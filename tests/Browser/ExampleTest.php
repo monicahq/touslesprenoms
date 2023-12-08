@@ -1,0 +1,22 @@
+<?php
+
+namespace Tests\Browser;
+
+use Laravel\Dusk\Browser;
+use Tests\DuskTestCase;
+
+class ExampleTest extends DuskTestCase
+{
+    /**
+     * A basic browser test example.
+     *
+     * @test
+     */
+    public function basicExample(): void
+    {
+        $this->browse(function (Browser $browser): void {
+            $browser->visit('/')
+                ->assertSee('Laravel');
+        });
+    }
+}
