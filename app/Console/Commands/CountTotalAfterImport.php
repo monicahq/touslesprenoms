@@ -24,7 +24,7 @@ class CountTotalAfterImport extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         foreach (Name::lazy() as $name) {
             $total = $name->nameStatistics()->sum('count');

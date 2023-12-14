@@ -1,6 +1,8 @@
 <x-guest-layout>
   <div class="bg-violet-100">
-    @include('layouts.unlogged-navigation')
+    <div class="border-b border-violet-200">
+      @include('layouts.unlogged-navigation')
+    </div>
 
     <div class="py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <!-- grid start -->
@@ -79,7 +81,7 @@
           <div>
             <h2 class="font-semibold text-xl mb-4">Prénoms féminins populaires</h2>
             <ul class="space-y-4">
-              @foreach ($twentyMostPopularNames['male_names'] as $name)
+              @foreach ($twentyMostPopularNames['female_names'] as $name)
               <li class="flex items-center border border-transparent hover:bg-gray-50 hover:border-gray-200 px-2 py-1 rounded-sm">
                 <div class="rounded-full w-6 mr-4 ring-4 ring-violet-100">{!! $name['avatar'] !!}</div>
                 <a href="{{ $name['url'] }}" class="text-lg">{{ $name['name'] }}</a>
@@ -105,7 +107,7 @@
           <div>
             <h2 class="font-semibold text-xl mb-4">Prénoms aléatoires</h2>
             <ul class="space-y-4">
-              @foreach ($twentyMostPopularNames['male_names'] as $name)
+              @foreach ($twentyMostPopularNames['random_names'] as $name)
               <li class="flex items-center border border-transparent hover:bg-gray-50 hover:border-gray-200 px-2 py-1 rounded-sm">
                 <div class="rounded-full w-6 mr-4 ring-4 ring-violet-100">{!! $name['avatar'] !!}</div>
                 <a href="{{ $name['url'] }}" class="text-lg">{{ $name['name'] }}</a>

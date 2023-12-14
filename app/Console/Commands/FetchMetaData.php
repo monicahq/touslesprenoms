@@ -32,43 +32,42 @@ class FetchMetaData extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         foreach (Name::orderBy('total', 'desc')->lazy() as $name) {
-            dd($name);
             if ($name->name === '_PRENOMS_RARES') {
                 continue;
             }
 
-            if ($name->origins === null) {
+            if (is_null($name->origins)) {
                 ProcessOrigins::dispatch($name);
             }
 
-            if ($name->personality === null) {
+            if (is_null($name->personality)) {
                 ProcessPersonality::dispatch($name);
             }
 
-            if ($name->country_of_origin === null) {
+            if (is_null($name->country_of_origin)) {
                 ProcessCountryOfOrigin::dispatch($name);
             }
 
-            if ($name->celebrities === null) {
+            if (is_null($name->celebrities)) {
                 ProcessCelebrities::dispatch($name);
             }
 
-            if ($name->elfic_traits === null) {
+            if (is_null($name->elfic_traits)) {
                 ProcessElficTraits::dispatch($name);
             }
 
-            if ($name->litterature_artistics_references === null) {
+            if (is_null($name->litterature_artistics_references)) {
                 ProcessLitteratureReferences::dispatch($name);
             }
 
-            if ($name->similar_names_in_other_languages === null) {
+            if (is_null($name->similar_names_in_other_languages)) {
                 ProcessSimilarNames::dispatch($name);
             }
 
-            if ($name->klingon_translation === null) {
+            if (is_null($name->klingon_translation)) {
                 //ProcessKlingonName::dispatch($name);
             }
         }
