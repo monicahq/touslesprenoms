@@ -1,3 +1,4 @@
+
 /.phpunit.cache
 /node_modules
 /public/build
@@ -19,3 +20,7 @@ yarn-error.log
 /.vscode
 .DS_Store
 database/database.sqlite
+*.csv
+_ide_helper.php
+_ide_helper_models.php
+_ide_helper_names.php

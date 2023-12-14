@@ -13,6 +13,8 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+        "openai-php/laravel": "^0.8.0",
+        "spatie/simple-excel": "^3.2",
         "stichoza/google-translate-php": "^5.1"
     },
     "require-dev": {

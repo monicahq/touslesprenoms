@@ -10,25 +10,25 @@
 
   <!-- Scripts -->
   @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+  {{ $jsonLdSchema ?? '' }}
 </head>
 
 <body class="font-sans text-gray-900 antialiased">
-  <div class="flex min-h-screen flex-col items-center bg-gray-100 px-2 py-2 dark:bg-gray-900 sm:justify-center sm:px-0 sm:py-0">
-    <div class="mb-6 w-full overflow-hidden rounded bg-white shadow-md dark:bg-gray-800 sm:mt-6 sm:max-w-md sm:rounded-lg">
-      {{ $slot }}
-    </div>
+  <div class="flex min-h-screen flex-col">
+    {{ $slot }}
+  </div>
 
-    <!-- locale -->
-    <div class="mb-4">
-      <ul class="list">
-        <li class="mr-3 inline">
-          <x-link :boost="false" href="{{ route('locale.update', ['locale' => 'en']) }}" class="text-sm" dusk="locale-switch-english">{{ __('English') }}</x-link>
-        </li>
-        <li class="inline">
-          <x-link :boost="false" href="{{ route('locale.update', ['locale' => 'fr']) }}" class="text-sm" dusk="locale-switch-french">{{ __('French') }}</x-link>
-        </li>
-      </ul>
-    </div>
+  <!-- locale -->
+  <div class="mb-4">
+    <ul class="list">
+      <li class="mr-3 inline">
+        <x-link :boost="false" href="{{ route('locale.update', ['locale' => 'en']) }}" class="text-sm" dusk="locale-switch-english">{{ __('English') }}</x-link>
+      </li>
+      <li class="inline">
+        <x-link :boost="false" href="{{ route('locale.update', ['locale' => 'fr']) }}" class="text-sm" dusk="locale-switch-french">{{ __('French') }}</x-link>
+      </li>
+    </ul>
   </div>
 </body>
 
