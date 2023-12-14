@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Channel;
 use App\Models\Name;
 use Closure;
 use Illuminate\Database\Eloquent\ModelNotFoundException;

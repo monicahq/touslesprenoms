@@ -6,7 +6,6 @@ use App\Helpers\StringHelper;
 use App\Models\Name;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 class NameViewModel
