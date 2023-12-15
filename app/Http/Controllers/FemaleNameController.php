@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\StringHelper;
-use App\Http\ViewModels\Names\AllNamesViewModel;
 use App\Http\ViewModels\Names\FemaleNamesViewModel;
-use App\Http\ViewModels\Names\MaleNamesViewModel;
-use App\Http\ViewModels\Names\NameViewModel;
 use App\Models\Name;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
@@ -29,7 +26,7 @@ class FemaleNameController extends Controller
             return $requestedPage;
         });
 
-        $namesPagination = Cache::remember('all-names-female-page-'.$requestedPage, 604800, function () {
+        $namesPagination = Cache::remember('all-names-female-page-' . $requestedPage, 604800, function () {
             return Name::where('name', '!=', '_PRENOMS_RARES')
                 ->where('gender', 'female')
                 ->orderBy('name', 'asc')
@@ -67,7 +64,7 @@ class FemaleNameController extends Controller
             return $requestedPage;
         });
 
-        $namesPagination = Cache::remember('female-letter-'.$requestedLetter.'-page-' . $requestedPage, 604800, function () use ($requestedLetter) {
+        $namesPagination = Cache::remember('female-letter-' . $requestedLetter . '-page-' . $requestedPage, 604800, function () use ($requestedLetter) {
             return Name::where('name', '!=', '_PRENOMS_RARES')
                 ->where('gender', 'female')
                 ->where('name', 'like', $requestedLetter . '%')

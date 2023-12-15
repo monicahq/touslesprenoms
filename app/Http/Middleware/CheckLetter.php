@@ -2,11 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Name;
 use Closure;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -26,7 +23,7 @@ class CheckLetter
             return redirect()->route('home.index');
         }
 
-        if (!preg_match('/^[A-Za-z]+$/', $requestedLetter)) {
+        if (! preg_match('/^[A-Za-z]+$/', $requestedLetter)) {
             return redirect()->route('home.index');
         }
 

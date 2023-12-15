@@ -15,10 +15,10 @@
         <!-- Navigation Links -->
         <div class="hidden space-x-4 sm:ms-10 sm:flex items-center">
           <div>
-            <x-unlogged-nav-link :href="route('home.index')" :active="request()->routeIs('home.index')">
+            <x-unlogged-nav-link hx-boost="true" :href="route('home.index')" :active="request()->routeIs('home.index')">
               {{ __('Accueil') }}
             </x-unlogged-nav-link>
-            <x-unlogged-nav-link :href="route('name.index')" :active="request()->routeIs('name*')">
+            <x-unlogged-nav-link hx-boost="true" :href="route('name.index')" :active="request()->routeIs('name*')">
               {{ __('Tous les prénoms') }}
             </x-unlogged-nav-link>
           </div>
