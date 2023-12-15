@@ -18,7 +18,7 @@
             <x-unlogged-nav-link :href="route('home.index')" :active="request()->routeIs('home.index')">
               {{ __('Accueil') }}
             </x-unlogged-nav-link>
-            <x-unlogged-nav-link :href="route('name.index')" :active="request()->is('name*')">
+            <x-unlogged-nav-link :href="route('name.index')" :active="request()->routeIs('name*')">
               {{ __('Tous les prénoms') }}
             </x-unlogged-nav-link>
           </div>

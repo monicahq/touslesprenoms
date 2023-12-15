@@ -21,7 +21,7 @@
 
   <div>
     <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 py-2">
-      <div class="grid name-index-grid">
+      <div class="grid name-index-grid gap-4">
 
         <!-- left -->
         <div>
