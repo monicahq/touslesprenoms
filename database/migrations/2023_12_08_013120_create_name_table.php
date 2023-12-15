@@ -24,7 +24,7 @@ return new class extends Migration
             $table->text('litterature_artistics_references')->nullable();
             $table->text('similar_names_in_other_languages')->nullable();
             $table->text('klingon_translation')->nullable();
-            $table->boolean('unisex')->default(false);
+            $table->boolean('unisex')->nullable();
             $table->integer('total')->default(0);
             $table->integer('page_views')->default(0);
             $table->timestamps();

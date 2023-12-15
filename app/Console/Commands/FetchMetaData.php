@@ -7,6 +7,7 @@ use App\Jobs\ProcessCountryOfOrigin;
 use App\Jobs\ProcessElficTraits;
 use App\Jobs\ProcessKlingonName;
 use App\Jobs\ProcessLitteratureReferences;
+use App\Jobs\ProcessMixte;
 use App\Jobs\ProcessOrigins;
 use App\Jobs\ProcessPersonality;
 use App\Jobs\ProcessSimilarNames;
@@ -69,6 +70,10 @@ class FetchMetaData extends Command
 
             if (is_null($name->klingon_translation)) {
                 //ProcessKlingonName::dispatch($name);
+            }
+
+            if (is_null($name->unisex)) {
+                ProcessMixte::dispatch($name);
             }
         }
     }

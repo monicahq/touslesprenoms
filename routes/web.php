@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\FemaleNameController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\MaleNameController;
 use App\Http\Controllers\NameController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Settings\SettingsController;
@@ -14,6 +16,18 @@ Route::get('locale/{locale}', [LocaleController::class, 'update'])->name('locale
 
 Route::get('', [HomeController::class, 'index'])->name('home.index');
 Route::get('prenoms', [NameController::class, 'index'])->name('name.index');
+
+Route::get('prenoms/garcons', [MaleNameController::class, 'index'])->name('name.garcon.index');
+Route::get('prenoms/filles', [FemaleNameController::class, 'index'])->name('name.fille.index');
+Route::get('prenoms/mixtes', [NameController::class, 'index'])->name('name.mixte.index');
+Route::get('prenoms/mixtes/{letter}', [NameController::class, 'index'])->name('name.mixte.show');
+
+Route::middleware(['letter'])->group(function (): void {
+    Route::get('prenoms/garcons/{letter}', [MaleNameController::class, 'letter'])->name('name.garcon.letter');
+    Route::get('prenoms/filles/{letter}', [FemaleNameController::class, 'letter'])->name('name.fille.letter');
+    Route::get('prenoms/{letter}', [NameController::class, 'letter'])->name('name.letter');
+});
+
 Route::middleware(['name'])->group(function (): void {
     Route::get('prenoms/{id}/{name}', [NameController::class, 'show'])->name('name.show');
 });
