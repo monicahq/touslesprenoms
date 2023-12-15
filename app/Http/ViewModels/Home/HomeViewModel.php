@@ -86,7 +86,7 @@ class HomeViewModel
 
     public static function serverStats(): array
     {
-        $totalNames = Name::count();
+        $totalNames = Name::where('name', '!=', '_PRENOMS_RARES')->count();
 
         return [
             'total_names' => $totalNames,

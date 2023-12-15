@@ -5,3 +5,7 @@
 .name-show-grid {
   grid-template-columns: 1fr 240px;
 }
+
+.name-index-grid {
+  grid-template-columns: 240px 1fr;
+}

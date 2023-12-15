@@ -27,9 +27,9 @@ class ProcessMixte implements ShouldQueue
      */
     public function handle(): void
     {
-        if ($this->name->celebrities === null) {
-            $celebrities = OpenAIHelper::getUnisex($this->name->name);
-            $this->name->celebrities = $celebrities;
+        if ($this->name->unisex === null) {
+            $answer = OpenAIHelper::getUnisex($this->name->name);
+            $this->name->unisex = $answer;
             $this->name->save();
         }
     }

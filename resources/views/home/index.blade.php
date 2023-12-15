@@ -15,7 +15,7 @@
           <h2 class="text-xl mb-6">Parcourez le site de fiches de prénoms le plus complet. Créez des listes et faites voter vos proches. Un site qui vous respecte, sans pub, sans tracking et open source.</h2>
 
           <p>
-            <a href="" class="bg-amber-300 px-4 py-2 rounded-lg font-bold shadow">Parcourir tous les prénoms</a>
+            <a href="{{ route('name.index') }}" class="bg-amber-300 px-4 py-2 rounded-lg font-bold shadow">Parcourir tous les prénoms</a>
           </p>
         </div>
 
@@ -63,59 +63,59 @@
   <div class="bg-yellow-100">
     <div class="py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <!-- list of popular names -->
-        <div class="grid grid-cols-4 gap-10">
-          <!-- male names -->
-          <div>
-            <h2 class="font-semibold text-xl mb-4">Prénoms masculins populaires</h2>
-            <ul class="space-y-4">
-              @foreach ($twentyMostPopularNames['male_names'] as $name)
-                <li class="flex items-center border border-transparent hover:bg-gray-50 hover:border-gray-200 px-2 py-1 rounded-sm">
-                  <div class="rounded-full w-6 mr-4 ring-4 ring-violet-100">{!! $name['avatar'] !!}</div>
-                  <a href="{{ $name['url'] }}" class="text-lg">{{ $name['name'] }}</a>
-                </li>
-              @endforeach
-            </ul>
-          </div>
-
-          <!-- female names -->
-          <div>
-            <h2 class="font-semibold text-xl mb-4">Prénoms féminins populaires</h2>
-            <ul class="space-y-4">
-              @foreach ($twentyMostPopularNames['female_names'] as $name)
+      <div class="grid grid-cols-4 gap-10">
+        <!-- male names -->
+        <div>
+          <h2 class="font-semibold text-xl mb-4">Prénoms masculins populaires</h2>
+          <ul class="space-y-4">
+            @foreach ($twentyMostPopularNames['male_names'] as $name)
               <li class="flex items-center border border-transparent hover:bg-gray-50 hover:border-gray-200 px-2 py-1 rounded-sm">
                 <div class="rounded-full w-6 mr-4 ring-4 ring-violet-100">{!! $name['avatar'] !!}</div>
                 <a href="{{ $name['url'] }}" class="text-lg">{{ $name['name'] }}</a>
               </li>
-              @endforeach
-            </ul>
-          </div>
-
-          <!-- mixte names -->
-          <div>
-            <h2 class="font-semibold text-xl mb-4">Prénoms mixtes populaires</h2>
-            <ul class="space-y-4">
-              @foreach ($twentyMostPopularNames['male_names'] as $name)
-              <li class="flex items-center border border-transparent hover:bg-gray-50 hover:border-gray-200 px-2 py-1 rounded-sm">
-                <div class="rounded-full w-6 mr-4 ring-4 ring-violet-100">{!! $name['avatar'] !!}</div>
-                <a href="{{ $name['url'] }}" class="text-lg">{{ $name['name'] }}</a>
-              </li>
-              @endforeach
-            </ul>
-          </div>
-
-          <!-- random names -->
-          <div>
-            <h2 class="font-semibold text-xl mb-4">Prénoms aléatoires</h2>
-            <ul class="space-y-4">
-              @foreach ($twentyMostPopularNames['random_names'] as $name)
-              <li class="flex items-center border border-transparent hover:bg-gray-50 hover:border-gray-200 px-2 py-1 rounded-sm">
-                <div class="rounded-full w-6 mr-4 ring-4 ring-violet-100">{!! $name['avatar'] !!}</div>
-                <a href="{{ $name['url'] }}" class="text-lg">{{ $name['name'] }}</a>
-              </li>
-              @endforeach
-            </ul>
-          </div>
+            @endforeach
+          </ul>
         </div>
+
+        <!-- female names -->
+        <div>
+          <h2 class="font-semibold text-xl mb-4">Prénoms féminins populaires</h2>
+          <ul class="space-y-4">
+            @foreach ($twentyMostPopularNames['female_names'] as $name)
+            <li class="flex items-center border border-transparent hover:bg-gray-50 hover:border-gray-200 px-2 py-1 rounded-sm">
+              <div class="rounded-full w-6 mr-4 ring-4 ring-violet-100">{!! $name['avatar'] !!}</div>
+              <a href="{{ $name['url'] }}" class="text-lg">{{ $name['name'] }}</a>
+            </li>
+            @endforeach
+          </ul>
+        </div>
+
+        <!-- mixte names -->
+        <div>
+          <h2 class="font-semibold text-xl mb-4">Prénoms mixtes populaires</h2>
+          <ul class="space-y-4">
+            @foreach ($twentyMostPopularNames['male_names'] as $name)
+            <li class="flex items-center border border-transparent hover:bg-gray-50 hover:border-gray-200 px-2 py-1 rounded-sm">
+              <div class="rounded-full w-6 mr-4 ring-4 ring-violet-100">{!! $name['avatar'] !!}</div>
+              <a href="{{ $name['url'] }}" class="text-lg">{{ $name['name'] }}</a>
+            </li>
+            @endforeach
+          </ul>
+        </div>
+
+        <!-- random names -->
+        <div>
+          <h2 class="font-semibold text-xl mb-4">Prénoms aléatoires</h2>
+          <ul class="space-y-4">
+            @foreach ($twentyMostPopularNames['random_names'] as $name)
+            <li class="flex items-center border border-transparent hover:bg-gray-50 hover:border-gray-200 px-2 py-1 rounded-sm">
+              <div class="rounded-full w-6 mr-4 ring-4 ring-violet-100">{!! $name['avatar'] !!}</div>
+              <a href="{{ $name['url'] }}" class="text-lg">{{ $name['name'] }}</a>
+            </li>
+            @endforeach
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </x-guest-layout>
