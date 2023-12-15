@@ -27,7 +27,7 @@ class NameController extends Controller
             return $requestedPage;
         });
 
-        $namesPagination = Cache::remember('all-names-page-'.$requestedPage, 604800, function () {
+        $namesPagination = Cache::remember('all-names-page-' . $requestedPage, 604800, function () {
             return Name::where('name', '!=', '_PRENOMS_RARES')
                 ->orderBy('name', 'asc')
                 ->paginate(40);
@@ -51,6 +51,25 @@ class NameController extends Controller
         ]);
     }
 
+    public function show(Request $request): View
+    {
+        $requestedName = $request->attributes->get('name');
+
+        $name = Cache::remember('name-' . $requestedName->name, 604800, function () use ($requestedName) {
+            return NameViewModel::details($requestedName);
+        });
+
+        $relatedNames = Cache::remember('related-names-' . $requestedName->name, 60, function () use ($requestedName) {
+            return NameViewModel::relatedNames($requestedName);
+        });
+
+        return view('names.show', [
+            'name' => $name,
+            'relatedNames' => $relatedNames,
+            'jsonLdSchema' => NameViewModel::jsonLdSchema($requestedName),
+        ]);
+    }
+
     public function letter(Request $request): View
     {
         $requestedLetter = $request->attributes->get('letter');
@@ -64,7 +83,7 @@ class NameController extends Controller
             return $requestedPage;
         });
 
-        $namesPagination = Cache::remember('letter-'.$requestedLetter.'-page-' . $requestedPage, 604800, function () use ($requestedLetter) {
+        $namesPagination = Cache::remember('letter-' . $requestedLetter . '-page-' . $requestedPage, 604800, function () use ($requestedLetter) {
             return Name::where('name', '!=', '_PRENOMS_RARES')
                 ->where('name', 'like', $requestedLetter . '%')
                 ->orderBy('name', 'asc')
@@ -87,25 +106,6 @@ class NameController extends Controller
             'names' => $names,
             'namesPagination' => $namesPagination,
             'activeLetter' => Str::ucfirst($requestedLetter),
-        ]);
-    }
-
-    public function show(Request $request): View
-    {
-        $requestedName = $request->attributes->get('name');
-
-        $name = Cache::remember('name-' . $requestedName->name, 604800, function () use ($requestedName) {
-            return NameViewModel::details($requestedName);
-        });
-
-        $relatedNames = Cache::remember('related-names-' . $requestedName->name, 60, function () use ($requestedName) {
-            return NameViewModel::relatedNames($requestedName);
-        });
-
-        return view('names.show', [
-            'name' => $name,
-            'relatedNames' => $relatedNames,
-            'jsonLdSchema' => NameViewModel::jsonLdSchema($requestedName),
         ]);
     }
 }

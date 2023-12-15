@@ -15,7 +15,7 @@
           <h2 class="text-xl mb-6">Parcourez le site de fiches de prénoms le plus complet. Créez des listes et faites voter vos proches. Un site qui vous respecte, sans pub, sans tracking et open source.</h2>
 
           <p>
-            <a href="{{ route('name.index') }}" class="bg-amber-300 px-4 py-2 rounded-lg font-bold shadow">Parcourir tous les prénoms</a>
+            <a hx-boost="true" href="{{ route('name.index') }}" class="bg-amber-300 px-4 py-2 rounded-lg font-bold shadow">Parcourir tous les prénoms</a>
           </p>
         </div>
 
@@ -38,7 +38,7 @@
               <div class="prose mb-5">{{ $nameSpotlight['origins'] }}</div>
 
               <p class="text-center">
-                <a href="{{ $nameSpotlight['url'] }}" class="bg-amber-300 px-4 py-2 rounded-lg font-bold shadow">Lire plus +</a>
+                <a hx-boost="true" href="{{ $nameSpotlight['url'] }}" class="bg-amber-300 px-4 py-2 rounded-lg font-bold shadow">Lire plus +</a>
               </p>
             </div>
           </div>
@@ -71,7 +71,7 @@
             @foreach ($twentyMostPopularNames['male_names'] as $name)
               <li class="flex items-center border border-transparent hover:bg-gray-50 hover:border-gray-200 px-2 py-1 rounded-sm">
                 <div class="rounded-full w-6 mr-4 ring-4 ring-violet-100">{!! $name['avatar'] !!}</div>
-                <a href="{{ $name['url'] }}" class="text-lg">{{ $name['name'] }}</a>
+                <a hx-boost="true" href="{{ $name['url'] }}" class="text-lg">{{ $name['name'] }}</a>
               </li>
             @endforeach
           </ul>
@@ -84,7 +84,7 @@
             @foreach ($twentyMostPopularNames['female_names'] as $name)
             <li class="flex items-center border border-transparent hover:bg-gray-50 hover:border-gray-200 px-2 py-1 rounded-sm">
               <div class="rounded-full w-6 mr-4 ring-4 ring-violet-100">{!! $name['avatar'] !!}</div>
-              <a href="{{ $name['url'] }}" class="text-lg">{{ $name['name'] }}</a>
+              <a hx-boost="true" href="{{ $name['url'] }}" class="text-lg">{{ $name['name'] }}</a>
             </li>
             @endforeach
           </ul>
@@ -97,7 +97,7 @@
             @foreach ($twentyMostPopularNames['male_names'] as $name)
             <li class="flex items-center border border-transparent hover:bg-gray-50 hover:border-gray-200 px-2 py-1 rounded-sm">
               <div class="rounded-full w-6 mr-4 ring-4 ring-violet-100">{!! $name['avatar'] !!}</div>
-              <a href="{{ $name['url'] }}" class="text-lg">{{ $name['name'] }}</a>
+              <a hx-boost="true" href="{{ $name['url'] }}" class="text-lg">{{ $name['name'] }}</a>
             </li>
             @endforeach
           </ul>
@@ -110,7 +110,7 @@
             @foreach ($twentyMostPopularNames['random_names'] as $name)
             <li class="flex items-center border border-transparent hover:bg-gray-50 hover:border-gray-200 px-2 py-1 rounded-sm">
               <div class="rounded-full w-6 mr-4 ring-4 ring-violet-100">{!! $name['avatar'] !!}</div>
-              <a href="{{ $name['url'] }}" class="text-lg">{{ $name['name'] }}</a>
+              <a hx-boost="true" href="{{ $name['url'] }}" class="text-lg">{{ $name['name'] }}</a>
             </li>
             @endforeach
           </ul>
