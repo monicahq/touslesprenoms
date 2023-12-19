@@ -24,6 +24,7 @@
     "vite": "^4.0.0"
   },
   "dependencies": {
-    "@tailwindcss/typography": "^0.5.10"
+    "@tailwindcss/typography": "^0.5.10",
+    "charts.css": "^1.1.0"
   }
 }

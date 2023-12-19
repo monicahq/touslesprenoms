@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 
+use Illuminate\Support\Str;
+
 class StringHelper
 {
     public static function sanitizeNameForURL(string $name): string
@@ -18,7 +20,7 @@ class StringHelper
 
     public static function getProperName(string $name): string
     {
-        $formattedName = ucwords(strtolower($name));
+        $formattedName = Str::ucfirst(Str::lower($name));
 
         $separator = [' ', '-', '+', "'"];
         foreach ($separator as $s) {

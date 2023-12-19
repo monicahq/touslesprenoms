@@ -49,8 +49,8 @@
   </div>
 
   <div>
-    <div class="mx-auto max-w-5xl sm:px-6 lg:px-8 py-2">
-      <div class="grid name-show-grid">
+    <div class="mx-auto max-w-5xl sm:px-6 px-2 lg:px-8 py-2">
+      <div class="grid name-show-grid sm:gap-5">
 
         <!-- left -->
         <div>
@@ -87,17 +87,17 @@
 
           <!-- country of origin -->
           <div class="grid grid-cols-3 gap-3 mb-5">
-            <div class="bg-white rounded-lg p-2">
+            <div class="bg-violet-100 rounded-lg p-2">
               <h3 class="text-xs">Pays d'origine</h3>
               <div>{!! $name['country_of_origin'] !!}</div>
             </div>
 
-            <div class="bg-white rounded-lg p-2">
+            <div class="bg-violet-100 rounded-lg p-2">
               <h3 class="text-xs">Numérologie</h3>
-              <div>{!! $name['country_of_origin'] !!}</div>
+              <div>{{ $numerology }}</div>
             </div>
 
-            <div class="bg-white rounded-lg p-2">
+            <div class="bg-violet-100 rounded-lg p-2">
               <h3 class="text-xs"></h3>
               <div>{!! $name['country_of_origin'] !!}</div>
             </div>
@@ -173,9 +173,29 @@
         <!-- right -->
         <div>
 
+          <div class="mb-8">
+            <h2 class="font-semibold text-lg mb-4">Popularités par décennies</h2>
+            <!-- popularity -->
+            <table class="charts-css bar show-labels show-4-secondary-axes">
+              <caption> Front End Developer Salary </caption>
+              <tbody>
+                @foreach ($popularity['decades'] as $popularityItem)
+                  <tr>
+                    <th scope="row">
+                      <span class="data text-xs mr-2">{{ $popularityItem['decade'] }}</span>
+                    </th>
+                    <td style="--size: calc( {{ $popularityItem['percentage'] }} / 100 )">
+                      <span class="tooltip text-xs font-normal">{{ $popularityItem['popularity'] }}</span>
+                    </td>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
+
           <!-- random names -->
           <div>
-            <h2 class="font-semibold text-xl mb-4">D'autres idées de prénoms</h2>
+            <h2 class="font-semibold text-lg mb-4">D'autres idées de prénoms</h2>
             <ul class="space-y-1">
               @foreach ($relatedNames as $name)
                 <li class="flex items-center border border-transparent hover:bg-gray-50 hover:border-gray-200 px-2 py-1 rounded-sm">

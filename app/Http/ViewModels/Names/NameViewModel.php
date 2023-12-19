@@ -7,6 +7,7 @@ use App\Models\Name;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Illuminate\Support\Number;
 
 class NameViewModel
 {
@@ -30,6 +31,36 @@ class NameViewModel
                 'id' => $name->id,
                 'name' => StringHelper::sanitizeNameForURL($name->name),
             ]),
+        ];
+    }
+
+    public static function popularity(Name $name): array
+    {
+        $decades = range(1900, Carbon::now()->year, 10);
+
+        $decadesCollection = collect();
+        foreach ($decades as $decade) {
+            $popularity = $name->nameStatistics()
+                ->where('year', '>=', $decade)
+                ->where('year', '<', $decade + 9)
+                ->sum('count');
+
+            $decadesCollection->push([
+                'decade' => $decade . 's',
+                'popularity' => $popularity,
+                'percentage' => 0,
+            ]);
+        }
+
+        // now we need to add the percentage of popularity for each decade
+        $total = $decadesCollection->sum('popularity');
+        $decadesCollection = $decadesCollection->map(function ($decade) use ($total) {
+            $decade['percentage'] = Number::format(round($decade['popularity'] / $total * 100), locale: 'fr');
+            return $decade;
+        });
+
+        return [
+            'decades' => $decadesCollection,
         ];
     }
 
@@ -63,5 +94,46 @@ class NameViewModel
                     'name' => StringHelper::sanitizeNameForURL($name->name),
                 ]),
             ]);
+    }
+
+    public static function numerology(Name $name): int
+    {
+        // for each letter in the name, we need to get the corresponding number
+        // letter A is 1, letter B is 2, etc... until letter I is 9
+        // then we start over, letter J is 1, letter K is 2, etc... until letter R is 9
+        // then we start over, letter S is 1, letter T is 2, etc... until letter Z is 8
+        // then we add all the numbers together and we get the number for the name
+        // if the number is greater than 9, we add the digits together until we get a number between 1 and 9
+        // if the number is 11, 22 or 33, we keep it as is
+
+        $letters = str_split($name->name);
+        $numbers = [];
+        foreach ($letters as $letter) {
+            if ($letter === '_' || $letter === ' ' || $letter === '-' || $letter === "'") {
+                continue;
+            }
+
+            $number = match ($letter) {
+                'A', 'J', 'S' => 1,
+                'B', 'K', 'T' => 2,
+                'C', 'L', 'U' => 3,
+                'D', 'M', 'V' => 4,
+                'E', 'N', 'W' => 5,
+                'F', 'O', 'X' => 6,
+                'G', 'P', 'Y' => 7,
+                'H', 'Q', 'Z' => 8,
+                'I', 'R' => 9,
+                default => 0,
+            };
+
+            $numbers[] = $number;
+        }
+
+        $number = array_sum($numbers);
+        while ($number > 9) {
+            $number = array_sum(str_split($number));
+        }
+
+        return $number;
     }
 }

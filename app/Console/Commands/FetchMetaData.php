@@ -72,9 +72,9 @@ class FetchMetaData extends Command
                 //ProcessKlingonName::dispatch($name);
             }
 
-            if (is_null($name->unisex)) {
-                ProcessMixte::dispatch($name);
-            }
+            // if (is_null($name->unisex)) {
+            //     ProcessMixte::dispatch($name);
+            // }
         }
     }
 }
