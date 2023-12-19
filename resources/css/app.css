@@ -2,10 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+
 .name-show-grid {
   grid-template-columns: 1fr 240px;
 }
 
 .name-index-grid {
   grid-template-columns: 240px 1fr;
+}
+
+@media (max-width: 480px) {
+  .name-show-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .name-index-grid {
+    grid-template-columns: 1fr;
+  }
 }

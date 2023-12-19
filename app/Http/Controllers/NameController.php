@@ -63,10 +63,20 @@ class NameController extends Controller
             return NameViewModel::relatedNames($requestedName);
         });
 
+        $popularity = Cache::remember('popularity-' . $requestedName->name, 604800, function () use ($requestedName) {
+            return NameViewModel::popularity($requestedName);
+        });
+
+        $numerology = Cache::remember('numerology-' . $requestedName->name, 604800, function () use ($requestedName) {
+            return NameViewModel::numerology($requestedName);
+        });
+
         return view('names.show', [
             'name' => $name,
+            'popularity' => $popularity,
             'relatedNames' => $relatedNames,
             'jsonLdSchema' => NameViewModel::jsonLdSchema($requestedName),
+            'numerology' => $numerology,
         ]);
     }
 
