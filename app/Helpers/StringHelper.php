@@ -18,7 +18,14 @@ class StringHelper
         return strtolower(trim($string, '-'));
     }
 
-    public static function getProperName(string $name): string
+    /**
+     * Format the name from the db.
+     * The name that the files give us is like "JEAN-JACQUES" and we need to
+     * - lowercase it
+     * - ucfirst it
+     * so it becomes "Jean-Jacques"
+     */
+    public static function formatNameFromDB(string $name): string
     {
         $formattedName = Str::ucfirst(Str::lower($name));
 

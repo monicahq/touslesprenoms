@@ -18,7 +18,7 @@ class HomeViewModel
             ->get()
             ->map(fn (Name $name) => [
                 'id' => $name->id,
-                'name' => StringHelper::getProperName($name->name),
+                'name' => StringHelper::formatNameFromDB($name->name),
                 'avatar' => $name->avatar,
                 'url' => route('name.show', [
                     'id' => $name->id,
@@ -33,7 +33,7 @@ class HomeViewModel
             ->get()
             ->map(fn (Name $name) => [
                 'id' => $name->id,
-                'name' => StringHelper::getProperName($name->name),
+                'name' => StringHelper::formatNameFromDB($name->name),
                 'avatar' => $name->avatar,
                 'url' => route('name.show', [
                     'id' => $name->id,
@@ -41,14 +41,13 @@ class HomeViewModel
                 ]),
             ]);
 
-        $randomNames = Name::where('gender', 'female')
-            ->where('name', '!=', '_PRENOMS_RARES')
+        $randomNames = Name::where('name', '!=', '_PRENOMS_RARES')
             ->inRandomOrder()
             ->take(10)
             ->get()
             ->map(fn (Name $name) => [
                 'id' => $name->id,
-                'name' => StringHelper::getProperName($name->name),
+                'name' => StringHelper::formatNameFromDB($name->name),
                 'avatar' => $name->avatar,
                 'url' => route('name.show', [
                     'id' => $name->id,
@@ -74,7 +73,7 @@ class HomeViewModel
 
         return [
             'id' => $name->id,
-            'name' => StringHelper::getProperName($name->name),
+            'name' => StringHelper::formatNameFromDB($name->name),
             'avatar' => $name->avatar,
             'origins' => Str::words($name->origins, 50, '...'),
             'url' => route('name.show', [
