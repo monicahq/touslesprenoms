@@ -33,6 +33,7 @@ class Name extends Model
     protected $casts = [
         'total' => 'integer',
         'page_views' => 'integer',
+        'name' => 'string',
     ];
 
     public function nameStatistics(): HasMany
