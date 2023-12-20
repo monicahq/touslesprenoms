@@ -6,8 +6,8 @@ use App\Helpers\StringHelper;
 use App\Models\Name;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 use Illuminate\Support\Number;
+use Illuminate\Support\Str;
 
 class NameViewModel
 {
@@ -15,7 +15,7 @@ class NameViewModel
     {
         return [
             'id' => $name->id,
-            'name' => StringHelper::getProperName($name->name),
+            'name' => StringHelper::formatNameFromDB($name->name),
             'avatar' => $name->avatar,
             'origins' => Str::of($name->origins)->markdown(),
             'personality' => Str::of($name->personality)->markdown(),
@@ -25,7 +25,7 @@ class NameViewModel
             'name_day' => Str::of($name->name_day)->markdown(),
             'litterature_artistics_references' => Str::of($name->litterature_artistics_references)->markdown(),
             'similar_names_in_other_languages' => Str::of($name->similar_names_in_other_languages)->markdown(),
-            'klingon_translation' => Str::of($name->klingon_translation)->markdown(),
+            'klingon_translation' => null,
             'total' => $name->total,
             'url' => route('name.show', [
                 'id' => $name->id,
@@ -56,6 +56,7 @@ class NameViewModel
         $total = $decadesCollection->sum('popularity');
         $decadesCollection = $decadesCollection->map(function ($decade) use ($total) {
             $decade['percentage'] = Number::format(round($decade['popularity'] / $total * 100), locale: 'fr');
+
             return $decade;
         });
 
@@ -67,7 +68,7 @@ class NameViewModel
     public static function jsonLdSchema(Name $name): array
     {
         return [
-            'headline' => 'Tout savoir sur le prénom ' . StringHelper::getProperName($name->name),
+            'headline' => 'Tout savoir sur le prénom ' . StringHelper::formatNameFromDB($name->name),
             'image' => env('APP_URL') . '/images/facebook.png',
             'date' => Carbon::now()->format('Y-m-d'),
             'url' => route('name.show', [
@@ -87,7 +88,7 @@ class NameViewModel
             ->get()
             ->map(fn (Name $name) => [
                 'id' => $name->id,
-                'name' => StringHelper::getProperName($name->name),
+                'name' => StringHelper::formatNameFromDB($name->name),
                 'avatar' => $name->avatar,
                 'url' => route('name.show', [
                     'id' => $name->id,

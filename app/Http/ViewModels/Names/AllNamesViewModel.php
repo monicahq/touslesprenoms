@@ -11,21 +11,21 @@ class AllNamesViewModel
 {
     public static function index(): Collection
     {
-        // iterate over the alphabet
-        $alphabet = range('A', 'Z');
-
         $letters = collect();
-
+        $allNames = Name::where('name', '!=', '_PRENOMS_RARES')->count();
         $letters->push([
             'letter' => 'Tous',
-            'count' => Number::format(Name::where('name', '!=', '_PRENOMS_RARES')->count(), locale: 'fr'),
+            'count' => Number::format($allNames, locale: 'fr'),
             'url' => route('name.index'),
         ]);
 
+        $alphabet = range('A', 'Z');
         foreach ($alphabet as $letter) {
+            $count = Name::where('name', 'like', $letter . '%')->count();
+
             $letters->push([
                 'letter' => $letter,
-                'count' => Number::format(Name::where('name', 'like', $letter . '%')->count(), locale: 'fr'),
+                'count' => Number::format($count, locale: 'fr'),
                 'url' => route('name.letter', ['letter' => Str::lcfirst($letter)]),
             ]);
         }

@@ -36,7 +36,7 @@ class FemaleNameController extends Controller
         $names = $namesPagination
             ->map(fn (Name $name) => [
                 'id' => $name->id,
-                'name' => StringHelper::getProperName($name->name),
+                'name' => StringHelper::formatNameFromDB($name->name),
                 'avatar' => $name->avatar,
                 'url' => route('name.show', [
                     'id' => $name->id,
@@ -75,7 +75,7 @@ class FemaleNameController extends Controller
         $names = $namesPagination
             ->map(fn (Name $name) => [
                 'id' => $name->id,
-                'name' => StringHelper::getProperName($name->name),
+                'name' => StringHelper::formatNameFromDB($name->name),
                 'avatar' => $name->avatar,
                 'url' => route('name.show', [
                     'id' => $name->id,

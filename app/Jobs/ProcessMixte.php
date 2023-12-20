@@ -29,6 +29,15 @@ class ProcessMixte implements ShouldQueue
     {
         if ($this->name->unisex === null) {
             $answer = OpenAIHelper::getUnisex($this->name->name);
+
+            if ($answer == 'yes') {
+                $answer = true;
+            } elseif ($answer == 'no') {
+                $answer = false;
+            } else {
+                $answer = null;
+            }
+
             $this->name->unisex = $answer;
             $this->name->save();
         }

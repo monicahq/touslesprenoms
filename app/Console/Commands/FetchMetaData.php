@@ -48,9 +48,9 @@ class FetchMetaData extends Command
                 ProcessPersonality::dispatch($name);
             }
 
-            if (is_null($name->country_of_origin)) {
-                ProcessCountryOfOrigin::dispatch($name);
-            }
+            // if (is_null($name->country_of_origin)) {
+            //     ProcessCountryOfOrigin::dispatch($name);
+            // }
 
             if (is_null($name->celebrities)) {
                 ProcessCelebrities::dispatch($name);
