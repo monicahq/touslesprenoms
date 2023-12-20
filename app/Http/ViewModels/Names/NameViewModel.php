@@ -25,7 +25,7 @@ class NameViewModel
             'name_day' => Str::of($name->name_day)->markdown(),
             'litterature_artistics_references' => Str::of($name->litterature_artistics_references)->markdown(),
             'similar_names_in_other_languages' => Str::of($name->similar_names_in_other_languages)->markdown(),
-            'klingon_translation' => Str::of($name->klingon_translation)->markdown(),
+            'klingon_translation' => null,
             'total' => $name->total,
             'url' => route('name.show', [
                 'id' => $name->id,
