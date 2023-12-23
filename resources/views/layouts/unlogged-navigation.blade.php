@@ -21,6 +21,9 @@
             <x-unlogged-nav-link hx-boost="true" :href="route('name.index')" :active="request()->routeIs('name*')">
               {{ __('Tous les prénoms') }}
             </x-unlogged-nav-link>
+            <x-unlogged-nav-link hx-boost="true" :href="route('search.index')" :active="request()->routeIs('search*')">
+              {{ __('Recherche') }}
+            </x-unlogged-nav-link>
           </div>
         </div>
       </div>

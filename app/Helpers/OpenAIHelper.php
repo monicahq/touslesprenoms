@@ -167,7 +167,47 @@ PROMPT,
                 [
                     'role' => 'system',
                     'content' => <<<'PROMPT'
-pour le prénom donné par l'utilisateur, indiquez si le prénom est unisexe. répondez uniquement par "oui" ou "non", sans rien d'autres, et sans les guillements bien sur.
+pour le prénom donné par l'utilisateur, indiquez si le prénom est mixte/unisexe. répondez uniquement par "oui" ou "non", sans rien ajouter d'autres, et sans les guillements bien sur.
+PROMPT,
+                ], [
+                    'role' => 'user',
+                    'content' => $name,
+                ],
+            ],
+        ]);
+
+        return $response->choices[0]->message->content;
+    }
+
+    public static function getSyllabes(string $name): ?string
+    {
+        $response = OpenAI::chat()->create([
+            'model' => 'gpt-3.5-turbo',
+            'messages' => [
+                [
+                    'role' => 'system',
+                    'content' => <<<'PROMPT'
+pour le prénom donné par l'utilisateur, indique le nombre de syllabes. écris simplement le chiffre, sans rien d'autres.
+PROMPT,
+                ], [
+                    'role' => 'user',
+                    'content' => $name,
+                ],
+            ],
+        ]);
+
+        return $response->choices[0]->message->content;
+    }
+
+    public static function getMainCharacteristics(string $name): ?string
+    {
+        $response = OpenAI::chat()->create([
+            'model' => 'gpt-3.5-turbo',
+            'messages' => [
+                [
+                    'role' => 'system',
+                    'content' => <<<'PROMPT'
+pour le prénom donné par l'utilisateur, donne jusqu'à 3 termes ou qualités qui décrivent la personnalité du prénom. donne la reponse en mettant uniquement les mots, séparés par une virgule, sans rien d'autres.
 PROMPT,
                 ], [
                     'role' => 'user',

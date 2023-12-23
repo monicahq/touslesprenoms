@@ -7,10 +7,12 @@ use App\Jobs\ProcessCountryOfOrigin;
 use App\Jobs\ProcessElficTraits;
 use App\Jobs\ProcessKlingonName;
 use App\Jobs\ProcessLitteratureReferences;
+use App\Jobs\ProcessMainCaracteristics;
 use App\Jobs\ProcessMixte;
 use App\Jobs\ProcessOrigins;
 use App\Jobs\ProcessPersonality;
 use App\Jobs\ProcessSimilarNames;
+use App\Jobs\ProcessSyllabes;
 use App\Models\Name;
 use Illuminate\Console\Command;
 
@@ -72,9 +74,17 @@ class FetchMetaData extends Command
                 //ProcessKlingonName::dispatch($name);
             }
 
-            // if (is_null($name->unisex)) {
-            //     ProcessMixte::dispatch($name);
-            // }
+            if (is_null($name->unisex)) {
+                ProcessMixte::dispatch($name);
+            }
+
+            if ($name->syllabes === 0) {
+                ProcessSyllabes::dispatch($name);
+            }
+
+            if (is_null($name->characteristics)) {
+                ProcessMainCaracteristics::dispatch($name);
+            }
         }
     }
 }
