@@ -62,8 +62,8 @@
           </div>
 
           <!-- sommaire -->
-          <div class="mb-6">
-            <ul class="grid grid-cols-2">
+          <div class="mb-6 p-2 border border-gray-200 rounded-lg">
+            <ul class="grid grid-cols-2 text-sm">
               <li>
                 <a href="#origine" class="underline">Origine</a>
               </li>
@@ -85,11 +85,11 @@
             </ul>
           </div>
 
-          <!-- country of origin -->
+          <!-- syllabes -->
           <div class="grid grid-cols-3 gap-3 mb-5">
             <div class="bg-violet-100 rounded-lg p-2">
-              <h3 class="text-xs">Pays d'origine</h3>
-              <div>{!! $name['country_of_origin'] !!}</div>
+              <h3 class="text-xs">Nombre de syllabes</h3>
+              <div>{!! $name['syllabes'] !!}</div>
             </div>
 
             <div class="bg-violet-100 rounded-lg p-2">
@@ -99,7 +99,7 @@
 
             <div class="bg-violet-100 rounded-lg p-2">
               <h3 class="text-xs"></h3>
-              <div>{!! $name['country_of_origin'] !!}</div>
+              <div>{!! $name['syllabes'] !!}</div>
             </div>
           </div>
 
@@ -177,7 +177,6 @@
             <h2 class="font-semibold text-lg mb-4">Popularités par décennies</h2>
             <!-- popularity -->
             <table class="charts-css bar show-labels show-4-secondary-axes">
-              <caption> Front End Developer Salary </caption>
               <tbody>
                 @foreach ($popularity['decades'] as $popularityItem)
                   <tr>
@@ -191,6 +190,7 @@
                 @endforeach
               </tbody>
             </table>
+            <p class="mt-4 text-xs text-center">Utilisé {{ $popularity['total'] }} fois depuis 1900.</p>
           </div>
 
           <!-- random names -->

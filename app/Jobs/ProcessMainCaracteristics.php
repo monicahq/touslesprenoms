@@ -3,14 +3,16 @@
 namespace App\Jobs;
 
 use App\Helpers\OpenAIHelper;
+use App\Models\Characteristic;
 use App\Models\Name;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Str;
 
-class ProcessMixte implements ShouldQueue
+class ProcessMainCaracteristics implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -27,18 +29,10 @@ class ProcessMixte implements ShouldQueue
      */
     public function handle(): void
     {
-        if ($this->name->unisex === null) {
-            $answer = OpenAIHelper::getUnisex($this->name->name);
+        if (is_null($this->name->characteristics)) {
+            $strings = OpenAIHelper::getMainCharacteristics($this->name->name);
 
-            if ($answer == 'oui') {
-                $answer = true;
-            } elseif ($answer == 'non') {
-                $answer = false;
-            } else {
-                $answer = null;
-            }
-
-            $this->name->unisex = $answer;
+            $this->name->characteristics = Str::lower($strings);
             $this->name->save();
         }
     }

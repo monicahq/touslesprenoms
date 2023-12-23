@@ -10,7 +10,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class ProcessMixte implements ShouldQueue
+class ProcessSyllabes implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -27,18 +27,10 @@ class ProcessMixte implements ShouldQueue
      */
     public function handle(): void
     {
-        if ($this->name->unisex === null) {
-            $answer = OpenAIHelper::getUnisex($this->name->name);
+        if ($this->name->syllabes === 0) {
+            $number = OpenAIHelper::getSyllabes($this->name->name);
 
-            if ($answer == 'oui') {
-                $answer = true;
-            } elseif ($answer == 'non') {
-                $answer = false;
-            } else {
-                $answer = null;
-            }
-
-            $this->name->unisex = $answer;
+            $this->name->syllabes = $number;
             $this->name->save();
         }
     }

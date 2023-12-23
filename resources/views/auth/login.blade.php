@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-login-layout>
   <!-- image + title -->
   <div class="border-b px-6 py-4">
     <a href="/">
@@ -66,4 +66,4 @@
       </x-link>
     </div>
   </form>
-</x-guest-layout>
+</x-login-layout>

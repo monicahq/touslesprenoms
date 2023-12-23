@@ -20,7 +20,7 @@ class NameViewModelTest extends TestCase
             'name' => 'HÉLOÏSE',
             'origins' => 'Origine du prénom Héloïse',
             'personality' => 'Personnalité du prénom Héloïse',
-            'country_of_origin' => 'Pays d\'origine du prénom Héloïse',
+            'syllabes' => 2,
             'celebrities' => 'Célébrités du prénom Héloïse',
             'elfic_traits' => 'Traits elfiques du prénom Héloïse',
             'name_day' => 'Fête du prénom Héloïse',
@@ -37,7 +37,7 @@ class NameViewModelTest extends TestCase
         $this->assertArrayHasKey('avatar', $array);
         $this->assertArrayHasKey('origins', $array);
         $this->assertArrayHasKey('personality', $array);
-        $this->assertArrayHasKey('country_of_origin', $array);
+        $this->assertArrayHasKey('syllabes', $array);
         $this->assertArrayHasKey('celebrities', $array);
         $this->assertArrayHasKey('elfic_traits', $array);
         $this->assertArrayHasKey('name_day', $array);
@@ -80,8 +80,9 @@ class NameViewModelTest extends TestCase
 
         $array = NameViewModel::popularity($name);
 
-        $this->assertCount(1, $array);
+        $this->assertCount(2, $array);
         $this->assertArrayHasKey('decades', $array);
+        $this->assertArrayHasKey('total', $array);
         $this->assertEquals(
             [
                 0 => [

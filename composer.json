@@ -12,6 +12,7 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
+        "laravel/scout": "^10.6",
         "laravel/tinker": "^2.8",
         "openai-php/laravel": "^0.8.0",
         "spatie/simple-excel": "^3.2",

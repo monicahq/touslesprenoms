@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\ViewModels\Home;
+namespace Tests\Unit\ViewModels\Names;
 
 use App\Http\ViewModels\Names\AllNamesViewModel;
 use App\Models\Name;

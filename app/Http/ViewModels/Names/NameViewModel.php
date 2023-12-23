@@ -19,7 +19,7 @@ class NameViewModel
             'avatar' => $name->avatar,
             'origins' => Str::of($name->origins)->markdown(),
             'personality' => Str::of($name->personality)->markdown(),
-            'country_of_origin' => Str::of($name->country_of_origin)->markdown(),
+            'syllabes' => $name->syllabes,
             'celebrities' => Str::of($name->celebrities)->markdown(),
             'elfic_traits' => Str::of($name->elfic_traits)->markdown(),
             'name_day' => Str::of($name->name_day)->markdown(),
@@ -55,13 +55,21 @@ class NameViewModel
         // now we need to add the percentage of popularity for each decade
         $total = $decadesCollection->sum('popularity');
         $decadesCollection = $decadesCollection->map(function ($decade) use ($total) {
-            $decade['percentage'] = Number::format(round($decade['popularity'] / $total * 100), locale: 'fr');
+            if ($total > 0) {
+                $decade['percentage'] = Number::format(round($decade['popularity'] / $total * 100), locale: 'fr');
+            } else {
+                $decade['percentage'] = 0;
+            }
 
             return $decade;
         });
 
+        // calculate the total popularity
+        $total = $name->total;
+
         return [
             'decades' => $decadesCollection,
+            'total' => Number::format($total, locale: 'fr'),
         ];
     }
 

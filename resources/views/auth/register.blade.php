@@ -1,49 +1,21 @@
-<x-guest-layout>
+<x-login-layout>
   <!-- image + title -->
   <div class="border-b px-6 py-4">
     <a href="/">
       <x-application-logo class="mx-auto mb-4 block w-28 text-center" />
     </a>
 
-    <h2 class="mb-2 text-center font-bold">{{ __('Welcome to Shelter') }}</h2>
-    <h3 class="text-center text-sm text-gray-700">{{ __('Be part of something unique.') }}</h3>
+    <h2 class="mb-2 text-center font-bold">Bienvenue</h2>
+    <h3 class="text-center text-sm text-gray-700">Créez un compte pour sauvegarder vos noms préférés et les faire voter par ceux qui vous aiment.</h3>
   </div>
 
   <form method="POST" action="{{ route('register') }}">
     @csrf
 
     <div class="px-6 py-4">
-      <!-- first name and last name -->
-      <div class="mb-4 flex justify-between">
-        <div class="mr-4">
-          <x-input-label for="first_name" :value="__('First name')" />
-          <x-text-input class="mt-1 block w-full"
-                        id="first_name"
-                        name="first_name"
-                        type="text"
-                        :value="old('first_name')"
-                        required
-                        autofocus
-                        autocomplete="first_name" />
-          <x-input-error class="mt-2" :messages="$errors->get('first_name')" />
-        </div>
-
-        <div>
-          <x-input-label for="last_name" :value="__('Last name')" />
-          <x-text-input class="mt-1 block w-full"
-                        id="last_name"
-                        name="last_name"
-                        type="text"
-                        :value="old('last_name')"
-                        required
-                        autocomplete="last_name" />
-          <x-input-error class="mt-2" :messages="$errors->get('last_name')" />
-        </div>
-      </div>
-
       <!-- Email Address -->
       <div class="mb-4">
-        <x-input-label class="mb-1" for="email" :value="__('Email')" />
+        <x-input-label class="mb-1" for="email" :value="'Email'" />
         <x-text-input class="mb-2 block w-full"
                       id="email"
                       name="email"
@@ -53,7 +25,7 @@
                       autocomplete="username" />
 
         <x-input-help>
-          {{ __('We will send you a verification email, and won\'t spam you.') }}
+          Nous vous enverrons un email de vérification, et ne vous spammerons jamais.
         </x-input-help>
 
         <x-input-error class="mt-2" :messages="$errors->get('email')" />
@@ -61,7 +33,7 @@
 
       <!-- Password -->
       <div class="mb-4">
-        <x-input-label class="mb-1" for="password" :value="__('Password')" />
+        <x-input-label class="mb-1" for="password" :value="'Mot de passe'" />
 
         <x-text-input class="block w-full"
                       id="password"
@@ -75,7 +47,7 @@
 
       <!-- Confirm Password -->
       <div class="mb-2">
-        <x-input-label class="mb-1" for="password_confirmation" :value="__('Confirm Password')" />
+        <x-input-label class="mb-1" for="password_confirmation" :value="'Confirmez le mot de passe'" />
 
         <x-text-input class="block w-full"
                       id="password_confirmation"
@@ -88,28 +60,14 @@
       </div>
     </div>
 
-    <div class="border-t px-6 py-4">
-      <!-- organization -->
-      <x-input-label for="organization_name" :value="__('Name of your organization')" />
-      <x-text-input class="mt-1 block w-full"
-                    id="organization_name"
-                    name="organization_name"
-                    type="text"
-                    :value="old('organization_name')"
-                    required
-                    autocomplete="organization_name" />
-
-      <x-input-error class="mt-2" :messages="$errors->get('organization_name')" />
-    </div>
-
     <div class="flex items-center justify-between border-t px-6 py-4">
       <x-primary-button>
-        {{ __('Register') }}
+        {{ __('Créez le compte') }}
       </x-primary-button>
 
       <x-link href="{{ route('login') }}">
-        {{ __('Already registered?') }}
+        {{ __('Déjà inscrit ?') }}
       </x-link>
     </div>
   </form>
-</x-guest-layout>
+</x-login-layout>
