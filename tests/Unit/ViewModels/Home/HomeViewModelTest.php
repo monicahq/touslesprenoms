@@ -17,17 +17,20 @@ class HomeViewModelTest extends TestCase
         $maleName = Name::factory()->create([
             'gender' => 'male',
             'name' => 'JEAN-JACQUES',
+            'unisex' => 0,
         ]);
         $femaleName = Name::factory()->create([
             'gender' => 'female',
             'name' => 'HÉLOÏSE',
+            'unisex' => 1,
         ]);
 
         $array = HomeViewModel::twentyMostPopularNames();
 
-        $this->assertCount(3, $array);
+        $this->assertCount(4, $array);
         $this->assertArrayHasKey('male_names', $array);
         $this->assertArrayHasKey('female_names', $array);
+        $this->assertArrayHasKey('mixted_names', $array);
         $this->assertArrayHasKey('random_names', $array);
 
         $this->assertEquals(
@@ -35,7 +38,6 @@ class HomeViewModelTest extends TestCase
                 0 => [
                     'id' => $maleName->id,
                     'name' => 'Jean-Jacques',
-                    'avatar' => $maleName->avatar,
                     'url' => [
                         'show' => env('APP_URL') . '/prenoms/' . $maleName->id . '/jean-jacques',
                         'favorite' => env('APP_URL') . '/prenoms/' . $maleName->id . '/favorite',
@@ -50,7 +52,6 @@ class HomeViewModelTest extends TestCase
                 0 => [
                     'id' => $femaleName->id,
                     'name' => 'Héloïse',
-                    'avatar' => $femaleName->avatar,
                     'url' => [
                         'show' => env('APP_URL') . '/prenoms/' . $femaleName->id . '/heloise',
                         'favorite' => env('APP_URL') . '/prenoms/' . $femaleName->id . '/favorite',
@@ -59,6 +60,20 @@ class HomeViewModelTest extends TestCase
             ],
             $array['female_names']->toArray()
         );
+
+        $this->assertEquals(
+            [
+                0 => [
+                    'id' => $femaleName->id,
+                    'name' => 'Héloïse',
+                    'url' => [
+                        'show' => env('APP_URL') . '/prenoms/' . $femaleName->id . '/heloise',
+                        'favorite' => env('APP_URL') . '/prenoms/' . $femaleName->id . '/favorite',
+                    ],
+                ],
+            ],
+            $array['mixted_names']->toArray()
+        );
     }
 
     /** @test */
@@ -66,7 +81,7 @@ class HomeViewModelTest extends TestCase
     {
         $name = Name::factory()->create([
             'name' => 'JEAN-JACQUES',
-            'total' => 10000,
+            'total' => 1000000,
             'origins' => 'This is the origins of the name Jean-Jacques and it is very long and this is insane because i want to test if Occaecat tempor aliqua nostrud magna adipisicing nulla excepteur ea. Occaecat tempor aliqua nostrud magna adipisicing nulla excepteur ea. This is the origins of the name Jean-Jacques and it is very long and this is insane because i want to test if Occaecat tempor aliqua nostrud magna adipisicing nulla excepteur ea. Occaecat tempor aliqua nostrud magna adipisicing nulla excepteur ea.',
         ]);
         $array = HomeViewModel::nameSpotlight();
@@ -75,7 +90,6 @@ class HomeViewModelTest extends TestCase
             [
                 'id' => $name->id,
                 'name' => 'Jean-Jacques',
-                'avatar' => $name->avatar,
                 'origins' => 'This is the origins of the name Jean-Jacques and it is very long and this is insane because i want to test if Occaecat tempor aliqua nostrud magna adipisicing nulla excepteur ea. Occaecat tempor aliqua nostrud magna adipisicing nulla excepteur ea. This is the origins of the name Jean-Jacques and...',
                 'url' => env('APP_URL') . '/prenoms/' . $name->id . '/jean-jacques',
             ],
@@ -86,12 +100,12 @@ class HomeViewModelTest extends TestCase
     /** @test */
     public function it_gets_the_stats_of_the_server(): void
     {
-        $name = Name::factory()->create();
+        $name = Name::factory()->count(1000)->create();
         $array = HomeViewModel::serverStats();
 
         $this->assertEquals(
             [
-                'total_names' => 1,
+                'total_names' => '1 000',
             ],
             $array
         );

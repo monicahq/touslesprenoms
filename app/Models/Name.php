@@ -2,16 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Laravel\Scout\Searchable;
 
 class Name extends Model
 {
-    use HasFactory, Searchable;
+    use HasFactory;
 
     protected $table = 'names';
 
@@ -66,20 +64,5 @@ class Name extends Model
     public function lists(): BelongsToMany
     {
         return $this->belongsToMany(NameList::class, 'list_name', 'name_id', 'list_id');
-    }
-
-    /**
-     * @return Attribute<string,never>
-     */
-    protected function avatar(): Attribute
-    {
-        return Attribute::make(
-            get: function ($value) {
-                $multiavatar = new MultiAvatar;
-                $avatar = $multiavatar($this->name, null, null);
-
-                return $avatar;
-            }
-        );
     }
 }

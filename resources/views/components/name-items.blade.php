@@ -6,8 +6,8 @@
   hx-swap="outerHTML"
   >
   <div class="flex items-center">
-    <div class="rounded-full w-6 mr-4 ring-4 ring-violet-100">{!! $name['avatar'] !!}</div>
-    <a href="{{ $name['url']['show'] }}" class="text-lg">{{ $name['name'] }}</a>
+    <div class="rounded-full w-6 mr-4 ring-4 ring-violet-100">{!! \App\Helpers\NameHelper::getAvatar($name['name']) !!}</div>
+    <a href="{{ $name['url']['show'] }}" class="text-lg hover:underline">{{ $name['name'] }}</a>
   </div>
 
   @auth
