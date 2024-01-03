@@ -105,7 +105,7 @@ class HomeViewModelTest extends TestCase
 
         $this->assertEquals(
             [
-                'total_names' => '1 000',
+                'total_names' => '1 000',
             ],
             $array
         );
