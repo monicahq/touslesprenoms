@@ -14,7 +14,9 @@ class UserViewModel
         // first we get the favorite list
         $list = auth()->user()->lists()->where('is_list_of_favorites', true)->firstOrFail();
 
-        $names = $list->names()->orderBy('name')->get()->pluck('id');
+        $names = $list->names()->orderBy('name')->get()->map(function ($name) {
+            return $name->id;
+        });
 
         return $names;
     }
