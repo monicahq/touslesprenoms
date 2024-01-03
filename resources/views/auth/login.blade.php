@@ -2,7 +2,7 @@
   <!-- image + title -->
   <div class="border-b px-6 py-4">
     <a href="/">
-      <x-application-logo class="mx-auto mb-4 block w-28 text-center" />
+      <x-application-logo class="mx-auto mb-4 block w-16 text-center" />
     </a>
 
     <h2 class="mb-2 text-center font-bold">{{ __('Welcome back to Shelter') }}</h2>

@@ -2,17 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Jobs\ProcessCelebrities;
-use App\Jobs\ProcessCountryOfOrigin;
-use App\Jobs\ProcessElficTraits;
-use App\Jobs\ProcessKlingonName;
-use App\Jobs\ProcessLitteratureReferences;
-use App\Jobs\ProcessMainCaracteristics;
-use App\Jobs\ProcessMixte;
-use App\Jobs\ProcessOrigins;
-use App\Jobs\ProcessPersonality;
-use App\Jobs\ProcessSimilarNames;
-use App\Jobs\ProcessSyllabes;
 use App\Models\Characteristic;
 use App\Models\Name;
 use Illuminate\Console\Command;

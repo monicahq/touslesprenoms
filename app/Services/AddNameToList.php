@@ -6,28 +6,24 @@ use App\Models\NameList;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-/**
- * Create an account for the user.
- */
-class CreateAccount extends BaseService
+class AddNameToList extends BaseService
 {
-    private User $user;
+    private NameList $list;
 
     public function __construct(
-        public string $email,
-        public string $password,
+        public int $nameId,
+        public int $listId,
     ) {
     }
 
     public function execute(): User
     {
-        $this->createUser();
-        $this->createFirstList();
+        $this->add();
 
         return $this->user;
     }
 
-    private function createUser(): void
+    private function add(): void
     {
         $this->user = User::create([
             'email' => $this->email,

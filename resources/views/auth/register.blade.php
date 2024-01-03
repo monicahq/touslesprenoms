@@ -1,12 +1,12 @@
 <x-login-layout>
   <!-- image + title -->
   <div class="border-b px-6 py-4">
-    <a href="/">
-      <x-application-logo class="mx-auto mb-4 block w-28 text-center" />
+    <a href="/" class="mx-auto block w-full">
+      <x-application-logo class="mx-auto mb-4 block w-16 text-center" />
     </a>
 
     <h2 class="mb-2 text-center font-bold">Bienvenue</h2>
-    <h3 class="text-center text-sm text-gray-700">Créez un compte pour sauvegarder vos noms préférés et les faire voter par ceux qui vous aiment.</h3>
+    <h3 class="text-center text-sm text-gray-700">Créez un compte pour sauvegarder vos noms préférés, créer des listes et demander le vote de vos bien-aimés.</h3>
   </div>
 
   <form method="POST" action="{{ route('register') }}">

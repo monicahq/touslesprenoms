@@ -4,13 +4,10 @@ namespace App\Http\ViewModels\Search;
 
 use App\Helpers\StringHelper;
 use App\Models\Name;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Str;
 
 class SearchViewModel
 {
-    public static function names(string $term = null): array
+    public static function names(?string $term = null): array
     {
         $names = Name::search($term)
             ->where('name', '!=', '_PRENOMS_RARES')

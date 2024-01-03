@@ -69,10 +69,9 @@
           <h2 class="font-semibold text-xl mb-4">Prénoms masculins populaires</h2>
           <ul class="space-y-4">
             @foreach ($twentyMostPopularNames['male_names'] as $name)
-              <li class="flex items-center border border-transparent hover:bg-gray-50 hover:border-gray-200 px-2 py-1 rounded-sm">
-                <div class="rounded-full w-6 mr-4 ring-4 ring-violet-100">{!! $name['avatar'] !!}</div>
-                <a hx-boost="true" href="{{ $name['url'] }}" class="text-lg">{{ $name['name'] }}</a>
-              </li>
+            <li>
+              <x-name-items :name="$name['name']" :avatar="$name['avatar']" :url="$name['url']" />
+            </li>
             @endforeach
           </ul>
         </div>
@@ -82,9 +81,8 @@
           <h2 class="font-semibold text-xl mb-4">Prénoms féminins populaires</h2>
           <ul class="space-y-4">
             @foreach ($twentyMostPopularNames['female_names'] as $name)
-            <li class="flex items-center border border-transparent hover:bg-gray-50 hover:border-gray-200 px-2 py-1 rounded-sm">
-              <div class="rounded-full w-6 mr-4 ring-4 ring-violet-100">{!! $name['avatar'] !!}</div>
-              <a hx-boost="true" href="{{ $name['url'] }}" class="text-lg">{{ $name['name'] }}</a>
+            <li>
+              <x-name-items :name="$name['name']" :avatar="$name['avatar']" :url="$name['url']" />
             </li>
             @endforeach
           </ul>
@@ -95,9 +93,8 @@
           <h2 class="font-semibold text-xl mb-4">Prénoms mixtes populaires</h2>
           <ul class="space-y-4">
             @foreach ($twentyMostPopularNames['male_names'] as $name)
-            <li class="flex items-center border border-transparent hover:bg-gray-50 hover:border-gray-200 px-2 py-1 rounded-sm">
-              <div class="rounded-full w-6 mr-4 ring-4 ring-violet-100">{!! $name['avatar'] !!}</div>
-              <a hx-boost="true" href="{{ $name['url'] }}" class="text-lg">{{ $name['name'] }}</a>
+            <li>
+              <x-name-items :name="$name['name']" :avatar="$name['avatar']" :url="$name['url']" />
             </li>
             @endforeach
           </ul>
@@ -108,9 +105,8 @@
           <h2 class="font-semibold text-xl mb-4">Prénoms aléatoires</h2>
           <ul class="space-y-4">
             @foreach ($twentyMostPopularNames['random_names'] as $name)
-            <li class="flex items-center border border-transparent hover:bg-gray-50 hover:border-gray-200 px-2 py-1 rounded-sm">
-              <div class="rounded-full w-6 mr-4 ring-4 ring-violet-100">{!! $name['avatar'] !!}</div>
-              <a hx-boost="true" href="{{ $name['url'] }}" class="text-lg">{{ $name['name'] }}</a>
+            <li>
+              <x-name-items :name="$name['name']" :avatar="$name['avatar']" :url="$name['url']" />
             </li>
             @endforeach
           </ul>
