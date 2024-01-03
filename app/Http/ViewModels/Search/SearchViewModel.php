@@ -10,7 +10,6 @@ class SearchViewModel
     public static function names(?string $term = null): array
     {
         $names = Name::search($term)
-            ->where('name', '!=', '_PRENOMS_RARES')
             ->orderBy('total', 'desc')
             ->take(20)
             ->get()

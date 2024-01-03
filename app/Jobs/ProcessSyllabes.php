@@ -30,7 +30,7 @@ class ProcessSyllabes implements ShouldQueue
         if ($this->name->syllabes === 0) {
             $number = OpenAIHelper::getSyllabes($this->name->name);
 
-            $this->name->syllabes = $number;
+            $this->name->syllabes = (int) $number;
             $this->name->save();
         }
     }

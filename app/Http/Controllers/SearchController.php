@@ -30,7 +30,6 @@ class SearchController extends Controller
 
         $term = trim($request->input('term'));
         $names = SearchViewModel::names($term);
-        dd($names);
 
         return view('search.index', [
             'stats' => $stats,

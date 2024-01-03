@@ -16,29 +16,7 @@ class AddNameToList extends BaseService
     ) {
     }
 
-    public function execute(): User
+    public function execute(): void
     {
-        $this->add();
-
-        return $this->user;
-    }
-
-    private function add(): void
-    {
-        $this->user = User::create([
-            'email' => $this->email,
-            'password' => Hash::make($this->password),
-        ]);
-    }
-
-    private function createFirstList(): void
-    {
-        NameList::create([
-            'user_id' => $this->user->id,
-            'name' => 'Favoris',
-            'is_public' => false,
-            'can_be_modified' => false,
-            'is_list_of_favorites' => true,
-        ]);
     }
 }
