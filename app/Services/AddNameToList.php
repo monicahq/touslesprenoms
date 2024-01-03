@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\Hash;
 
 class AddNameToList extends BaseService
 {
-    private NameList $list;
-
     public function __construct(
         public int $nameId,
         public int $listId,
