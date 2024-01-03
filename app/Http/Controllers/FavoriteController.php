@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Response;
 use App\Services\ToggleNameToFavorites;
 use Illuminate\Http\RedirectResponse;
-use Request;
+use Illuminate\Http\Request;
 
 class FavoriteController extends Controller
 {

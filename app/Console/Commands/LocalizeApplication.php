@@ -14,14 +14,14 @@ class LocalizeApplication extends Command
      *
      * @var string
      */
-    protected $signature = 'shelter:localize';
+    protected $signature = 'openname:localize';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Generate locale files for Shelter.';
+    protected $description = 'Generate locale files for OpenName.';
 
     private GoogleTranslate $googleTranslate;
 
