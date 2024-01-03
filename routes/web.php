@@ -45,6 +45,8 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
         Route::put('prenoms/{id}/show/favorite', [NameFavoriteController::class, 'update'])->name('favorite.name.update');
     });
 
+    Route::get('favoris', [FavoriteController::class, 'index'])->name('favorite.index');
+
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

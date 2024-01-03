@@ -26,7 +26,13 @@
             </x-unlogged-nav-link>
 
             @auth
-            <x-unlogged-nav-link hx-boost="true" :href="route('search.index')" :active="request()->routeIs('search*')">
+            <x-unlogged-nav-link class="mr-4" hx-boost="true" :href="route('favorite.index')" :active="request()->routeIs('search*')">
+              {{ __('Vos favoris') }}
+            </x-unlogged-nav-link>
+            <x-unlogged-nav-link class="mr-4" hx-boost="true" :href="route('search.index')" :active="request()->routeIs('search*')">
+              {{ __('Vos listes') }}
+            </x-unlogged-nav-link>
+            <x-unlogged-nav-link class="mr-4" hx-boost="true" :href="route('search.index')" :active="request()->routeIs('search*')">
               {{ __('Votre compte') }}
             </x-unlogged-nav-link>
             @endauth
@@ -42,7 +48,7 @@
               action="{{ route('logout') }}">
               @csrf
               <span class="text-sm text-blue-700 cursor-pointer underline hover:no-underline dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800" onclick="event.preventDefault(); this.closest('form').submit();">
-                {{ __('Log out') }}
+                Déconnexion
               </span>
             </form>
           @endauth

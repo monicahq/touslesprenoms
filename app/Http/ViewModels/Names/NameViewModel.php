@@ -16,7 +16,6 @@ class NameViewModel
         return [
             'id' => $name->id,
             'name' => StringHelper::formatNameFromDB($name->name),
-            'avatar' => $name->avatar,
             'url' => [
                 'show' => route('name.show', [
                     'id' => $name->id,
@@ -36,7 +35,6 @@ class NameViewModel
         return [
             'id' => $name->id,
             'name' => StringHelper::formatNameFromDB($name->name),
-            'avatar' => $name->avatar,
             'origins' => Str::of($name->origins)->markdown(),
             'personality' => Str::of($name->personality)->markdown(),
             'syllabes' => $name->syllabes,
@@ -47,6 +45,7 @@ class NameViewModel
             'similar_names_in_other_languages' => Str::of($name->similar_names_in_other_languages)->markdown(),
             'klingon_translation' => null,
             'total' => $name->total,
+            'mixte' => $name->unisex ? 'Oui' : 'Non',
             'updated_at' => $name->updated_at->isoFormat('LL'),
             'url' => [
                 'show' => route('name.show', [

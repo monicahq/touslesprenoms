@@ -29,7 +29,7 @@
             <div class="p-6">
               <!-- title -->
               <div class="flex items-center mb-5">
-                <div class="rounded-full w-14 mr-4 ring-4 ring-violet-100">{!! $nameSpotlight['avatar'] !!}</div>
+                <div class="rounded-full w-14 mr-4 ring-4 ring-violet-100">{!! \App\Helpers\NameHelper::getAvatar($nameSpotlight['name']) !!}</div>
 
                 <h3 class="text-xl font-bold">{{ $nameSpotlight['name'] }}</h3>
               </div>
@@ -92,7 +92,7 @@
         <div>
           <h2 class="font-semibold text-xl mb-4">Prénoms mixtes populaires</h2>
           <ul class="space-y-4">
-            @foreach ($twentyMostPopularNames['male_names'] as $name)
+            @foreach ($twentyMostPopularNames['mixted_names'] as $name)
             <li>
               <x-name-items :name="$name" favorited="{{ $favorites->contains($name['id']) }}" />
             </li>

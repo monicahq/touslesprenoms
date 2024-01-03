@@ -24,14 +24,12 @@ class NameViewModelTest extends TestCase
 
         $this->assertArrayHasKey('id', $array);
         $this->assertArrayHasKey('name', $array);
-        $this->assertArrayHasKey('avatar', $array);
         $this->assertArrayHasKey('url', $array);
 
         $this->assertEquals(
             [
                 'id' => $name->id,
                 'name' => 'Héloïse',
-                'avatar' => $name->avatar,
                 'url' => [
                     'show' => env('APP_URL') . '/prenoms/' . $name->id . '/heloise',
                     'favorite' => env('APP_URL') . '/prenoms/' . $name->id . '/favorite',
@@ -62,7 +60,6 @@ class NameViewModelTest extends TestCase
 
         $this->assertArrayHasKey('id', $array);
         $this->assertArrayHasKey('name', $array);
-        $this->assertArrayHasKey('avatar', $array);
         $this->assertArrayHasKey('origins', $array);
         $this->assertArrayHasKey('personality', $array);
         $this->assertArrayHasKey('syllabes', $array);
@@ -73,6 +70,7 @@ class NameViewModelTest extends TestCase
         $this->assertArrayHasKey('similar_names_in_other_languages', $array);
         $this->assertArrayHasKey('klingon_translation', $array);
         $this->assertArrayHasKey('total', $array);
+        $this->assertArrayHasKey('mixte', $array);
         $this->assertArrayHasKey('url', $array);
 
         $this->assertEquals(
@@ -221,7 +219,6 @@ class NameViewModelTest extends TestCase
                 0 => [
                     'id' => $name->id,
                     'name' => 'Héloïse',
-                    'avatar' => $name->avatar,
                     'url' => [
                         'show' => env('APP_URL') . '/prenoms/' . $name->id . '/heloise',
                         'favorite' => env('APP_URL') . '/prenoms/' . $name->id . '/favorite',

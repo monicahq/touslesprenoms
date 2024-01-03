@@ -3,17 +3,17 @@
 namespace App\Console\Commands;
 
 use App\Models\Name;
-use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Http\Request;
 
-class GenerateFakeLastUpdatedDate extends Command
+class WarmCache extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'openname:last-update';
+    protected $signature = 'openname:warm';
 
     /**
      * The console command description.
@@ -27,10 +27,14 @@ class GenerateFakeLastUpdatedDate extends Command
      */
     public function handle(): void
     {
-        foreach (Name::lazy() as $name) {
-            // generate a fake date in the last two years for the last updated date
-            $name->updated_at = Carbon::now()->subDays(rand(1, 320));
-            $name->save();
+        $request = Request::create(route('home.index'), 'GET');
+
+        foreach (Name::where('total', '>', 69000)->lazy() as $name) {
+            $request = Request::create(route('name.show', [
+                'id' => $name->id,
+                'name' => $name->name,
+            ]), 'GET');
+            app()->handle($request);
         }
     }
 }

@@ -56,7 +56,7 @@
         <div>
           <!-- nom + avatar -->
           <div class="flex items-center mb-5">
-            <div class="rounded-full w-14 mr-4 ring-4 ring-violet-100">{!! $name['avatar'] !!}</div>
+            <div class="rounded-full w-14 mr-4 ring-4 ring-violet-100">{!! \App\Helpers\NameHelper::getAvatar($name['name']) !!}</div>
 
             <h1 class="text-xl font-bold">{{ $name['name'] }}</h1>
           </div>
@@ -98,8 +98,8 @@
             </div>
 
             <div class="bg-violet-100 rounded-lg p-2">
-              <h3 class="text-xs text-gray-700"></h3>
-              <div class="text-xl">{!! $name['syllabes'] !!}</div>
+              <h3 class="text-xs text-gray-700">Mixte</h3>
+              <div class="text-xl">{!! $name['mixte'] !!}</div>
             </div>
           </div>
 
