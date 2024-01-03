@@ -31,7 +31,7 @@
       @endif
 
       <!-- names -->
-      <div class="grid grid-cols-2 gap-10 gap-y-1 mb-10">
+      <div class="grid grid-cols-2 gap-10 gap-y-1 mb-10" x-data="{ last_name: '{{ auth()->user()->last_name }}' }">
         @foreach ($names as $name)
         <div
           class="flex items-center justify-between border border-transparent hover:bg-gray-50 hover:border-gray-200 px-2 py-1 rounded-sm"
@@ -42,7 +42,7 @@
             <div class="rounded-full w-6 mr-4 ring-4 ring-violet-100">{!! \App\Helpers\NameHelper::getAvatar($name['name']) !!}</div>
 
             <div class="flex-col">
-              <a href="{{ $name['url']['show'] }}" class="text-lg hover:underline">{{ $name['name'] }}</a>
+              <a href="{{ $name['url']['show'] }}" class="text-lg hover:underline">{{ $name['name'] }} <span x-text="last_name"></span></a>
               <p class="text-xs text-gray-700">{{ $name['total'] }} utilisations depuis 1900</p>
             </div>
           </div>

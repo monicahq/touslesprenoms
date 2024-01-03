@@ -26,13 +26,10 @@
             </x-unlogged-nav-link>
 
             @auth
-            <x-unlogged-nav-link class="mr-4" hx-boost="true" :href="route('favorite.index')" :active="request()->routeIs('search*')">
+            <x-unlogged-nav-link class="mr-4" hx-boost="true" :href="route('favorite.index')" :active="request()->routeIs('favorite*')">
               {{ __('Vos favoris') }}
             </x-unlogged-nav-link>
-            <x-unlogged-nav-link class="mr-4" hx-boost="true" :href="route('search.index')" :active="request()->routeIs('search*')">
-              {{ __('Vos listes') }}
-            </x-unlogged-nav-link>
-            <x-unlogged-nav-link class="mr-4" hx-boost="true" :href="route('search.index')" :active="request()->routeIs('search*')">
+            <x-unlogged-nav-link class="mr-4" hx-boost="true" :href="route('profile.show')" :active="request()->routeIs('profile*')">
               {{ __('Votre compte') }}
             </x-unlogged-nav-link>
             @endauth

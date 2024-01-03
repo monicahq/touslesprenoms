@@ -46,10 +46,7 @@
 
           <div class="grid grid-cols-4 gap-10 gap-y-1 mb-10">
             @foreach ($names as $name)
-              <div class="flex items-center border border-transparent hover:bg-gray-50 hover:border-gray-200 px-2 py-1 rounded-sm">
-                <div class="rounded-full w-6 mr-4 ring-4 ring-violet-100">{!! $name['avatar'] !!}</div>
-                <a hx-boost="true" href="{{ $name['url'] }}" class="text-lg">{{ $name['name'] }}</a>
-              </div>
+              <x-name-items :name="$name" favorited="{{ $favorites->contains($name['id']) }}" />
             @endforeach
           </div>
 
