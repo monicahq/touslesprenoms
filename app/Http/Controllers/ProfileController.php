@@ -11,30 +11,30 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
-    public function edit(Request $request): View
+    public function show(Request $request): View
     {
-        return view('profile.edit', [
+        return view('user.account', [
             'user' => $request->user(),
         ]);
     }
 
     /**
-     * Update the user's profile information.
+     * Update the user's password.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(Request $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
+        dd('is the probleme here god damn it');
         $request->user()->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    }
+
+    public function name(Request $request): RedirectResponse
+    {
+        auth()->user()->last_name = $request->get('last_name');
+        auth()->user()->save();
+
+        return redirect()->route('profile.show');
     }
 
     /**

@@ -30,7 +30,7 @@ class MaleNameController extends Controller
         $namesPagination = Cache::remember('all-names-male-page-' . $requestedPage, 604800, function () {
             return Name::where('name', '!=', '_PRENOMS_RARES')
                 ->where('gender', 'male')
-                ->orderBy('name', 'asc')
+                ->orderBy('total', 'desc')
                 ->paginate(40);
         });
 
@@ -77,11 +77,20 @@ class MaleNameController extends Controller
         $names = $namesPagination
             ->map(fn (Name $name) => NameViewModel::summary($name));
 
+        if (!auth()->check()) {
+            $favoritedNamesForLoggedUser = collect();
+        } else {
+            $favoritedNamesForLoggedUser = Cache::remember('user-favorites-' . auth()->id(), 604800, function () {
+                return UserViewModel::favorites();
+            });
+        }
+
         return view('names.male.letter', [
             'letters' => $letters,
             'names' => $names,
             'namesPagination' => $namesPagination,
             'activeLetter' => Str::ucfirst($requestedLetter),
+            'favorites' => $favoritedNamesForLoggedUser,
         ]);
     }
 }

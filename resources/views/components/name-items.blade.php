@@ -7,7 +7,7 @@
   >
   <div class="flex items-center">
     <div class="rounded-full w-6 mr-4 ring-4 ring-violet-100">{!! \App\Helpers\NameHelper::getAvatar($name['name']) !!}</div>
-    <a href="{{ $name['url']['show'] }}" class="text-lg hover:underline">{{ $name['name'] }}</a>
+    <a href="{{ $name['url']['show'] }}" class="text-lg hover:underline">{{ $name['name'] }} <span x-text="last_name"></span></a>
   </div>
 
   @auth

@@ -39,7 +39,7 @@
           </div>
 
           <!-- names -->
-          <div class="grid grid-cols-4 gap-10 gap-y-1 mb-10">
+          <div class="grid grid-cols-3 gap-10 gap-y-1 mb-10" x-data="{ last_name: '{{ auth()->user()->last_name }}' }">
             @foreach ($names as $name)
             <x-name-items :name="$name" favorited="{{ $favorites->contains($name['id']) }}" />
             @endforeach

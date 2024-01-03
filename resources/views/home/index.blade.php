@@ -66,8 +66,8 @@
       <div class="grid grid-row-4 sm:grid-cols-4 gap-10">
         <!-- male names -->
         <div>
-          <h2 class="font-semibold text-xl mb-4">Prénoms masculins populaires</h2>
-          <ul class="space-y-4">
+          <h2 class="font-semibold text-lg mb-4">Prénoms masculins populaires</h2>
+          <ul class="space-y-4" x-data="{ last_name: '{{ auth()->user()->last_name }}' }">
             @foreach ($twentyMostPopularNames['male_names'] as $name)
             <li>
               <x-name-items :name="$name" favorited="{{ $favorites->contains($name['id']) }}" />
@@ -78,8 +78,8 @@
 
         <!-- female names -->
         <div>
-          <h2 class="font-semibold text-xl mb-4">Prénoms féminins populaires</h2>
-          <ul class="space-y-4">
+          <h2 class="font-semibold text-lg mb-4">Prénoms féminins populaires</h2>
+          <ul class="space-y-4" x-data="{ last_name: '{{ auth()->user()->last_name }}' }">
             @foreach ($twentyMostPopularNames['female_names'] as $name)
             <li>
               <x-name-items :name="$name" favorited="{{ $favorites->contains($name['id']) }}" />
@@ -90,8 +90,8 @@
 
         <!-- mixte names -->
         <div>
-          <h2 class="font-semibold text-xl mb-4">Prénoms mixtes populaires</h2>
-          <ul class="space-y-4">
+          <h2 class="font-semibold text-lg mb-4">Prénoms mixtes populaires</h2>
+          <ul class="space-y-4" x-data="{ last_name: '{{ auth()->user()->last_name }}' }">
             @foreach ($twentyMostPopularNames['mixted_names'] as $name)
             <li>
               <x-name-items :name="$name" favorited="{{ $favorites->contains($name['id']) }}" />
@@ -102,8 +102,8 @@
 
         <!-- random names -->
         <div>
-          <h2 class="font-semibold text-xl mb-4">Prénoms aléatoires</h2>
-          <ul class="space-y-4">
+          <h2 class="font-semibold text-lg mb-4">Prénoms aléatoires</h2>
+          <ul class="space-y-4" x-data="{ last_name: '{{ auth()->user()->last_name }}' }">
             @foreach ($twentyMostPopularNames['random_names'] as $name)
             <li>
               <x-name-items :name="$name" favorited="{{ $favorites->contains($name['id']) }}" />
