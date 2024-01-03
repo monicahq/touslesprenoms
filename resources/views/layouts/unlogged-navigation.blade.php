@@ -7,8 +7,8 @@
       <div class="flex">
         <!-- Logo -->
         <div class="flex shrink-0 items-center">
-          <a href="{{ route('dashboard') }}">
-            <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+          <a href="{{ route('home.index') }}">
+            <x-application-logo class="block h-12 w-auto fill-current text-gray-800 dark:text-gray-200" />
           </a>
         </div>
 
@@ -24,6 +24,9 @@
             <x-unlogged-nav-link hx-boost="true" :href="route('search.index')" :active="request()->routeIs('search*')">
               {{ __('Recherche') }}
             </x-unlogged-nav-link>
+            <x-unlogged-nav-link hx-boost="true" :href="route('search.index')" :active="request()->routeIs('search*')">
+              {{ __('Votre compte') }}
+            </x-unlogged-nav-link>
           </div>
         </div>
       </div>
@@ -31,9 +34,15 @@
       <!-- Settings Dropdown -->
       <div class="hidden sm:flex sm:items-center">
 
+          @auth
           <span class="text-sm text-blue-700 cursor-pointer underline hover:no-underline dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800" onclick="event.preventDefault(); this.closest('form').submit();">
             {{ __('Log out') }}
           </span>
+          @endauth
+
+          @guest
+          <a hx-boost="true" href="{{ route('register') }}" class="bg-amber-300 px-4 py-2 rounded-lg font-bold shadow flex items-center"><x-heroicon-o-user-circle class="mr-2 w-5 h-5" /> <span>Créer votre compte</span></a>
+          @endguest
       </div>
 
       <div class="-me-2 flex items-center sm:hidden">
@@ -65,17 +74,17 @@
   <div class="hidden sm:hidden"
        :class="{ 'block': open, 'hidden': !open }">
     <div class="space-y-1 pb-3 pt-2">
-      <x-responsive-nav-link :href="route('dashboard')"
-                             :active="request()->routeIs('dashboard')">
-        {{ __('Dashboard') }}
+      <x-responsive-nav-link :href="route('home.index')"
+                             :active="request()->routeIs('home*')">
+        {{ __('Accueil') }}
       </x-responsive-nav-link>
     </div>
 
     <!-- Responsive Settings Options -->
     <div class="border-t border-gray-200 pb-1 pt-4 dark:border-gray-600">
       <div class="mt-3 space-y-1">
-        <x-responsive-nav-link :href="route('profile.edit')">
-          {{ __('Profile') }}
+        <x-responsive-nav-link :href="route('name.index')">
+          {{ __('Tous les prénoms') }}
         </x-responsive-nav-link>
 
         <!-- Authentication -->

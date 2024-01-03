@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FemaleNameController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocaleController;
@@ -32,11 +33,12 @@ Route::middleware(['name'])->group(function (): void {
     Route::get('prenoms/{id}/{name}', [NameController::class, 'show'])->name('name.show');
 });
 
-Route::get('dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware(['auth', 'verified'])->group(function (): void {
+    Route::middleware(['name'])->group(function (): void {
+        Route::put('prenoms/{id}/favorite', [FavoriteController::class, 'update'])->name('favorite.update');
+        Route::get('prenoms/{id}', [FavoriteController::class, 'show'])->name('favorite.show');
+    });
+
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

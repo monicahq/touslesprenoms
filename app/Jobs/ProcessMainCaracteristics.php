@@ -3,7 +3,6 @@
 namespace App\Jobs;
 
 use App\Helpers\OpenAIHelper;
-use App\Models\Characteristic;
 use App\Models\Name;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;

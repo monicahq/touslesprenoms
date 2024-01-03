@@ -58,6 +58,16 @@ class Name extends Model
         return $this->hasMany(NameStatistic::class);
     }
 
+    public function mainCharacteristics(): BelongsToMany
+    {
+        return $this->belongsToMany(Characteristic::class);
+    }
+
+    public function lists(): BelongsToMany
+    {
+        return $this->belongsToMany(NameList::class, 'list_name');
+    }
+
     /**
      * @return Attribute<string,never>
      */
@@ -71,10 +81,5 @@ class Name extends Model
                 return $avatar;
             }
         );
-    }
-
-    public function mainCharacteristics(): BelongsToMany
-    {
-        return $this->belongsToMany(Characteristic::class);
     }
 }

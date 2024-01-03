@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\NameList;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -21,6 +22,7 @@ class CreateAccount extends BaseService
     public function execute(): User
     {
         $this->createUser();
+        $this->createFirstList();
 
         return $this->user;
     }
@@ -30,6 +32,17 @@ class CreateAccount extends BaseService
         $this->user = User::create([
             'email' => $this->email,
             'password' => Hash::make($this->password),
+        ]);
+    }
+
+    private function createFirstList(): void
+    {
+        NameList::create([
+            'user_id' => $this->user->id,
+            'name' => 'Favoris',
+            'is_public' => false,
+            'can_be_modified' => false,
+            'is_list_of_favorites' => true,
         ]);
     }
 }

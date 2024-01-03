@@ -2,11 +2,11 @@
   <!-- image + title -->
   <div class="border-b px-6 py-4">
     <a href="/">
-      <x-application-logo class="mx-auto mb-4 block w-28 text-center" />
+      <x-application-logo class="mx-auto mb-4 block w-16 text-center" />
     </a>
 
-    <h2 class="mb-2 text-center font-bold">{{ __('Welcome back to Shelter') }}</h2>
-    <h3 class="text-center text-sm text-gray-700">{{ __('It\'s great to have you back!') }}</h3>
+    <h2 class="mb-2 text-center font-bold">{{ __('Bienvenue sur Tous les prénoms') }}</h2>
+    <h3 class="text-center text-sm text-gray-700">C'est chouette de vous avoir</h3>
   </div>
 
   <!-- Session Status -->
