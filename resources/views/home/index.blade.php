@@ -70,7 +70,7 @@
           <ul class="space-y-4">
             @foreach ($twentyMostPopularNames['male_names'] as $name)
             <li>
-              <x-name-items :name="$name['name']" :avatar="$name['avatar']" :url="$name['url']" />
+              <x-name-items :name="$name" />
             </li>
             @endforeach
           </ul>
@@ -82,7 +82,7 @@
           <ul class="space-y-4">
             @foreach ($twentyMostPopularNames['female_names'] as $name)
             <li>
-              <x-name-items :name="$name['name']" :avatar="$name['avatar']" :url="$name['url']" />
+              <x-name-items :name="$name" />
             </li>
             @endforeach
           </ul>
@@ -94,7 +94,7 @@
           <ul class="space-y-4">
             @foreach ($twentyMostPopularNames['male_names'] as $name)
             <li>
-              <x-name-items :name="$name['name']" :avatar="$name['avatar']" :url="$name['url']" />
+              <x-name-items :name="$name" />
             </li>
             @endforeach
           </ul>
@@ -106,7 +106,7 @@
           <ul class="space-y-4">
             @foreach ($twentyMostPopularNames['random_names'] as $name)
             <li>
-              <x-name-items :name="$name['name']" :avatar="$name['avatar']" :url="$name['url']" />
+              <x-name-items :name="$name" />
             </li>
             @endforeach
           </ul>

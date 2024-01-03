@@ -3,6 +3,7 @@
 namespace App\Http\ViewModels\Home;
 
 use App\Helpers\StringHelper;
+use App\Http\ViewModels\Names\NameViewModel;
 use App\Models\Name;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
@@ -16,44 +17,20 @@ class HomeViewModel
             ->orderBy('total', 'desc')
             ->take(10)
             ->get()
-            ->map(fn (Name $name) => [
-                'id' => $name->id,
-                'name' => StringHelper::formatNameFromDB($name->name),
-                'avatar' => $name->avatar,
-                'url' => route('name.show', [
-                    'id' => $name->id,
-                    'name' => StringHelper::sanitizeNameForURL($name->name),
-                ]),
-            ]);
+            ->map(fn (Name $name) => NameViewModel::summary($name));
 
         $femaleNames = Name::where('gender', 'female')
             ->where('name', '!=', '_PRENOMS_RARES')
             ->orderBy('total', 'desc')
             ->take(10)
             ->get()
-            ->map(fn (Name $name) => [
-                'id' => $name->id,
-                'name' => StringHelper::formatNameFromDB($name->name),
-                'avatar' => $name->avatar,
-                'url' => route('name.show', [
-                    'id' => $name->id,
-                    'name' => StringHelper::sanitizeNameForURL($name->name),
-                ]),
-            ]);
+            ->map(fn (Name $name) => NameViewModel::summary($name));
 
         $randomNames = Name::where('name', '!=', '_PRENOMS_RARES')
             ->inRandomOrder()
             ->take(10)
             ->get()
-            ->map(fn (Name $name) => [
-                'id' => $name->id,
-                'name' => StringHelper::formatNameFromDB($name->name),
-                'avatar' => $name->avatar,
-                'url' => route('name.show', [
-                    'id' => $name->id,
-                    'name' => StringHelper::sanitizeNameForURL($name->name),
-                ]),
-            ]);
+            ->map(fn (Name $name) => NameViewModel::summary($name));
 
         return [
             'male_names' => $maleNames,

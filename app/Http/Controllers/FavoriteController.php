@@ -2,15 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\ViewModels\Names\NameViewModel;
 use App\Services\ToggleNameToFavorites;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class FavoriteController extends Controller
 {
-    public function update(Request $request): void
+    public function update(Request $request): View
     {
-        (new ToggleNameToFavorites(
-            nameId: $request->attributes->get('name')->id,
+        $name = $request->attributes->get('name');
+
+        $favorited = (new ToggleNameToFavorites(
+            nameId: $name->id,
         ))->execute();
+
+        return view('components.name-items', [
+            'name' => NameViewModel::summary($name),
+            'favorited' => $favorited,
+        ]);
     }
 }
