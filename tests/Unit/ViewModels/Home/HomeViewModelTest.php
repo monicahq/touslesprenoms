@@ -36,7 +36,10 @@ class HomeViewModelTest extends TestCase
                     'id' => $maleName->id,
                     'name' => 'Jean-Jacques',
                     'avatar' => $maleName->avatar,
-                    'url' => env('APP_URL') . '/prenoms/' . $maleName->id . '/jean-jacques',
+                    'url' => [
+                        'show' => env('APP_URL') . '/prenoms/' . $maleName->id . '/jean-jacques',
+                        'favorite' => env('APP_URL') . '/prenoms/' . $maleName->id . '/favorite',
+                    ],
                 ],
             ],
             $array['male_names']->toArray()
@@ -48,7 +51,10 @@ class HomeViewModelTest extends TestCase
                     'id' => $femaleName->id,
                     'name' => 'Héloïse',
                     'avatar' => $femaleName->avatar,
-                    'url' => env('APP_URL') . '/prenoms/' . $femaleName->id . '/heloise',
+                    'url' => [
+                        'show' => env('APP_URL') . '/prenoms/' . $femaleName->id . '/heloise',
+                        'favorite' => env('APP_URL') . '/prenoms/' . $femaleName->id . '/favorite',
+                    ],
                 ],
             ],
             $array['female_names']->toArray()

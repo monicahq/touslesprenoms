@@ -65,7 +65,7 @@ class Name extends Model
 
     public function lists(): BelongsToMany
     {
-        return $this->belongsToMany(NameList::class, 'list_name');
+        return $this->belongsToMany(NameList::class, 'list_name', 'name_id', 'list_id');
     }
 
     /**

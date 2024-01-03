@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\MaleNameController;
 use App\Http\Controllers\NameController;
+use App\Http\Controllers\NameFavoriteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Settings\SettingsController;
@@ -35,8 +36,13 @@ Route::middleware(['name'])->group(function (): void {
 
 Route::middleware(['auth', 'verified'])->group(function (): void {
     Route::middleware(['name'])->group(function (): void {
+
+        // set favorites
+        // used in the list of names
         Route::put('prenoms/{id}/favorite', [FavoriteController::class, 'update'])->name('favorite.update');
-        Route::get('prenoms/{id}', [FavoriteController::class, 'show'])->name('favorite.show');
+
+        // used on the show page
+        Route::put('prenoms/{id}/show/favorite', [NameFavoriteController::class, 'update'])->name('favorite.name.update');
     });
 
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');

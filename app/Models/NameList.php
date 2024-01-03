@@ -36,6 +36,6 @@ class NameList extends Model
 
     public function names(): BelongsToMany
     {
-        return $this->belongsToMany(Name::class, 'list_name');
+        return $this->belongsToMany(Name::class, 'list_name', 'list_id', 'name_id');
     }
 }

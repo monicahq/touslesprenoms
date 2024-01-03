@@ -41,7 +41,7 @@
           <!-- names -->
           <div class="grid grid-cols-4 gap-10 gap-y-1 mb-10">
             @foreach ($names as $name)
-            <x-name-items :name="$name['name']" :avatar="$name['avatar']" :url="$name['url']" />
+            <x-name-items :name="$name" favorited="{{ $favorites->contains($name['id']) }}" />
             @endforeach
           </div>
 

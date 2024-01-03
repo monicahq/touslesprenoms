@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 
-class FavoriteController extends Controller
+class NameFavoriteController extends Controller
 {
     public function update(Request $request): View
     {
@@ -20,8 +20,8 @@ class FavoriteController extends Controller
 
         Cache::forget('user-favorites-' . auth()->id());
 
-        return view('components.name-items', [
-            'name' => NameViewModel::summary($name),
+        return view('components.favorite', [
+            'name' => NameViewModel::details($name),
             'favorited' => $favorited,
         ]);
     }

@@ -14,6 +14,34 @@ class NameViewModelTest extends TestCase
     use DatabaseTransactions;
 
     /** @test */
+    public function it_gets_the_summary_of_a_name(): void
+    {
+        $name = Name::factory()->create([
+            'name' => 'HÉLOÏSE',
+        ]);
+
+        $array = NameViewModel::summary($name);
+
+        $this->assertArrayHasKey('id', $array);
+        $this->assertArrayHasKey('name', $array);
+        $this->assertArrayHasKey('avatar', $array);
+        $this->assertArrayHasKey('url', $array);
+
+        $this->assertEquals(
+            [
+                'id' => $name->id,
+                'name' => 'Héloïse',
+                'avatar' => $name->avatar,
+                'url' => [
+                    'show' => env('APP_URL') . '/prenoms/' . $name->id . '/heloise',
+                    'favorite' => env('APP_URL') . '/prenoms/' . $name->id . '/favorite',
+                ],
+            ],
+            $array
+        );
+    }
+
+    /** @test */
     public function it_gets_the_details_of_a_name(): void
     {
         $name = Name::factory()->create([
@@ -48,7 +76,10 @@ class NameViewModelTest extends TestCase
         $this->assertArrayHasKey('url', $array);
 
         $this->assertEquals(
-            env('APP_URL') . '/prenoms/' . $name->id . '/heloise',
+            [
+                'show' => env('APP_URL') . '/prenoms/' . $name->id . '/heloise',
+                'favorite' => env('APP_URL') . '/prenoms/' . $name->id . '/show/favorite',
+            ],
             $array['url']
         );
     }
@@ -191,7 +222,10 @@ class NameViewModelTest extends TestCase
                     'id' => $name->id,
                     'name' => 'Héloïse',
                     'avatar' => $name->avatar,
-                    'url' => env('APP_URL') . '/prenoms/' . $name->id . '/heloise',
+                    'url' => [
+                        'show' => env('APP_URL') . '/prenoms/' . $name->id . '/heloise',
+                        'favorite' => env('APP_URL') . '/prenoms/' . $name->id . '/favorite',
+                    ],
                 ],
             ],
             $collection->toArray()

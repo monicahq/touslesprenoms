@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\StringHelper;
 use App\Http\ViewModels\Names\AllNamesViewModel;
 use App\Http\ViewModels\Names\NameViewModel;
+use App\Http\ViewModels\User\UserViewModel;
 use App\Models\Name;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
@@ -34,20 +35,21 @@ class NameController extends Controller
         });
 
         $names = $namesPagination
-            ->map(fn (Name $name) => [
-                'id' => $name->id,
-                'name' => StringHelper::formatNameFromDB($name->name),
-                'avatar' => $name->avatar,
-                'url' => route('name.show', [
-                    'id' => $name->id,
-                    'name' => StringHelper::sanitizeNameForURL($name->name),
-                ]),
-            ]);
+            ->map(fn (Name $name) => NameViewModel::summary($name));
+
+        if (! auth()->check()) {
+            $favoritedNamesForLoggedUser = collect();
+        } else {
+            $favoritedNamesForLoggedUser = Cache::remember('user-favorites-' . auth()->id(), 604800, function () {
+                return UserViewModel::favorites();
+            });
+        }
 
         return view('names.index', [
             'letters' => $letters,
             'names' => $names,
             'namesPagination' => $namesPagination,
+            'favorites' => $favoritedNamesForLoggedUser,
         ]);
     }
 
@@ -71,12 +73,21 @@ class NameController extends Controller
             return NameViewModel::numerology($requestedName);
         });
 
+        if (! auth()->check()) {
+            $favoritedNamesForLoggedUser = collect();
+        } else {
+            $favoritedNamesForLoggedUser = Cache::remember('user-favorites-' . auth()->id(), 604800, function () {
+                return UserViewModel::favorites();
+            });
+        }
+
         return view('names.show', [
             'name' => $name,
             'popularity' => $popularity,
             'relatedNames' => $relatedNames,
             'jsonLdSchema' => NameViewModel::jsonLdSchema($requestedName),
             'numerology' => $numerology,
+            'favorites' => $favoritedNamesForLoggedUser,
         ]);
     }
 
