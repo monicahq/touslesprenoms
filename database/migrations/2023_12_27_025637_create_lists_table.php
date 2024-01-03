@@ -24,9 +24,9 @@ return new class extends Migration
         });
 
         Schema::create('list_name', function (Blueprint $table) {
-            $table->unsignedBigInteger('name_list_id');
+            $table->unsignedBigInteger('list_id');
             $table->unsignedBigInteger('name_id');
-            $table->foreign('name_list_id')->references('id')->on('name_lists')->onDelete('cascade');
+            $table->foreign('list_id')->references('id')->on('lists')->onDelete('cascade');
             $table->foreign('name_id')->references('id')->on('names')->onDelete('cascade');
         });
     }
