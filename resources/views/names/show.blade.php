@@ -86,20 +86,20 @@
           </div>
 
           <!-- syllabes -->
-          <div class="grid grid-cols-3 gap-3 mb-5">
+          <div class="grid grid-cols-3 gap-3 mb-10">
             <div class="bg-violet-100 rounded-lg p-2">
-              <h3 class="text-xs">Nombre de syllabes</h3>
-              <div>{!! $name['syllabes'] !!}</div>
+              <h3 class="text-xs text-gray-700">Nombre de syllabes</h3>
+              <div class="text-xl">{!! $name['syllabes'] !!}</div>
             </div>
 
             <div class="bg-violet-100 rounded-lg p-2">
-              <h3 class="text-xs">Numérologie</h3>
-              <div>{{ $numerology }}</div>
+              <h3 class="text-xs text-gray-700">Numérologie</h3>
+              <div class="text-xl">{{ $numerology }}</div>
             </div>
 
             <div class="bg-violet-100 rounded-lg p-2">
-              <h3 class="text-xs"></h3>
-              <div>{!! $name['syllabes'] !!}</div>
+              <h3 class="text-xs text-gray-700"></h3>
+              <div class="text-xl">{!! $name['syllabes'] !!}</div>
             </div>
           </div>
 
@@ -159,7 +159,7 @@
           </div>
 
           <!-- elfic traits -->
-          <div class="mb-8">
+          <div class="mb-8 border-b pb-6">
             <h2 class="mb-2 flex items-center" id="elfiques">
               <span class="bg-amber-300 p-1 mr-2 rounded-full">
                 <x-heroicon-o-chevron-right class="w-4 h-4 text-white" />
@@ -168,10 +168,18 @@
             </h2>
             <div class="prose">{!! $name['elfic_traits'] !!}</div>
           </div>
+
+          <!-- last updated -->
+          <div class="mb-8">
+            <p class="text-sm">Cet article a été mis à jour le {{ $name['updated_at'] }}.</p>
+          </div>
         </div>
 
         <!-- right -->
         <div>
+
+          <!-- favorites -->
+          <x-favorite :name="$name" favorited="{{ $favorites->contains($name['id']) }}" />
 
           <div class="mb-8">
             <h2 class="font-semibold text-lg mb-4">Popularités par décennies</h2>
@@ -198,10 +206,9 @@
             <h2 class="font-semibold text-lg mb-4">D'autres idées de prénoms</h2>
             <ul class="space-y-1">
               @foreach ($relatedNames as $name)
-                <li class="flex items-center border border-transparent hover:bg-gray-50 hover:border-gray-200 px-2 py-1 rounded-sm">
-                  <div class="rounded-full w-6 mr-4 ring-4 ring-violet-100">{!! $name['avatar'] !!}</div>
-                  <a hx-boost="true" href="{{ $name['url'] }}" class="text-lg">{{ $name['name'] }}</a>
-                </li>
+              <li>
+                <x-name-items :name="$name" favorited="{{ $favorites->contains($name['id']) }}" />
+              </li>
               @endforeach
             </ul>
           </div>

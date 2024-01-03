@@ -78,7 +78,7 @@ class NameViewModelTest extends TestCase
         $this->assertEquals(
             [
                 'show' => env('APP_URL') . '/prenoms/' . $name->id . '/heloise',
-                'favorite' => env('APP_URL') . '/prenoms/' . $name->id . '/favorite',
+                'favorite' => env('APP_URL') . '/prenoms/' . $name->id . '/show/favorite',
             ],
             $array['url']
         );
@@ -222,7 +222,10 @@ class NameViewModelTest extends TestCase
                     'id' => $name->id,
                     'name' => 'Héloïse',
                     'avatar' => $name->avatar,
-                    'url' => env('APP_URL') . '/prenoms/' . $name->id . '/heloise',
+                    'url' => [
+                        'show' => env('APP_URL') . '/prenoms/' . $name->id . '/heloise',
+                        'favorite' => env('APP_URL') . '/prenoms/' . $name->id . '/favorite',
+                    ],
                 ],
             ],
             $collection->toArray()

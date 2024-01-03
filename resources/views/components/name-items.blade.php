@@ -7,7 +7,7 @@
   >
   <div class="flex items-center">
     <div class="rounded-full w-6 mr-4 ring-4 ring-violet-100">{!! $name['avatar'] !!}</div>
-    <a hx-boost="true" href="{{ $name['url']['show'] }}" class="text-lg">{{ $name['name'] }}</a>
+    <a href="{{ $name['url']['show'] }}" class="text-lg">{{ $name['name'] }}</a>
   </div>
 
   @auth

@@ -19,10 +19,10 @@ class HomeController extends Controller
             return HomeViewModel::serverStats();
         });
 
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             $favoritedNamesForLoggedUser = collect();
         } else {
-            $favoritedNamesForLoggedUser = Cache::remember('user-favorites-'.auth()->id(), 604800, function () {
+            $favoritedNamesForLoggedUser = Cache::remember('user-favorites-' . auth()->id(), 604800, function () {
                 return UserViewModel::favorites();
             });
         }

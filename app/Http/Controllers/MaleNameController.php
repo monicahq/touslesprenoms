@@ -38,7 +38,7 @@ class MaleNameController extends Controller
         $names = $namesPagination
             ->map(fn (Name $name) => NameViewModel::summary($name));
 
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             $favoritedNamesForLoggedUser = collect();
         } else {
             $favoritedNamesForLoggedUser = Cache::remember('user-favorites-' . auth()->id(), 604800, function () {

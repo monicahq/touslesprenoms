@@ -31,6 +31,8 @@ class NameViewModel
 
     public static function details(Name $name): array
     {
+        Carbon::setLocale('fr');
+
         return [
             'id' => $name->id,
             'name' => StringHelper::formatNameFromDB($name->name),
@@ -45,12 +47,13 @@ class NameViewModel
             'similar_names_in_other_languages' => Str::of($name->similar_names_in_other_languages)->markdown(),
             'klingon_translation' => null,
             'total' => $name->total,
+            'updated_at' => $name->updated_at->isoFormat('LL'),
             'url' => [
                 'show' => route('name.show', [
                     'id' => $name->id,
                     'name' => StringHelper::sanitizeNameForURL($name->name),
                 ]),
-                'favorite' => route('favorite.update', [
+                'favorite' => route('favorite.name.update', [
                     'id' => $name->id,
                 ]),
             ],
@@ -117,15 +120,7 @@ class NameViewModel
             ->inRandomOrder()
             ->take(10)
             ->get()
-            ->map(fn (Name $name) => [
-                'id' => $name->id,
-                'name' => StringHelper::formatNameFromDB($name->name),
-                'avatar' => $name->avatar,
-                'url' => route('name.show', [
-                    'id' => $name->id,
-                    'name' => StringHelper::sanitizeNameForURL($name->name),
-                ]),
-            ]);
+            ->map(fn (Name $name) => NameViewModel::summary($name));
     }
 
     public static function numerology(Name $name): int

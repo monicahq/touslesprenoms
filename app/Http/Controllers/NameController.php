@@ -37,7 +37,7 @@ class NameController extends Controller
         $names = $namesPagination
             ->map(fn (Name $name) => NameViewModel::summary($name));
 
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             $favoritedNamesForLoggedUser = collect();
         } else {
             $favoritedNamesForLoggedUser = Cache::remember('user-favorites-' . auth()->id(), 604800, function () {
@@ -73,12 +73,21 @@ class NameController extends Controller
             return NameViewModel::numerology($requestedName);
         });
 
+        if (! auth()->check()) {
+            $favoritedNamesForLoggedUser = collect();
+        } else {
+            $favoritedNamesForLoggedUser = Cache::remember('user-favorites-' . auth()->id(), 604800, function () {
+                return UserViewModel::favorites();
+            });
+        }
+
         return view('names.show', [
             'name' => $name,
             'popularity' => $popularity,
             'relatedNames' => $relatedNames,
             'jsonLdSchema' => NameViewModel::jsonLdSchema($requestedName),
             'numerology' => $numerology,
+            'favorites' => $favoritedNamesForLoggedUser,
         ]);
     }
 
