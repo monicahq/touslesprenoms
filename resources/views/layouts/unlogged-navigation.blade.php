@@ -15,18 +15,21 @@
         <!-- Navigation Links -->
         <div class="hidden space-x-4 sm:ms-10 sm:flex items-center">
           <div>
-            <x-unlogged-nav-link hx-boost="true" :href="route('home.index')" :active="request()->routeIs('home.index')">
+            <x-unlogged-nav-link class="mr-4" hx-boost="true" :href="route('home.index')" :active="request()->routeIs('home.index')">
               {{ __('Accueil') }}
             </x-unlogged-nav-link>
-            <x-unlogged-nav-link hx-boost="true" :href="route('name.index')" :active="request()->routeIs('name*')">
+            <x-unlogged-nav-link class="mr-4" hx-boost="true" :href="route('name.index')" :active="request()->routeIs('name*')">
               {{ __('Tous les prénoms') }}
             </x-unlogged-nav-link>
-            <x-unlogged-nav-link hx-boost="true" :href="route('search.index')" :active="request()->routeIs('search*')">
+            <x-unlogged-nav-link class="mr-4" hx-boost="true" :href="route('search.index')" :active="request()->routeIs('search*')">
               {{ __('Recherche') }}
             </x-unlogged-nav-link>
+
+            @auth
             <x-unlogged-nav-link hx-boost="true" :href="route('search.index')" :active="request()->routeIs('search*')">
               {{ __('Votre compte') }}
             </x-unlogged-nav-link>
+            @endauth
           </div>
         </div>
       </div>
@@ -35,13 +38,20 @@
       <div class="hidden sm:flex sm:items-center">
 
           @auth
-          <span class="text-sm text-blue-700 cursor-pointer underline hover:no-underline dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800" onclick="event.preventDefault(); this.closest('form').submit();">
-            {{ __('Log out') }}
-          </span>
+           <form method="POST"
+              action="{{ route('logout') }}">
+              @csrf
+              <span class="text-sm text-blue-700 cursor-pointer underline hover:no-underline dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800" onclick="event.preventDefault(); this.closest('form').submit();">
+                {{ __('Log out') }}
+              </span>
+            </form>
           @endauth
 
           @guest
-          <a hx-boost="true" href="{{ route('register') }}" class="bg-amber-300 px-4 py-2 rounded-lg font-bold shadow flex items-center"><x-heroicon-o-user-circle class="mr-2 w-5 h-5" /> <span>Créer votre compte</span></a>
+
+            <a hx-boost="true" href="{{ route('register') }}" class="bg-amber-300 mr-4 px-4 py-2 rounded-lg font-bold shadow flex items-center"><x-heroicon-o-user-circle class="mr-2 w-5 h-5" /> <span>Créer votre compte</span></a>
+            <a hx-boost="true" href="{{ route('login') }}" class="inline-flex items-center text-md font-bold text-cyan-950 focus:outline-none focus:border-indigo-700 transition duration-250 ease-in-out"><span>Connexion</span></a>
+
           @endguest
       </div>
 
