@@ -9,7 +9,6 @@ use App\Http\Controllers\NameController;
 use App\Http\Controllers\NameFavoriteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
-use App\Http\Controllers\Settings\SettingsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('locale/{locale}', [LocaleController::class, 'update'])->name('locale.update');
