@@ -1,7 +1,7 @@
 @props(['name', 'favorited' => false])
 
 <div
-  class="flex items-center justify-between border border-transparent hover:bg-gray-50 hover:border-gray-200 px-2 py-1 rounded-sm"
+  {{ $attributes->merge(['class' => 'flex items-center justify-between border border-transparent hover:bg-gray-50 hover:border-gray-200 px-2 py-1 rounded-sm']) }}
   hx-target="this"
   hx-swap="outerHTML"
   >
