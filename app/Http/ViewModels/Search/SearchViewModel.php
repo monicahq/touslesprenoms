@@ -7,19 +7,24 @@ use App\Models\Name;
 
 class SearchViewModel
 {
-    public static function names(?string $term = null): array
+    public static function names(?string $term = null, int $limit = 20): array
     {
         $names = Name::search($term)
             ->orderBy('total', 'desc')
-            ->take(20)
+            ->take($limit)
             ->get()
             ->map(fn (Name $name) => [
                 'id' => $name->id,
                 'name' => StringHelper::formatNameFromDB($name->name),
-                'url' => route('name.show', [
-                    'id' => $name->id,
-                    'name' => StringHelper::sanitizeNameForURL($name->name),
-                ]),
+                'url' => [
+                    'show' => route('name.show', [
+                        'id' => $name->id,
+                        'name' => StringHelper::sanitizeNameForURL($name->name),
+                    ]),
+                    'favorite' => route('favorite.update', [
+                        'id' => $name->id,
+                    ]),
+                ],
             ])
             ->filter(function ($name) {
                 return strpos($name['name'], '_prenoms_rares') === false;

@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Scout\Searchable;
+use Spatie\Sitemap\Contracts\Sitemapable;
+use Spatie\Sitemap\Tags\Url;
 
-class Name extends Model
+class Name extends Model implements Sitemapable
 {
     use HasFactory, Searchable;
 
@@ -65,5 +68,13 @@ class Name extends Model
     public function lists(): BelongsToMany
     {
         return $this->belongsToMany(NameList::class, 'list_name', 'name_id', 'list_id');
+    }
+
+    public function toSitemapTag(): Url|string|array
+    {
+        return Url::create(route('name.show', $this))
+            ->setLastModificationDate(Carbon::create($this->updated_at))
+            ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
+            ->setPriority(0.1);
     }
 }
