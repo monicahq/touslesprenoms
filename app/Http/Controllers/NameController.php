@@ -136,7 +136,7 @@ class NameController extends Controller
         ]);
     }
 
-    public function storeNameInList(Request $request, int $listId, int $nameId)
+    public function storeNameInList(Request $request, int $listId, int $nameId): View
     {
         $requestedList = $request->attributes->get('list');
 
