@@ -22,7 +22,8 @@ class CreateAccount extends BaseService
     public function execute(): User
     {
         $this->createUser();
-        $this->createFirstList();
+        $this->createFavoriteList();
+        $this->createDefaultList();
 
         return $this->user;
     }
@@ -35,7 +36,7 @@ class CreateAccount extends BaseService
         ]);
     }
 
-    private function createFirstList(): void
+    private function createFavoriteList(): void
     {
         NameList::create([
             'user_id' => $this->user->id,
@@ -43,6 +44,17 @@ class CreateAccount extends BaseService
             'is_public' => false,
             'can_be_modified' => false,
             'is_list_of_favorites' => true,
+        ]);
+    }
+
+    private function createDefaultList(): void
+    {
+        NameList::create([
+            'user_id' => $this->user->id,
+            'name' => 'Votre première liste',
+            'is_public' => false,
+            'can_be_modified' => true,
+            'is_list_of_favorites' => false,
         ]);
     }
 }

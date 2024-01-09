@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\ViewModels\Names\AllNamesViewModel;
 use App\Http\ViewModels\Names\NameViewModel;
+use App\Http\ViewModels\User\ListViewModel;
 use App\Http\ViewModels\User\UserViewModel;
 use App\Models\Name;
+use App\Services\ToggleNameToNameList;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Cache;
@@ -74,10 +76,13 @@ class NameController extends Controller
 
         if (! auth()->check()) {
             $favoritedNamesForLoggedUser = collect();
+            $lists = [];
         } else {
             $favoritedNamesForLoggedUser = Cache::remember('user-favorites-' . auth()->id(), 604800, function () {
                 return UserViewModel::favorites();
             });
+
+            $lists = ListViewModel::lists($requestedName);
         }
 
         return view('names.show', [
@@ -87,6 +92,7 @@ class NameController extends Controller
             'jsonLdSchema' => NameViewModel::jsonLdSchema($requestedName),
             'numerology' => $numerology,
             'favorites' => $favoritedNamesForLoggedUser,
+            'lists' => $lists,
         ]);
     }
 
@@ -106,7 +112,7 @@ class NameController extends Controller
         $namesPagination = Cache::remember('letter-' . $requestedLetter . '-page-' . $requestedPage, 604800, function () use ($requestedLetter) {
             return Name::where('name', '!=', '_PRENOMS_RARES')
                 ->where('name', 'like', $requestedLetter . '%')
-                ->orderBy('name', 'asc')
+                ->orderBy('total', 'desc')
                 ->paginate(40);
         });
 
@@ -127,6 +133,25 @@ class NameController extends Controller
             'namesPagination' => $namesPagination,
             'activeLetter' => Str::ucfirst($requestedLetter),
             'favorites' => $favoritedNamesForLoggedUser,
+        ]);
+    }
+
+    public function storeNameInList(Request $request, int $listId, int $nameId): View
+    {
+        $requestedList = $request->attributes->get('list');
+
+        (new ToggleNameToNameList(
+            nameId: $nameId,
+            listId: $requestedList->id,
+        ))->execute();
+
+        Cache::forget('list-details-' . $requestedList->id);
+        Cache::forget('user-lists-' . auth()->id());
+
+        $list = ListViewModel::getListDetail($requestedList, Name::find($nameId));
+
+        return view('names.partials.lists', [
+            'list' => $list,
         ]);
     }
 }

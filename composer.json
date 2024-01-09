@@ -15,6 +15,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/scout": "^10.6",
         "laravel/tinker": "^2.8",
+        "mauricius/laravel-htmx": "^0.5.0",
         "openai-php/laravel": "^0.8.0",
         "spatie/simple-excel": "^3.2",
         "stichoza/google-translate-php": "^5.1"

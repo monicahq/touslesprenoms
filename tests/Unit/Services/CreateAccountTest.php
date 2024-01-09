@@ -33,5 +33,19 @@ class CreateAccountTest extends TestCase
             'id' => $user->id,
             'email' => 'john@email.com',
         ]);
+
+        $this->assertDatabaseHas('lists', [
+            'name' => 'Favoris',
+            'is_public' => false,
+            'can_be_modified' => false,
+            'is_list_of_favorites' => true,
+        ]);
+
+        $this->assertDatabaseHas('lists', [
+            'name' => 'Votre première liste',
+            'is_public' => false,
+            'can_be_modified' => true,
+            'is_list_of_favorites' => false,
+        ]);
     }
 }

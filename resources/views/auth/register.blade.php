@@ -25,7 +25,7 @@
                       autocomplete="username" />
 
         <x-input-help>
-          Nous vous enverrons un email de vérification, et ne vous spammerons jamais.
+          Nous vous enverrons un email de vérification, et ne vous spammerons jamais. On déteste le spam nous aussi.
         </x-input-help>
 
         <x-input-error class="mt-2" :messages="$errors->get('email')" />

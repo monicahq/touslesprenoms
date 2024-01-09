@@ -86,7 +86,7 @@
           </div>
 
           <!-- syllabes -->
-          <div class="grid grid-cols-3 gap-3 mb-10">
+          <div class="grid grid-cols-4 gap-3 mb-10">
             <div class="bg-violet-100 rounded-lg p-2">
               <h3 class="text-xs text-gray-700">Nombre de syllabes</h3>
               <div class="text-xl">{!! $name['syllabes'] !!}</div>
@@ -95,6 +95,11 @@
             <div class="bg-violet-100 rounded-lg p-2">
               <h3 class="text-xs text-gray-700">Numérologie</h3>
               <div class="text-xl">{{ $numerology }}</div>
+            </div>
+
+            <div class="bg-violet-100 rounded-lg p-2">
+              <h3 class="text-xs text-gray-700">Genre</h3>
+              <div class="text-xl">{!! $name['gender'] !!}</div>
             </div>
 
             <div class="bg-violet-100 rounded-lg p-2">
@@ -180,6 +185,25 @@
 
           <!-- favorites -->
           <x-favorite :name="$name" favorited="{{ $favorites->contains($name['id']) }}" />
+
+          <!-- list -->
+          @if (count($lists) !== 0)
+          <div class="mb-10">
+            <p class="mb-2 text-sm">Vous pouvez aussi l'ajouter à une ou plusieurs listes :</p>
+            <div class="border border-gray-200 rounded-lg">
+              @forelse ($lists['lists'] as $list)
+                <!-- loop -->
+                @include('names.partials.lists')
+              @empty
+                <p class="p-2">Vous n'avez pas encore de liste.</p>
+              @endforelse
+            </div>
+          </div>
+          @else
+          <div class="border rounded-lg p-2 mb-8 text-sm">
+            <p>Connectez-vous pour ajouter ce prénom à une liste, la partager et permettre à vos proches de voter.</p>
+          </div>
+          @endif
 
           <div class="mb-8">
             <h2 class="font-semibold text-lg mb-4">Popularités par décennies</h2>

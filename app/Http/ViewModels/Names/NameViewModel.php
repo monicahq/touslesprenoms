@@ -45,6 +45,7 @@ class NameViewModel
             'similar_names_in_other_languages' => Str::of($name->similar_names_in_other_languages)->markdown(),
             'klingon_translation' => null,
             'total' => $name->total,
+            'gender' => $name->gender === 'male' ? 'Masculin' : 'Féminin',
             'mixte' => $name->unisex ? 'Oui' : 'Non',
             'updated_at' => $name->updated_at->isoFormat('LL'),
             'url' => [

@@ -42,14 +42,12 @@
           </div>
 
           <!-- names -->
-          <h2 class="mb-8 font-bold text-xl text-center">Tous les prénoms masculins commençant par la lettre {{ $activeLetter }}</h2>
+          <h2 class="mb-2 font-bold text-xl text-center">Tous les prénoms masculins commençant par la lettre {{ $activeLetter }}</h2>
+          <p class="text-gray-600 mb-8 text-center">Les prénoms sont triés par popularité.</p>
 
           <div class="grid grid-cols-4 gap-10 gap-y-1 mb-10">
             @foreach ($names as $name)
-              <div class="flex items-center border border-transparent hover:bg-gray-50 hover:border-gray-200 px-2 py-1 rounded-sm">
-                <div class="rounded-full w-6 mr-4 ring-4 ring-violet-100">{!! $name['avatar'] !!}</div>
-                <a href="{{ $name['url'] }}" class="text-lg">{{ $name['name'] }}</a>
-              </div>
+              <x-name-items :name="$name" favorited="{{ $favorites->contains($name['id']) }}" />
             @endforeach
           </div>
 
