@@ -37,7 +37,7 @@ class SearchController extends Controller
             return SearchViewModel::names($term, 1000);
         });
 
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             $favoritedNamesForLoggedUser = collect();
         } else {
             $favoritedNamesForLoggedUser = Cache::remember('user-favorites-' . auth()->id(), 604800, function () {
