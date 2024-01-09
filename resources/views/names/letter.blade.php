@@ -42,9 +42,10 @@
           </div>
 
           <!-- names -->
-          <h2 class="mb-8 font-bold text-xl text-center">Tous les prénoms commençant par la lettre {{ $activeLetter }}</h2>
+          <h2 class="mb-2 font-bold text-xl text-center">Tous les prénoms commençant par la lettre {{ $activeLetter }}</h2>
+          <p class="text-gray-600 mb-8 text-center">Les prénoms sont triés par popularité.</p>
 
-          <div class="grid grid-cols-4 gap-10 gap-y-1 mb-10">
+          <div class="grid grid-cols-3 gap-10 gap-y-1 mb-10" x-data="{ last_name: '{{ auth()->check() ? auth()->user()->last_name : "" }}' }">
             @foreach ($names as $name)
               <x-name-items :name="$name" favorited="{{ $favorites->contains($name['id']) }}" />
             @endforeach

@@ -16,12 +16,14 @@ class SearchViewModel
             ->map(fn (Name $name) => [
                 'id' => $name->id,
                 'name' => StringHelper::formatNameFromDB($name->name),
-                'avatar' => $name->avatar,
                 'url' => route('name.show', [
                     'id' => $name->id,
                     'name' => StringHelper::sanitizeNameForURL($name->name),
                 ]),
-            ]);
+            ])
+            ->filter(function ($name) {
+                return strpos($name['name'], '_prenoms_rares') === false;
+            });
 
         return [
             'names' => $names,

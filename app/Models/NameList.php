@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Laravel\Scout\Searchable;
 
+/**
+ * This class is called NameList and not List because List is a reserved word in PHP.
+ */
 class NameList extends Model
 {
     use HasFactory, Searchable;
@@ -21,6 +24,7 @@ class NameList extends Model
         'is_public',
         'can_be_modified',
         'is_list_of_favorites',
+        'system_list',
     ];
 
     protected $casts = [

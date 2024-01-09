@@ -10,7 +10,7 @@
           <li class="inline after:content-['>'] after:text-gray-500 after:text-xs">
             <a hx-boost="true" href="{{ route('home.index') }}" class="text-violet-900 underline">Accueil</a>
           </li>
-          <li class="inline">Tous les prénoms</li>
+          <li class="inline">Tous vos favoris</li>
         </ul>
       </div>
     </div>
@@ -31,7 +31,7 @@
       @endif
 
       <!-- names -->
-      <div class="grid grid-cols-2 gap-10 gap-y-1 mb-10" x-data="{ last_name: '{{ auth()->user()->last_name }}' }">
+      <div class="grid grid-cols-2 gap-10 gap-y-1 mb-10" x-data="{ last_name: '{{ auth()->check() ? auth()->user()->last_name : "" }}' }">
         @foreach ($names as $name)
         <div
           class="flex items-center justify-between border border-transparent hover:bg-gray-50 hover:border-gray-200 px-2 py-1 rounded-sm"

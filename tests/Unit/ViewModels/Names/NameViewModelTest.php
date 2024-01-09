@@ -70,6 +70,7 @@ class NameViewModelTest extends TestCase
         $this->assertArrayHasKey('similar_names_in_other_languages', $array);
         $this->assertArrayHasKey('klingon_translation', $array);
         $this->assertArrayHasKey('total', $array);
+        $this->assertArrayHasKey('gender', $array);
         $this->assertArrayHasKey('mixte', $array);
         $this->assertArrayHasKey('url', $array);
 

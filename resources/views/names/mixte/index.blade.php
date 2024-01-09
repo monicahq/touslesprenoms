@@ -10,7 +10,7 @@
           <li class="inline after:content-['>'] after:text-gray-500 after:text-xs">
             <a href="{{ route('home.index') }}" class="text-violet-900 underline">Accueil</a>
           </li>
-          <li class="inline">Tous les prénoms féminins</li>
+          <li class="inline">Tous les prénoms mixtes</li>
         </ul>
       </div>
     </div>
@@ -39,7 +39,7 @@
           </div>
 
           <!-- names -->
-          <h2 class="mb-8 font-bold text-xl text-center">Tous les prénoms féminins</h2>
+          <h2 class="mb-8 font-bold text-xl text-center">Tous les prénoms mixtes</h2>
           <div class="grid grid-cols-3 gap-10 gap-y-1 mb-10" x-data="{ last_name: '{{ auth()->check() ? auth()->user()->last_name : "" }}' }">
             @foreach ($names as $name)
               <x-name-items :name="$name" favorited="{{ $favorites->contains($name['id']) }}" />

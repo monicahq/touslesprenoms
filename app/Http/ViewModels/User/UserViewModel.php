@@ -29,7 +29,8 @@ class UserViewModel
     {
         $list = auth()->user()->lists()->where('is_list_of_favorites', true)->firstOrFail();
 
-        $names = $list->names()->orderBy('name')->get()
+        $names = $list->names()
+            ->orderBy('name')->get()
             ->map(fn (Name $name) => [
                 'id' => $name->id,
                 'name' => StringHelper::formatNameFromDB($name->name),

@@ -12,10 +12,10 @@
         <div class="text-gray-900 dark:text-gray-100">
           <div class="rounded-lg p-2 bg-violet-300 font-bold text-sm mb-4 shadow-md inline-block -rotate-2">+ de 39 000 prénoms</div>
           <h1 class="text-4xl font-bold tracking-tight mb-6">Choisissez le prénom parfait pour votre futur enfant</h1>
-          <h2 class="text-xl mb-6">Parcourez le site de fiches de prénoms le plus complet. Créez des listes et faites voter vos proches. Un site qui vous respecte, sans pub, sans tracking et open source.</h2>
+          <h2 class="text-xl mb-6">Parcourez le site de fiches de prénoms le plus complet. Créez des listes et faites voter vos proches. Un site qui vous respecte, sans pub et open source.</h2>
 
           <p class="sm:mb-0 mb-6">
-            <a hx-boost="true" href="{{ route('name.index') }}" class="bg-amber-300 px-4 py-2 rounded-lg font-bold shadow">Parcourir tous les prénoms</a>
+            <a hx-boost="true" href="{{ route('list.new') }}" class="bg-amber-300 px-4 py-2 rounded-lg font-bold shadow">Parcourir tous les prénoms</a>
           </p>
         </div>
 
@@ -67,7 +67,7 @@
         <!-- male names -->
         <div>
           <h2 class="font-semibold text-lg mb-4">Prénoms masculins populaires</h2>
-          <ul class="space-y-4" x-data="{ last_name: '{{ auth()->user()->last_name }}' }">
+          <ul class="space-y-4" x-data="{ last_name: '{{ auth()->check() ? auth()->user()->last_name : "" }}' }">
             @foreach ($twentyMostPopularNames['male_names'] as $name)
             <li>
               <x-name-items :name="$name" favorited="{{ $favorites->contains($name['id']) }}" />
@@ -79,7 +79,7 @@
         <!-- female names -->
         <div>
           <h2 class="font-semibold text-lg mb-4">Prénoms féminins populaires</h2>
-          <ul class="space-y-4" x-data="{ last_name: '{{ auth()->user()->last_name }}' }">
+          <ul class="space-y-4" x-data="{ last_name: '{{ auth()->check() ? auth()->user()->last_name : "" }}' }">
             @foreach ($twentyMostPopularNames['female_names'] as $name)
             <li>
               <x-name-items :name="$name" favorited="{{ $favorites->contains($name['id']) }}" />
@@ -91,7 +91,7 @@
         <!-- mixte names -->
         <div>
           <h2 class="font-semibold text-lg mb-4">Prénoms mixtes populaires</h2>
-          <ul class="space-y-4" x-data="{ last_name: '{{ auth()->user()->last_name }}' }">
+          <ul class="space-y-4" x-data="{ last_name: '{{ auth()->check() ? auth()->user()->last_name : "" }}' }">
             @foreach ($twentyMostPopularNames['mixted_names'] as $name)
             <li>
               <x-name-items :name="$name" favorited="{{ $favorites->contains($name['id']) }}" />
@@ -103,7 +103,7 @@
         <!-- random names -->
         <div>
           <h2 class="font-semibold text-lg mb-4">Prénoms aléatoires</h2>
-          <ul class="space-y-4" x-data="{ last_name: '{{ auth()->user()->last_name }}' }">
+          <ul class="space-y-4" x-data="{ last_name: '{{ auth()->check() ? auth()->user()->last_name : "" }}' }">
             @foreach ($twentyMostPopularNames['random_names'] as $name)
             <li>
               <x-name-items :name="$name" favorited="{{ $favorites->contains($name['id']) }}" />

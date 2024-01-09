@@ -70,7 +70,7 @@ class MaleNameController extends Controller
             return Name::where('name', '!=', '_PRENOMS_RARES')
                 ->where('gender', 'male')
                 ->where('name', 'like', $requestedLetter . '%')
-                ->orderBy('name', 'asc')
+                ->orderBy('total', 'desc')
                 ->paginate(40);
         });
 
