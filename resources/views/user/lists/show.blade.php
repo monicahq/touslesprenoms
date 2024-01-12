@@ -27,12 +27,34 @@
       <p class="text-center text-gray-500 mb-4">{{ $list['description'] }}</p>
       @endif
 
-      <ul class="mb-8 text-sm text-center">
-        <li class="inline mr-4" @click="showSearch = !showSearch"><span class="text-blue-700 underline hover:no-underline dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800 cursor-pointer">Ajouter un prénom à la liste</span></li>
-        <li class="inline mr-4" @click="showShare = !showShare"><span class="text-blue-700 underline hover:no-underline dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800 cursor-pointer">Partager la liste et activer les votes</span></li>
-        <li class="inline mr-4"><x-link href="{{ $list['url']['edit'] }}">Editer</x-link></li>
-        <li class="inline"><x-link href="{{ $list['url']['delete'] }}">Supprimer</x-link></li>
-      </ul>
+      <div class="mb-8 text-sm flex items-center justify-center">
+        <div class="mr-4" @click="showSearch = !showSearch">
+          <span class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 cursor-pointer flex items-center">
+            <x-heroicon-o-plus-circle class="w-5 h-5 mr-2 text-gray-500" />
+            <span>
+              Ajouter un prénom à la liste
+            </span>
+          </span>
+        </div>
+        <div class="mr-4" @click="showShare = !showShare">
+          <span class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 cursor-pointer flex items-center">
+            <x-heroicon-o-share class="w-4 h-4 mr-2 text-gray-500" />
+            <span>Partager la liste et activer les votes</span>
+          </span>
+        </div>
+        <div class="mr-4">
+          <a href="{{ $list['url']['edit'] }}" class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 cursor-pointer flex items-center">
+            <x-heroicon-o-pencil-square class="w-4 h-4 mr-2 text-gray-500" />
+            <span>Editer</span>
+          </a>
+        </div>
+        <div class="mr-4">
+          <a href="{{ $list['url']['delete'] }}" class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 cursor-pointer flex items-center">
+            <x-heroicon-o-trash class="w-4 h-4 mr-2 text-gray-500" />
+            <span>Supprimer</span>
+          </a>
+        </div>
+      </div>
 
       <div x-show="showShare" x-cloak class="mb-10 border rounded-lg p-3 max-w-xl mx-auto" x-data="{ input: '{{ $list['uuid'] }}' }">
         <p>Pour permettre aux gens de voter sur cette liste, copier le lien ci-dessous et envoyez le à ceux qui comptent. Voter sur la liste ne nécessite pas de compte. De plus, chaque personne qui recoit le lien aura droit à un vote.</p>
