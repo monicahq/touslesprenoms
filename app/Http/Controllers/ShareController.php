@@ -7,7 +7,7 @@ use Illuminate\View\View;
 
 class ShareController extends Controller
 {
-    public function show(Request $request): View
+    public function show(Request $request): void
     {
     }
 }
