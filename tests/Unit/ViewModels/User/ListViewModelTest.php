@@ -57,6 +57,7 @@ class ListViewModelTest extends TestCase
         $user = User::factory()->create();
         $nameList = $user->lists()->create([
             'is_list_of_favorites' => true,
+            'uuid' => '1234567890',
         ]);
         $nameList->names()->attach($name->id);
 
