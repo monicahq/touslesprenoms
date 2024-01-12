@@ -64,18 +64,19 @@ class ListViewModelTest extends TestCase
 
         $array = ListViewModel::show($nameList);
 
-        $this->assertCount(5, $array);
+        $this->assertCount(6, $array);
         $this->assertArrayHasKey('id', $array);
         $this->assertArrayHasKey('name', $array);
         $this->assertArrayHasKey('description', $array);
         $this->assertArrayHasKey('names', $array);
+        $this->assertArrayHasKey('uuid', $array);
         $this->assertArrayHasKey('url', $array);
         $this->assertEquals(
             [
                 0 => [
                     'id' => $name->id,
-                    'name' => 'Test',
                     'total' => '1 000',
+                    'name' => 'Test',
                     'url' => [
                         'show' => env('APP_URL') . '/prenoms/' . $name->id . '/test',
                         'destroy' => env('APP_URL') . '/listes/' . $nameList->id . '/prenoms/' . $name->id,

@@ -60,6 +60,7 @@ class ListViewModel
             'name' => $list->name,
             'description' => $list->description,
             'names' => $names,
+            'uuid' => StringHelper::shareLink($list->uuid),
             'url' => [
                 'show' => route('list.show', [
                     'liste' => $list->id,

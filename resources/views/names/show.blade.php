@@ -189,7 +189,7 @@
           <!-- list -->
           @if (count($lists) !== 0)
           <div class="mb-10">
-            <p class="mb-2 text-sm">Vous pouvez aussi l'ajouter à une ou plusieurs listes :</p>
+            <p class="mb-2 text-sm">Vous pouvez aussi l'ajouter à une ou plusieurs listes en cliquant sur le petit plus :</p>
             <div class="border border-gray-200 rounded-lg">
               @forelse ($lists['lists'] as $list)
                 <!-- loop -->

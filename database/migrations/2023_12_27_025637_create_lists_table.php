@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('lists', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->string('uuid')->nullable();
             $table->string('name')->nullable();
             $table->string('description')->nullable();
             $table->boolean('is_public')->default(true);

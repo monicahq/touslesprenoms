@@ -24,6 +24,10 @@
       <p class="flex items-center mb-10 justify-center">
         <span class="text-gray-500">Une liste vous permet de classer vos prénoms autour d'une thématique donnée.</span>
       </p>
+
+      <div class="text-center mb-8">
+        <a hx-boost="true" href="{{ route('list.new') }}" class="bg-amber-300 px-4 py-2 rounded-lg font-bold shadow">Créer une nouvelle liste</a>
+      </div>
       @endif
 
       <!-- lists -->

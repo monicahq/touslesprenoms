@@ -40,4 +40,11 @@ class StringHelper
 
         return $formattedName;
     }
+
+    public static function shareLink(string $uuid): string
+    {
+        return route('share.show', [
+            'uuid' => $uuid,
+        ]);
+    }
 }
