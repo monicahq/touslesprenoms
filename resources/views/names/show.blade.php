@@ -65,22 +65,22 @@
           <div class="mb-6 p-2 border border-gray-200 rounded-lg">
             <ul class="grid grid-cols-2 text-sm">
               <li>
-                <a href="#origine" class="underline">Origine</a>
+                <a href="#origine" class="underline hover:no-underline">Origine</a>
               </li>
               <li>
-                <a href="#personnalite" class="underline">Personnalité</a>
+                <a href="#personnalite" class="underline hover:no-underline">Personnalité</a>
               </li>
               <li>
-                <a href="#celebrites" class="underline">Célébrités portant ce prénom</a>
+                <a href="#celebrites" class="underline hover:no-underline">Célébrités portant ce prénom</a>
               </li>
               <li>
-                <a href="#references" class="underline">Références artistiques</a>
+                <a href="#references" class="underline hover:no-underline">Références artistiques</a>
               </li>
               <li>
-                <a href="#similaires" class="underline">Prénoms similaires</a>
+                <a href="#similaires" class="underline hover:no-underline">Prénoms similaires</a>
               </li>
               <li>
-                <a href="#elfiques" class="underline">Traits elfiques</a>
+                <a href="#elfiques" class="underline hover:no-underline">Traits elfiques</a>
               </li>
             </ul>
           </div>
@@ -106,6 +106,11 @@
               <h3 class="text-xs text-gray-700">Mixte</h3>
               <div class="text-xl">{!! $name['mixte'] !!}</div>
             </div>
+          </div>
+
+          <!-- user note, if it exists -->
+          <div class="mb-10 p-4 border rounded-lg border-gray-200 bg-gray-100" x-data="{edit: false}">
+            @include('names.partials.note')
           </div>
 
           <!-- origin -->

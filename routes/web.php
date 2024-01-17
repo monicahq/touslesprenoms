@@ -13,6 +13,7 @@ use App\Http\Controllers\NameFavoriteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ShareController;
+use App\Http\Controllers\UserNameController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('partage/{uuid}', [ShareController::class, 'show'])->name('share.show');
@@ -46,6 +47,9 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
 
         // used on the show page
         Route::put('prenoms/{id}/show/favorite', [NameFavoriteController::class, 'update'])->name('favorite.name.update');
+
+        // set the note for the given name
+        Route::put('prenoms/{id}/{name}/note', [UserNameController::class, 'update'])->name('user.name.update');
     });
 
     Route::get('favoris', [FavoriteController::class, 'index'])->name('favorite.index');
