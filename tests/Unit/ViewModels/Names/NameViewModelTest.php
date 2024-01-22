@@ -78,6 +78,7 @@ class NameViewModelTest extends TestCase
             [
                 'show' => env('APP_URL') . '/prenoms/' . $name->id . '/heloise',
                 'favorite' => env('APP_URL') . '/prenoms/' . $name->id . '/show/favorite',
+                'note_edit' => env('APP_URL') . '/notes/' . $name->id,
             ],
             $array['url']
         );

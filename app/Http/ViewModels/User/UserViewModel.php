@@ -35,6 +35,7 @@ class UserViewModel
                 'id' => $name->id,
                 'name' => StringHelper::formatNameFromDB($name->name),
                 'total' => Number::format($name->total, locale: 'fr'),
+                'note' => $name->getNoteForUser(),
                 'url' => [
                     'show' => route('name.show', [
                         'id' => $name->id,

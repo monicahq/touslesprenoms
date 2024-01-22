@@ -77,12 +77,15 @@ class NameController extends Controller
         if (! auth()->check()) {
             $favoritedNamesForLoggedUser = collect();
             $lists = [];
+            $note = '';
         } else {
             $favoritedNamesForLoggedUser = Cache::remember('user-favorites-' . auth()->id(), 604800, function () {
                 return UserViewModel::favorites();
             });
 
             $lists = ListViewModel::lists($requestedName);
+
+            $note = $requestedName->getNoteForUser();
         }
 
         return view('names.show', [
@@ -93,6 +96,15 @@ class NameController extends Controller
             'numerology' => $numerology,
             'favorites' => $favoritedNamesForLoggedUser,
             'lists' => $lists,
+            'note' => $note,
+            'url' => [
+                'edit' => route('user.name.edit', [
+                    'id' => $requestedName->id,
+                ]),
+                'delete' => route('user.name.destroy', [
+                    'id' => $requestedName->id,
+                ]),
+            ],
         ]);
     }
 

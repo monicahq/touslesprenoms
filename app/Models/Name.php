@@ -77,4 +77,21 @@ class Name extends Model implements Sitemapable
             ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
             ->setPriority(0.1);
     }
+
+    public function getNoteForUser(): ?string
+    {
+        if (! auth()->check()) {
+            return null;
+        }
+
+        $note = Note::where('name_id', $this->id)
+            ->where('user_id', auth()->id())
+            ->first();
+
+        if (! $note) {
+            return null;
+        }
+
+        return $note->content;
+    }
 }

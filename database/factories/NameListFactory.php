@@ -24,6 +24,7 @@ class NameListFactory extends Factory
             'is_public' => fake()->boolean,
             'can_be_modified' => fake()->boolean,
             'is_list_of_favorites' => fake()->boolean,
+            'uuid' => fake()->uuid,
         ];
     }
 }

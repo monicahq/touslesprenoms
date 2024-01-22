@@ -19,6 +19,7 @@ class NameList extends Model
 
     protected $fillable = [
         'user_id',
+        'uuid',
         'name',
         'description',
         'is_public',

@@ -6,16 +6,17 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ListController;
 use App\Http\Controllers\ListNameController;
 use App\Http\Controllers\ListSearchController;
-use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\MaleNameController;
 use App\Http\Controllers\MixteNameController;
 use App\Http\Controllers\NameController;
 use App\Http\Controllers\NameFavoriteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ShareController;
+use App\Http\Controllers\UserNameController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('locale/{locale}', [LocaleController::class, 'update'])->name('locale.update');
+Route::get('partage/{uuid}', [ShareController::class, 'show'])->name('share.show');
 
 Route::get('', [HomeController::class, 'index'])->name('home.index');
 Route::get('recherche', [SearchController::class, 'index'])->name('search.index');
@@ -46,6 +47,12 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
 
         // used on the show page
         Route::put('prenoms/{id}/show/favorite', [NameFavoriteController::class, 'update'])->name('favorite.name.update');
+
+        // set the note for the given name
+        Route::get('notes/{id}', [UserNameController::class, 'show'])->name('user.name.show');
+        Route::get('notes/{id}/edit', [UserNameController::class, 'edit'])->name('user.name.edit');
+        Route::put('notes/{id}', [UserNameController::class, 'update'])->name('user.name.update');
+        Route::delete('notes/{id}', [UserNameController::class, 'destroy'])->name('user.name.destroy');
     });
 
     Route::get('favoris', [FavoriteController::class, 'index'])->name('favorite.index');

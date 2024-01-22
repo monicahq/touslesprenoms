@@ -56,6 +56,9 @@ class NameViewModel
                 'favorite' => route('favorite.name.update', [
                     'id' => $name->id,
                 ]),
+                'note_edit' => route('user.name.update', [
+                    'id' => $name->id,
+                ]),
             ],
         ];
     }

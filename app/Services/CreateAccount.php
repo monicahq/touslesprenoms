@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\NameList;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 /**
  * Create an account for the user.
@@ -55,6 +56,7 @@ class CreateAccount extends BaseService
             'is_public' => false,
             'can_be_modified' => true,
             'is_list_of_favorites' => false,
+            'uuid' => Str::uuid(),
         ]);
     }
 }
