@@ -109,8 +109,8 @@
           </div>
 
           <!-- user note, if it exists -->
-          <div class="mb-10 p-4 border rounded-lg border-gray-200 bg-gray-100" x-data="{edit: false}">
-            @include('names.partials.note')
+          <div class="mb-10 p-4 border rounded-lg border-gray-200 bg-gray-100">
+            <x-note-show :note="$note" :url="$url['edit']" :delete-url="$url['delete']" />
           </div>
 
           <!-- origin -->

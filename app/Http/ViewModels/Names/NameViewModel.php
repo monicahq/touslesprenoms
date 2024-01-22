@@ -58,7 +58,6 @@ class NameViewModel
                 ]),
                 'note_edit' => route('user.name.update', [
                     'id' => $name->id,
-                    'name' => StringHelper::sanitizeNameForURL($name->name),
                 ]),
             ],
         ];

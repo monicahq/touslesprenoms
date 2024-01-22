@@ -97,6 +97,14 @@ class NameController extends Controller
             'favorites' => $favoritedNamesForLoggedUser,
             'lists' => $lists,
             'note' => $note,
+            'url' => [
+                'edit' => route('user.name.edit', [
+                    'id' => $requestedName->id,
+                ]),
+                'delete' => route('user.name.destroy', [
+                    'id' => $requestedName->id,
+                ]),
+            ],
         ]);
     }
 

@@ -44,6 +44,9 @@
             <div class="flex-col">
               <a href="{{ $name['url']['show'] }}" class="text-lg hover:underline">{{ $name['name'] }} <span x-text="last_name"></span></a>
               <p class="text-xs text-gray-700">{{ $name['total'] }} utilisations depuis 1900</p>
+              @if ($name['note'])
+              <p class="text-xs text-gray-700 mt-1">{{ $name['note'] }}</p>
+              @endif
             </div>
           </div>
 

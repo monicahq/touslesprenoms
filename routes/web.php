@@ -49,7 +49,10 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
         Route::put('prenoms/{id}/show/favorite', [NameFavoriteController::class, 'update'])->name('favorite.name.update');
 
         // set the note for the given name
-        Route::put('prenoms/{id}/{name}/note', [UserNameController::class, 'update'])->name('user.name.update');
+        Route::get('notes/{id}', [UserNameController::class, 'show'])->name('user.name.show');
+        Route::get('notes/{id}/edit', [UserNameController::class, 'edit'])->name('user.name.edit');
+        Route::put('notes/{id}', [UserNameController::class, 'update'])->name('user.name.update');
+        Route::delete('notes/{id}', [UserNameController::class, 'destroy'])->name('user.name.destroy');
     });
 
     Route::get('favoris', [FavoriteController::class, 'index'])->name('favorite.index');

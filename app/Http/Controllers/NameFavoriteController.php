@@ -19,6 +19,7 @@ class NameFavoriteController extends Controller
         ))->execute();
 
         Cache::forget('user-favorites-' . auth()->id());
+        Cache::forget('user-favorites-details-' . auth()->id());
 
         return view('components.favorite', [
             'name' => NameViewModel::details($name),
