@@ -1,0 +1,19 @@
+name: Static analysis
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+env:
+  php-version: '8.2'
+
+concurrency:
+  group: Static ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  statics:
+    name: Static analysis
+    uses: monicahq/workflows/.github/workflows/static.yml@v1
+    with:
+      php-version: 8.2

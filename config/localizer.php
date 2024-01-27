@@ -6,7 +6,7 @@ return [
      * The locales you wish to support.
      * English HAS TO be the first language of the array.
      */
-    'supported_locales' => ['en', 'fr'],
+    'supported_locales' => ['fr'],
 
     /**
      * If your main locale is omitted from the URL, set it here.
