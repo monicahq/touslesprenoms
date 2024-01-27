@@ -496,6 +496,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vitejs/plugin-basic-ssl@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@vitejs/plugin-basic-ssl@npm:1.1.0"
+  peerDependencies:
+    vite: ^3.0.0 || ^4.0.0 || ^5.0.0
+  checksum: 98aadf5c7fd229995c67f973b4fb0f987a378031a4edcc5f714b412c00af12a6ecafb96659e76382ff9f8a831aac5243c74548e2807402ea8b02ec122d29f008
+  languageName: node
+  linkType: hard
+
 "@vue/reactivity@npm:~3.1.1":
   version: 3.1.5
   resolution: "@vue/reactivity@npm:3.1.5"
@@ -2478,6 +2487,7 @@ __metadata:
     "@ryangjchandler/alpine-clipboard": "npm:^2.3.0"
     "@tailwindcss/forms": "npm:^0.5.7"
     "@tailwindcss/typography": "npm:^0.5.10"
+    "@vitejs/plugin-basic-ssl": "npm:^1.1.0"
     alpinejs: "npm:^3.13.5"
     autoprefixer: "npm:^10.4.17"
     axios: "npm:^1.6.7"
