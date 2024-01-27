@@ -107,7 +107,7 @@ jobs:
       - name: Setup problem matchers for PHPUnit
         run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
       - name: Run Dusk Tests
-        run: php artisan dusk --log-junit results/dusk.xml
+        run: php artisan dusk --log-junit results/junit/dusk.xml
         env:
           DB_CONNECTION: ${{ env.connection }}
 
