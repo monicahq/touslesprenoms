@@ -20,7 +20,7 @@ jobs:
     with:
       php-versions: "['8.2']"
       connections: "['sqlite', 'mysql', 'pgsql']"
-      testsuites: "['Unit']"
+      testsuites: "['Unit','Feature']"
       default-php-version: '8.2'
       default-connection: sqlite
       project: touslesprenoms
