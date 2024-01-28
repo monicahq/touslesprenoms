@@ -16,7 +16,7 @@ concurrency:
 jobs:
   tests:
     name: Run tests
-    uses: monicahq/workflows/.github/workflows/laravel.yml@v1
+    uses: monicahq/workflows/.github/workflows/laravel.yml@fix-input
     with:
       php-versions: "['8.2']"
       connections: "['sqlite', 'mysql', 'pgsql']"
