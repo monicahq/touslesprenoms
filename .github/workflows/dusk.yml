@@ -11,7 +11,7 @@ env:
   node-version: 20
   connection: mysql
   database_name: touslesprenoms
-  testsuite: Feature
+  testsuite: ''
 
 jobs:
 
