@@ -22,7 +22,7 @@ jobs:
       connections: "['sqlite', 'mysql', 'pgsql']"
       default-php-version: '8.2'
       default-connection: sqlite
-      project: touslesprenoms
+      project: monicahq_touslesprenoms
       database_name: touslesprenoms
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
