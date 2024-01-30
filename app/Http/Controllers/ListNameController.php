@@ -40,6 +40,7 @@ class ListNameController extends Controller
         Cache::forget('route-list-' . $requestedList->id);
         Cache::forget('user-lists-' . auth()->id());
         Cache::forget('list-details-' . $requestedList->id);
+        Cache::forget('admin-lists');
 
         return new HtmxResponseClientRedirect(route('list.show', [
             'liste' => $requestedList->id,

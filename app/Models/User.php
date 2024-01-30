@@ -23,6 +23,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at',
         'password',
         'last_name',
+        'is_administrator',
     ];
 
     /**
@@ -43,6 +44,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'is_administrator' => 'boolean',
     ];
 
     public function lists(): HasMany

@@ -61,6 +61,7 @@ class ListViewModel
             'description' => $list->description,
             'names' => $names,
             'uuid' => StringHelper::shareLink($list->uuid),
+            'visibility' => $list->is_public,
             'url' => [
                 'show' => route('list.show', [
                     'liste' => $list->id,
@@ -72,6 +73,9 @@ class ListViewModel
                     'liste' => $list->id,
                 ]),
                 'search' => route('list.search.index', [
+                    'liste' => $list->id,
+                ]),
+                'visibility' => route('list.system.update', [
                     'liste' => $list->id,
                 ]),
             ],

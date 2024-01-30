@@ -20,7 +20,6 @@ return new class extends Migration
             $table->boolean('is_public')->default(true);
             $table->boolean('can_be_modified')->default(true);
             $table->boolean('is_list_of_favorites')->default(false);
-            $table->boolean('system_list')->default(false);
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

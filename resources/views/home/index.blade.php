@@ -57,7 +57,7 @@
       </div>
     </form>
 
-    <p class="text-gray-500 text-xs text-center">{{ $stats['total_names'] }} noms | 371 listes de prénoms</p>
+    <p class="text-gray-500 text-xs text-center">{{ $stats['total_names'] }} noms</p>
   </div>
 
   <div class="bg-yellow-100">
@@ -111,6 +111,38 @@
             @endforeach
           </ul>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="py-20 mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <h2 class="text-center mb-4 text-xl">Quelques inspirations pour vous aider</h2>
+
+      <div class="grid grid-row-1 sm:grid-cols-2 gap-x-10 gap-y-4 w-full">
+        @foreach($lists as $list)
+        <div class="flex items-center border border-gray-200 px-2 py-1 rounded-lg">
+          <!-- avatars -->
+          <div class="flex -space-x-4 rtl:space-x-reverse mr-5">
+            @foreach ($list['names'] as $name)
+            {{-- <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="/docs/images/people/profile-picture-5.jpg" alt=""> --}}
+            <div class="rounded-full w-6 h-6 mr-4 ring-4 ring-violet-100">{!! \App\Helpers\NameHelper::getAvatar($name['name']) !!}</div>
+            @endforeach
+          </div>
+
+          <div>
+            <p class="block text-xl mb-1">{{ $list['name'] }}</p>
+            <div class="flex items-center text-gray-600 text-xs mb-1">
+              <p class="mr-3">Quelques exemples :</p>
+              @foreach ($list['names'] as $name)
+              <div class="flex items-center mr-2">
+                <a href="{{ $name['url']['show'] }}" class="hover:underline">{{ $name['name'] }}</a>
+              </div>
+              @endforeach
+            </div>
+          </div>
+        </div>
+        @endforeach
       </div>
     </div>
   </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ListController;
 use App\Http\Controllers\ListNameController;
 use App\Http\Controllers\ListSearchController;
+use App\Http\Controllers\ListSystemController;
 use App\Http\Controllers\MaleNameController;
 use App\Http\Controllers\MixteNameController;
 use App\Http\Controllers\NameController;
@@ -64,6 +65,7 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
         Route::get('listes/{liste}/edition', [ListController::class, 'edit'])->name('list.edit');
         Route::put('listes/{liste}', [ListController::class, 'update'])->name('list.update');
         Route::get('listes/{liste}/suppression', [ListController::class, 'delete'])->name('list.delete');
+        Route::get('listes/{liste}/system', [ListSystemController::class, 'update'])->name('list.system.update');
         Route::delete('listes/{liste}', [ListController::class, 'destroy'])->name('list.destroy');
 
         Route::post('listes/{liste}/search', [ListSearchController::class, 'index'])->name('list.search.index');
