@@ -12,6 +12,7 @@ use App\Http\Controllers\MixteNameController;
 use App\Http\Controllers\NameController;
 use App\Http\Controllers\NameFavoriteController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublicListController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ShareController;
 use App\Http\Controllers\UserNameController;
@@ -83,6 +84,8 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
 
 Route::middleware(['list'])->group(function (): void {
     Route::get('listes/{liste}', [ListController::class, 'show'])->name('list.show');
+
+    Route::get('public/listes/{liste}', [PublicListController::class, 'show'])->name('list.public.show');
 });
 
 require __DIR__ . '/auth.php';

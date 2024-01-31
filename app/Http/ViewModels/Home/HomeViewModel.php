@@ -79,6 +79,11 @@ class HomeViewModel
         ];
     }
 
+    /**
+     * Get the list of all the public lists that administrators have set public.
+     *
+     * @return Collection
+     */
     public static function adminLists(): Collection
     {
         return NameList::where('is_public', true)
@@ -105,7 +110,7 @@ class HomeViewModel
                         ],
                     ]),
                 'url' => [
-                    'show' => route('list.show', [
+                    'show' => route('list.public.show', [
                         'liste' => $list->id,
                     ]),
                 ],

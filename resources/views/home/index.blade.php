@@ -131,7 +131,10 @@
           </div>
 
           <div>
-            <p class="block text-xl mb-1">{{ $list['name'] }}</p>
+            <!-- list name -->
+            <a href="{{ $list['url']['show'] }}" class="block text-xl mb-1 hover:underline">{{ $list['name'] }}</a>
+
+            <!-- some names in the list -->
             <div class="flex items-center text-gray-600 text-xs mb-1">
               <p class="mr-3">Quelques exemples :</p>
               @foreach ($list['names'] as $name)
