@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\ViewModels\User\ListViewModel;
+use App\Http\ViewModels\User\UserViewModel;
 use App\Services\CreateList;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -20,8 +21,17 @@ class PublicListController extends Controller
             return ListViewModel::show($requestedList);
         });
 
+        if (!auth()->check()) {
+            $favoritedNamesForLoggedUser = collect();
+        } else {
+            $favoritedNamesForLoggedUser = Cache::remember('user-favorites-' . auth()->id(), 604800, function () {
+                return UserViewModel::favorites();
+            });
+        }
+
         return view('user.lists.public.show', [
             'list' => $details,
+            'favorites' => $favoritedNamesForLoggedUser,
         ]);
     }
 }

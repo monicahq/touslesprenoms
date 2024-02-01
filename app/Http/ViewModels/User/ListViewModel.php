@@ -6,6 +6,7 @@ use App\Helpers\StringHelper;
 use App\Models\Name;
 use App\Models\NameList;
 use Illuminate\Support\Number;
+use Illuminate\Support\Str;
 
 class ListViewModel
 {
@@ -42,6 +43,7 @@ class ListViewModel
             ->map(fn (Name $name) => [
                 'id' => $name->id,
                 'name' => StringHelper::formatNameFromDB($name->name),
+                'origins' => Str::words($name->origins, 50, '...'),
                 'total' => Number::format($name->total, locale: 'fr'),
                 'url' => [
                     'show' => route('name.show', [

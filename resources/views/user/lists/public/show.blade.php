@@ -17,9 +17,9 @@
   </div>
 
   <div>
-    <div class="mx-auto max-w-5xl sm:px-6 px-2 lg:px-8 py-2">
+    <div class="mx-auto max-w-4xl sm:px-6 px-2 lg:px-8 py-2">
 
-      <h1>{{ $list['name'] }}</h1>
+      <h1 class="text-xl mb-6">{{ $list['name'] }}</h1>
 
       <div class="grid list-show-grid sm:gap-5">
 
@@ -30,11 +30,11 @@
 
         <!-- right -->
         <div>
-          <div>
+          <div class="mb-10">
             <ul class="space-y-1">
               @foreach ($list['names'] as $name)
               <li>
-                <x-name-items :name="$name" favorited="{{ $favorites->contains($name['id']) }}" />
+                <x-name-items :name="$name" favorited="{{ $favorites->contains($name['id']) }}" showOrigins="true" />
               </li>
               @endforeach
             </ul>
