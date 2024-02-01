@@ -2,7 +2,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --https",
+    "dev": "vite",
     "build": "vite build",
     "lint": "eslint --ext .js *.js resources",
     "pretest": "php artisan migrate:fresh --database=testing",
