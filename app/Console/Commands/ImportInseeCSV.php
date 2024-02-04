@@ -14,7 +14,7 @@ class ImportInseeCSV extends Command
      *
      * @var string
      */
-    protected $signature = 'openname:import';
+    protected $signature = 'touslesprenoms:import';
 
     /**
      * The console command description.
@@ -60,7 +60,7 @@ class ImportInseeCSV extends Command
                 ]);
             });
 
-        $this->artisan('☐ Counting total after import', 'openname:count-total-after-import');
+        $this->artisan('☐ Counting total after import', 'touslesprenoms:count-total-after-import');
     }
 
     private function artisan(string $message, string $command, array $arguments = []): void

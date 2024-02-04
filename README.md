@@ -19,5 +19,5 @@ MIT license.
 
 - first, * replace all semi colons with commas in the CSV provided by the INSEE
   * `sed 's/;/,/g' yourfile.csv > newfile.csv`
-- next, run the command `php artisan openname:import`
-- finally, run the command `php artisan openname:count-total-after-import`
+- next, run the command `php artisan touslesprenoms:import`
+- finally, run the command `php artisan touslesprenoms:count-total-after-import`

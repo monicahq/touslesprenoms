@@ -14,7 +14,7 @@ class LocalizeApplication extends Command
      *
      * @var string
      */
-    protected $signature = 'openname:localize';
+    protected $signature = 'touslesprenoms:localize';
 
     /**
      * The console command description.

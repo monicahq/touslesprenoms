@@ -14,7 +14,7 @@ class CreateMainCharacteristics extends Command
      *
      * @var string
      */
-    protected $signature = 'openname:create-main-characteristics';
+    protected $signature = 'touslesprenoms:create-main-characteristics';
 
     /**
      * The console command description.
