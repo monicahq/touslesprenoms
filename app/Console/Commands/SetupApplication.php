@@ -111,7 +111,7 @@ class SetupApplication extends Command
         $this->artisan('✓ Setup scout', 'scout:setup', ['--force' => true]);
     }
 
-    private function artisan(string $message, string $command, array $options = [])
+    private function artisan(string $message, string $command, array $options = []): void
     {
         $this->info($message);
         $this->getOutput()->getOutput()->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE
