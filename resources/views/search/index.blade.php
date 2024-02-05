@@ -28,7 +28,7 @@
         </div>
       </form>
 
-      <p class="text-gray-500 text-xs text-center">La base de données contient {{ $stats['total_names'] }} noms & 371 listes de prénoms</p>
+      <p class="text-gray-500 text-xs text-center">La base de données contient {{ $stats['total_names'] }} noms</p>
     </div>
 
     @if (count($names) > 0)
