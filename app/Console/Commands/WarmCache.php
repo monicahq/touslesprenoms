@@ -13,7 +13,7 @@ class WarmCache extends Command
      *
      * @var string
      */
-    protected $signature = 'openname:warm';
+    protected $signature = 'touslesprenoms:warm';
 
     /**
      * The console command description.

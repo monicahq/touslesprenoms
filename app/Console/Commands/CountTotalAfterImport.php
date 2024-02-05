@@ -5,6 +5,9 @@ namespace App\Console\Commands;
 use App\Models\Name;
 use Illuminate\Console\Command;
 
+/**
+ * @codeCoverageIgnore
+ */
 class CountTotalAfterImport extends Command
 {
     /**
@@ -12,7 +15,7 @@ class CountTotalAfterImport extends Command
      *
      * @var string
      */
-    protected $signature = 'openname:count-total-after-import';
+    protected $signature = 'touslesprenoms:count-total-after-import';
 
     /**
      * The console command description.
