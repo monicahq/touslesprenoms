@@ -66,7 +66,7 @@ class ListViewModelTest extends TestCase
 
         $array = ListViewModel::show($nameList);
 
-        $this->assertCount(7, $array);
+        $this->assertCount(8, $array);
         $this->assertArrayHasKey('id', $array);
         $this->assertArrayHasKey('name', $array);
         $this->assertArrayHasKey('description', $array);
