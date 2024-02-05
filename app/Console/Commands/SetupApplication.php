@@ -2,10 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Support\Facades\Schema;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * @codeCoverageIgnore
@@ -109,13 +107,5 @@ class SetupApplication extends Command
     protected function scout(): void
     {
         $this->artisan('✓ Setup scout', 'scout:setup', ['--force' => true]);
-    }
-
-    private function artisan(string $message, string $command, array $options = []): void
-    {
-        $this->info($message);
-        $this->getOutput()->getOutput()->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE
-            ? $this->call($command, $options)
-            : $this->callSilent($command, $options);
     }
 }

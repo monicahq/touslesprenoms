@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use App\Models\Name;
 use App\Models\NameStatistic;
-use Illuminate\Console\Command;
 use Spatie\SimpleExcel\SimpleExcelReader;
 
 class ImportInseeCSV extends Command
@@ -61,11 +60,5 @@ class ImportInseeCSV extends Command
             });
 
         $this->artisan('☐ Counting total after import', 'touslesprenoms:count-total-after-import');
-    }
-
-    private function artisan(string $message, string $command, array $arguments = []): void
-    {
-        $this->info($message);
-        $this->callSilent($command, $arguments);
     }
 }
