@@ -15,6 +15,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicListController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ShareController;
+use App\Http\Controllers\TermsController;
 use App\Http\Controllers\UserNameController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,8 @@ Route::get('', [HomeController::class, 'index'])->name('home.index');
 Route::get('recherche', [SearchController::class, 'index'])->name('search.index');
 Route::post('recherche', [SearchController::class, 'post'])->name('search.post');
 Route::get('prenoms', [NameController::class, 'index'])->name('name.index');
+
+Route::get('conditions', [TermsController::class, 'index'])->name('terms.index');
 
 Route::get('prenoms/garcons', [MaleNameController::class, 'index'])->name('name.garcon.index');
 Route::get('prenoms/filles', [FemaleNameController::class, 'index'])->name('name.fille.index');
