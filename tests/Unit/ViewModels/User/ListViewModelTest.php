@@ -53,6 +53,7 @@ class ListViewModelTest extends TestCase
         $name = Name::factory()->create([
             'name' => 'test',
             'total' => 1000,
+            'origins' => 'test',
         ]);
         $user = User::factory()->create();
         $nameList = $user->lists()->create([
@@ -65,21 +66,24 @@ class ListViewModelTest extends TestCase
 
         $array = ListViewModel::show($nameList);
 
-        $this->assertCount(6, $array);
+        $this->assertCount(8, $array);
         $this->assertArrayHasKey('id', $array);
         $this->assertArrayHasKey('name', $array);
         $this->assertArrayHasKey('description', $array);
         $this->assertArrayHasKey('names', $array);
         $this->assertArrayHasKey('uuid', $array);
+        $this->assertArrayHasKey('visibility', $array);
         $this->assertArrayHasKey('url', $array);
         $this->assertEquals(
             [
                 0 => [
                     'id' => $name->id,
                     'total' => '1 000',
+                    'origins' => 'test',
                     'name' => 'Test',
                     'url' => [
                         'show' => env('APP_URL') . '/prenoms/' . $name->id . '/test',
+                        'favorite' => env('APP_URL') . '/prenoms/' . $name->id.'/favorite',
                         'destroy' => env('APP_URL') . '/listes/' . $nameList->id . '/prenoms/' . $name->id,
                     ],
                 ],

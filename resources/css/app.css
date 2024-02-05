@@ -7,6 +7,10 @@
   grid-template-columns: 1fr 240px;
 }
 
+.list-show-grid {
+  grid-template-columns: 240px 1fr;
+}
+
 .name-index-grid {
   grid-template-columns: 240px 1fr;
 }
@@ -17,6 +21,10 @@
   }
 
   .name-index-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .list-show-grid {
     grid-template-columns: 1fr;
   }
 }

@@ -27,6 +27,7 @@
       <p class="text-center text-gray-500 mb-4">{{ $list['description'] }}</p>
       @endif
 
+      <!-- actions -->
       <div class="mb-8 text-sm flex items-center justify-center">
         <div class="mr-4" @click="showSearch = !showSearch">
           <span class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 cursor-pointer flex items-center">
@@ -56,6 +57,31 @@
         </div>
       </div>
 
+      @if (auth()->user()->is_administrator)
+      <div class="mb-8 text-sm flex items-center justify-center">
+        @if ($list['visibility'])
+        <p class="flex items-center mr-4">
+          <x-heroicon-o-eye class="w-4 h-4 mr-2 text-green-500" />
+          <span>La liste est publique.</span>
+        </p>
+        <a href="{{ $list['url']['visibility'] }}" class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 cursor-pointer flex items-center">
+          <x-heroicon-o-bell-alert class="w-4 h-4 mr-2 text-gray-500" />
+          <span>Rendre la liste privée</span>
+        </a>
+        @else
+        <p class="flex items-center mr-4">
+          <x-heroicon-o-eye-slash class="w-4 h-4 mr-2 text-red-500" />
+          <span>La liste est privée.</span>
+        </p>
+        <a href="{{ $list['url']['visibility'] }}" class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 cursor-pointer flex items-center">
+          <x-heroicon-o-bell-alert class="w-4 h-4 mr-2 text-gray-500" />
+          <span>Définir comme publique</span>
+        </a>
+        @endif
+      </div>
+      @endif
+
+      <!-- share box -->
       <div x-show="showShare" x-cloak class="mb-10 border rounded-lg p-3 max-w-xl mx-auto" x-data="{ input: '{{ $list['uuid'] }}' }">
         <p>Pour permettre aux gens de voter sur cette liste, copier le lien ci-dessous et envoyez le à ceux qui comptent. Voter sur la liste ne nécessite pas de compte. De plus, chaque personne qui recoit le lien aura droit à un vote.</p>
         <p class="mb-4">Vous pourrez réinitialiser les votes quand vous voudrez.</p>
