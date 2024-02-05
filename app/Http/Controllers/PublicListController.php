@@ -21,7 +21,7 @@ class PublicListController extends Controller
             return ListViewModel::show($requestedList);
         });
 
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             $favoritedNamesForLoggedUser = collect();
         } else {
             $favoritedNamesForLoggedUser = Cache::remember('user-favorites-' . auth()->id(), 604800, function () {

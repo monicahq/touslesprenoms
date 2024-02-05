@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('uuid')->nullable();
             $table->string('name')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->boolean('is_public')->default(true);
             $table->boolean('can_be_modified')->default(true);
             $table->boolean('is_list_of_favorites')->default(false);

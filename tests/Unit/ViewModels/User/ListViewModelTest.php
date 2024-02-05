@@ -53,6 +53,7 @@ class ListViewModelTest extends TestCase
         $name = Name::factory()->create([
             'name' => 'test',
             'total' => 1000,
+            'origins' => 'test',
         ]);
         $user = User::factory()->create();
         $nameList = $user->lists()->create([
@@ -78,9 +79,11 @@ class ListViewModelTest extends TestCase
                 0 => [
                     'id' => $name->id,
                     'total' => '1 000',
+                    'origins' => 'test',
                     'name' => 'Test',
                     'url' => [
                         'show' => env('APP_URL') . '/prenoms/' . $name->id . '/test',
+                        'favorite' => env('APP_URL') . '/prenoms/' . $name->id.'/favorite',
                         'destroy' => env('APP_URL') . '/listes/' . $nameList->id . '/prenoms/' . $name->id,
                     ],
                 ],

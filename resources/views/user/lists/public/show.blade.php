@@ -19,13 +19,17 @@
   <div>
     <div class="mx-auto max-w-4xl sm:px-6 px-2 lg:px-8 py-2">
 
-      <h1 class="text-xl mb-6">{{ $list['name'] }}</h1>
+      <h1 class="text-2xl mb-6 text-center">{{ $list['name'] }}</h1>
 
       <div class="grid list-show-grid sm:gap-5">
 
         <!-- left -->
         <div>
-          {{ $list['description'] }}
+          <p class="text-xs text-gray-700 mb-3">Liste créée le {{ $list['created_at'] }}.</p>
+
+          <div>
+            {{ $list['description'] }}
+          </div>
         </div>
 
         <!-- right -->

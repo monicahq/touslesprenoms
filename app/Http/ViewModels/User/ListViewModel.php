@@ -50,6 +50,9 @@ class ListViewModel
                         'id' => $name->id,
                         'name' => StringHelper::sanitizeNameForURL($name->name),
                     ]),
+                    'favorite' => route('favorite.update', [
+                        'id' => $name->id,
+                    ]),
                     'destroy' => route('list.name.destroy', [
                         'liste' => $list->id,
                         'id' => $name->id,
@@ -64,6 +67,7 @@ class ListViewModel
             'names' => $names,
             'uuid' => StringHelper::shareLink($list->uuid),
             'visibility' => $list->is_public,
+            'created_at' => $list->created_at->isoFormat('LL'),
             'url' => [
                 'show' => route('list.show', [
                     'liste' => $list->id,
