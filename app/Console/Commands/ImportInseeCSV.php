@@ -6,6 +6,9 @@ use App\Models\Name;
 use App\Models\NameStatistic;
 use Spatie\SimpleExcel\SimpleExcelReader;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ImportInseeCSV extends Command
 {
     /**

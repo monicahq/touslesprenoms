@@ -7,6 +7,9 @@ use App\Models\Name;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 
+/**
+ * @codeCoverageIgnore
+ */
 class CreateMainCharacteristics extends Command
 {
     /**

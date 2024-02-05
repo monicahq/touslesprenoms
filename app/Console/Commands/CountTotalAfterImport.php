@@ -5,6 +5,9 @@ namespace App\Console\Commands;
 use App\Models\Name;
 use Illuminate\Console\Command;
 
+/**
+ * @codeCoverageIgnore
+ */
 class CountTotalAfterImport extends Command
 {
     /**

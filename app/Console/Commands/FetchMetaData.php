@@ -16,6 +16,9 @@ use App\Jobs\ProcessSyllabes;
 use App\Models\Name;
 use Illuminate\Console\Command;
 
+/**
+ * @codeCoverageIgnore
+ */
 class FetchMetaData extends Command
 {
     /**

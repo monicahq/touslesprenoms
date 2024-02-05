@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Storage;
 use Stichoza\GoogleTranslate\GoogleTranslate;
 use Symfony\Component\Finder\Finder;
 
+/**
+ * @codeCoverageIgnore
+ */
 class LocalizeApplication extends Command
 {
     /**
