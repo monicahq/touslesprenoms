@@ -83,6 +83,7 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
     Route::get('profil', [ProfileController::class, 'show'])->name('profile.show');
     Route::put('profil', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('profil/nom', [ProfileController::class, 'name'])->name('profile.name');
+    Route::delete('profil', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 Route::middleware(['list'])->group(function (): void {

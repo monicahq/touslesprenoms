@@ -68,60 +68,114 @@
         </form>
 
       <form method="POST" action="{{ route('profile.update') }}" class="mb-6 shadow sm:rounded-lg">
-          @csrf
+        @csrf
 
-          <div class="relative border-b dark:border-gray-600 px-6 py-4 bg-yellow-50">
-            <h1 class="text-center font-bold">Changer votre mot de passe</h1>
+        <div class="relative border-b dark:border-gray-600 px-6 py-4 bg-yellow-50">
+          <h1 class="text-center font-bold">Changer votre mot de passe</h1>
+        </div>
+
+        <div class="relative px-6 pt-4 pb-2">
+          <x-input-label for="current_password"
+                        :value="'Mot de passe actuel'" />
+
+          <x-text-input class="mt-1 block w-full"
+                        id="current_password"
+                        name="current_password"
+                        type="password"
+                        required />
+
+          <x-input-error class="mt-2" :messages="$errors->get('current_password')" />
+        </div>
+
+        <div class="relative px-6 py-2">
+          <x-input-label for="current_password"
+                        :value="'Nouveau mot de passe'" />
+
+          <x-text-input class="mt-1 block w-full"
+                        id="current_password"
+                        name="current_password"
+                        type="password"
+                        required />
+
+          <x-input-error class="mt-2" :messages="$errors->get('current_password')" />
+        </div>
+
+        <div class="relative px-6 pt-2 pb-4">
+          <x-input-label for="current_password"
+                        :value="'Confirmer le nouveau mot de passe'" />
+
+          <x-text-input class="mt-1 block w-full"
+                        id="current_password"
+                        name="current_password"
+                        type="password"
+                        required />
+
+          <x-input-error class="mt-2" :messages="$errors->get('current_password')" />
+        </div>
+
+        <!-- actions -->
+        <div class="flex items-center justify-between border-t dark:border-gray-600 bg-white dark:bg-gray-800 px-6 py-4">
+          <div>
+            <x-primary-button class="w-full text-center">
+              Sauvegarder
+            </x-primary-button>
           </div>
+        </div>
+      </form>
 
-          <div class="relative px-6 pt-4 pb-2">
-            <x-input-label for="current_password"
-                          :value="'Mot de passe actuel'" />
+      <!-- delete account -->
+      <div class="mb-6 shadow sm:rounded-lg">
+        <div class="relative border-b dark:border-gray-600 px-6 py-4 bg-yellow-50">
+          <h1 class="text-center font-bold">Détruire votre compte</h1>
+        </div>
 
-            <x-text-input class="mt-1 block w-full"
-                          id="current_password"
-                          name="current_password"
-                          type="password"
-                          required />
+        <!-- actions -->
+        <div class="flex items-center justify-between dark:border-gray-600 bg-white dark:bg-gray-800 px-6 py-4">
+          <x-danger-button
+              x-data=""
+              x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
+          >{{ __('Delete Account') }}</x-danger-button>
 
-            <x-input-error class="mt-2" :messages="$errors->get('current_password')" />
-          </div>
+          <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
+            <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
+              @csrf
+              @method('delete')
 
-          <div class="relative px-6 py-2">
-            <x-input-label for="current_password"
-                          :value="'Nouveau mot de passe'" />
+              <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                {{ __('Are you sure you want to delete your account?') }}
+              </h2>
 
-            <x-text-input class="mt-1 block w-full"
-                          id="current_password"
-                          name="current_password"
-                          type="password"
-                          required />
+              <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
+              </p>
 
-            <x-input-error class="mt-2" :messages="$errors->get('current_password')" />
-          </div>
+              <div class="mt-6">
+                <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
 
-          <div class="relative px-6 pt-2 pb-4">
-            <x-input-label for="current_password"
-                          :value="'Confirmer le nouveau mot de passe'" />
+                <x-text-input
+                    id="password"
+                    name="password"
+                    type="password"
+                    class="mt-1 block w-3/4"
+                    placeholder="{{ __('Password') }}"
+                />
 
-            <x-text-input class="mt-1 block w-full"
-                          id="current_password"
-                          name="current_password"
-                          type="password"
-                          required />
+                <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
+              </div>
 
-            <x-input-error class="mt-2" :messages="$errors->get('current_password')" />
-          </div>
+              <div class="mt-6 flex justify-end">
+                <x-secondary-button x-on:click="$dispatch('close')">
+                    {{ __('Cancel') }}
+                </x-secondary-button>
 
-          <!-- actions -->
-          <div class="flex items-center justify-between border-t dark:border-gray-600 bg-white dark:bg-gray-800 px-6 py-4">
-            <div>
-              <x-primary-button class="w-full text-center">
-                Sauvegarder
-              </x-primary-button>
-            </div>
-          </div>
-        </form>
+                <x-danger-button class="ms-3">
+                    {{ __('Delete Account') }}
+                </x-danger-button>
+              </div>
+            </form>
+          </x-modal>
+        </div>
+      </div>
     </div>
   </div>
 </x-guest-layout>
