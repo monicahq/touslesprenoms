@@ -30,8 +30,6 @@ class NameViewModel
 
     public static function details(Name $name): array
     {
-        Carbon::setLocale('fr');
-
         return [
             'id' => $name->id,
             'name' => StringHelper::formatNameFromDB($name->name),
@@ -84,11 +82,7 @@ class NameViewModel
         // now we need to add the percentage of popularity for each decade
         $total = $decadesCollection->sum('popularity');
         $decadesCollection = $decadesCollection->map(function ($decade) use ($total) {
-            if ($total > 0) {
-                $decade['percentage'] = Number::format(round($decade['popularity'] / $total * 100), locale: 'fr');
-            } else {
-                $decade['percentage'] = 0;
-            }
+            $decade['percentage'] = $total > 0 ? Number::format(round($decade['popularity'] / $total * 100)) : 0;
 
             return $decade;
         });
@@ -98,7 +92,7 @@ class NameViewModel
 
         return [
             'decades' => $decadesCollection,
-            'total' => Number::format($total, locale: 'fr'),
+            'total' => Number::format($total),
         ];
     }
 

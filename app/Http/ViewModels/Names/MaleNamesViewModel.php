@@ -20,7 +20,7 @@ class MaleNamesViewModel
         $letters = collect();
         $letters->push([
             'letter' => 'Tous',
-            'count' => Number::format($total, locale: 'fr'),
+            'count' => Number::format($total),
             'url' => route('name.garcon.index'),
         ]);
 
@@ -29,7 +29,7 @@ class MaleNamesViewModel
                 ->where('name', 'like', $letter . '%')->count();
             $letters->push([
                 'letter' => $letter,
-                'count' => Number::format($total, locale: 'fr'),
+                'count' => Number::format($total),
                 'url' => route('name.garcon.letter', [
                     'letter' => Str::lcfirst($letter),
                 ]),

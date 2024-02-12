@@ -34,7 +34,7 @@ class UserViewModel
             ->map(fn (Name $name) => [
                 'id' => $name->id,
                 'name' => StringHelper::formatNameFromDB($name->name),
-                'total' => Number::format($name->total, locale: 'fr'),
+                'total' => Number::format($name->total),
                 'note' => $name->getNoteForUser(),
                 'url' => [
                     'show' => route('name.show', [

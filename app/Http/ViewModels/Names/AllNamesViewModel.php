@@ -15,7 +15,7 @@ class AllNamesViewModel
         $allNames = Name::where('name', '!=', '_PRENOMS_RARES')->count();
         $letters->push([
             'letter' => 'Tous',
-            'count' => Number::format($allNames, locale: 'fr'),
+            'count' => Number::format($allNames),
             'url' => route('name.index'),
         ]);
 
@@ -25,7 +25,7 @@ class AllNamesViewModel
 
             $letters->push([
                 'letter' => $letter,
-                'count' => Number::format($count, locale: 'fr'),
+                'count' => Number::format($count),
                 'url' => route('name.letter', ['letter' => Str::lcfirst($letter)]),
             ]);
         }

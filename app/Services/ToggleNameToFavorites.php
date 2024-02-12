@@ -27,8 +27,8 @@ class ToggleNameToFavorites extends BaseService
 
     private function findFavoritesList(): void
     {
-        $this->list = NameList::where('user_id', auth()->id())
-            ->where('is_list_of_favorites', true)
+        $this->list = auth()->user()->lists()
+            ->favorite()
             ->firstOrFail();
     }
 
