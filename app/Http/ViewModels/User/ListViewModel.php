@@ -6,6 +6,7 @@ use App\Helpers\StringHelper;
 use App\Models\Name;
 use App\Models\NameList;
 use Illuminate\Support\Number;
+use Illuminate\Support\Str;
 
 class ListViewModel
 {
@@ -42,11 +43,15 @@ class ListViewModel
             ->map(fn (Name $name) => [
                 'id' => $name->id,
                 'name' => StringHelper::formatNameFromDB($name->name),
+                'origins' => Str::words($name->origins, 50, '...'),
                 'total' => Number::format($name->total),
                 'url' => [
                     'show' => route('name.show', [
                         'id' => $name->id,
                         'name' => StringHelper::sanitizeNameForURL($name->name),
+                    ]),
+                    'favorite' => route('favorite.update', [
+                        'id' => $name->id,
                     ]),
                     'destroy' => route('list.name.destroy', [
                         'liste' => $list->id,
@@ -61,6 +66,8 @@ class ListViewModel
             'description' => $list->description,
             'names' => $names,
             'uuid' => StringHelper::shareLink($list->uuid),
+            'visibility' => $list->is_public,
+            'created_at' => $list->created_at->isoFormat('LL'),
             'url' => [
                 'show' => route('list.show', [
                     'liste' => $list->id,
@@ -72,6 +79,9 @@ class ListViewModel
                     'liste' => $list->id,
                 ]),
                 'search' => route('list.search.index', [
+                    'liste' => $list->id,
+                ]),
+                'visibility' => route('list.system.update', [
                     'liste' => $list->id,
                 ]),
             ],

@@ -7,6 +7,9 @@ use App\Models\Name;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 
+/**
+ * @codeCoverageIgnore
+ */
 class CreateMainCharacteristics extends Command
 {
     /**
@@ -14,7 +17,7 @@ class CreateMainCharacteristics extends Command
      *
      * @var string
      */
-    protected $signature = 'openname:create-main-characteristics';
+    protected $signature = 'touslesprenoms:create-main-characteristics';
 
     /**
      * The console command description.

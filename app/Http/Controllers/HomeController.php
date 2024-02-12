@@ -27,11 +27,16 @@ class HomeController extends Controller
             });
         }
 
+        $lists = Cache::remember('admin-lists', 604800, function () {
+            return HomeViewModel::adminLists();
+        });
+
         return view('home.index', [
             'twentyMostPopularNames' => $popularNames,
             'stats' => $stats,
             'nameSpotlight' => HomeViewModel::nameSpotlight(),
             'favorites' => $favoritedNamesForLoggedUser,
+            'lists' => $lists,
         ]);
     }
 }

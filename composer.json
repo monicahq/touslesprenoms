@@ -3,7 +3,7 @@
     "type": "project",
     "description": "Intranet for asynchronous teams.",
     "keywords": ["laravel", "intranet", "asynchronous"],
-    "license": "MIT",
+    "license": "AGPL-3.0-or-later",
     "require": {
         "php": "^8.2",
         "ext-fileinfo": "*",

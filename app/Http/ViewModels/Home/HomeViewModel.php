@@ -5,6 +5,8 @@ namespace App\Http\ViewModels\Home;
 use App\Helpers\StringHelper;
 use App\Http\ViewModels\Names\NameViewModel;
 use App\Models\Name;
+use App\Models\NameList;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Number;
 use Illuminate\Support\Str;
@@ -75,5 +77,43 @@ class HomeViewModel
         return [
             'total_names' => Number::format($totalNames),
         ];
+    }
+
+    /**
+     * Get the list of all the public lists that administrators have set public.
+     *
+     * @return Collection
+     */
+    public static function adminLists(): Collection
+    {
+        return NameList::where('is_public', true)
+            ->withCount('names')
+            ->with('names')
+            ->inRandomOrder()
+            ->get()
+            ->map(fn (NameList $list) => [
+                'id' => $list->id,
+                'name' => $list->name,
+                'total' => Number::format($list->names_count, locale: 'fr'),
+                'names' => $list->names()
+                    ->inRandomOrder()
+                    ->take(4)
+                    ->get()
+                    ->map(fn (Name $name) => [
+                        'id' => $name->id,
+                        'name' => StringHelper::formatNameFromDB($name->name),
+                        'url' => [
+                            'show' => route('name.show', [
+                                'id' => $name->id,
+                                'name' => StringHelper::sanitizeNameForURL($name->name),
+                            ]),
+                        ],
+                    ]),
+                'url' => [
+                    'show' => route('list.public.show', [
+                        'liste' => $list->id,
+                    ]),
+                ],
+            ]);
     }
 }

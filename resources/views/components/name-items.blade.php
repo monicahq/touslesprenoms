@@ -1,4 +1,4 @@
-@props(['name', 'favorited' => false])
+@props(['name', 'favorited' => false, 'showOrigins' => false])
 
 <div
   {{ $attributes->merge(['class' => 'flex items-center justify-between border border-transparent hover:bg-gray-50 hover:border-gray-200 px-2 py-1 rounded-sm']) }}
@@ -7,7 +7,12 @@
   >
   <div class="flex items-center">
     <div class="rounded-full w-6 mr-4 ring-4 ring-violet-100">{!! \App\Helpers\NameHelper::getAvatar($name['name']) !!}</div>
-    <a href="{{ $name['url']['show'] }}" class="text-lg hover:underline">{{ $name['name'] }} <span x-text="last_name"></span></a>
+    <div class="flex-col w-full">
+      <a href="{{ $name['url']['show'] }}" class="text-lg hover:underline">{{ $name['name'] }} <span x-text="last_name"></span></a>
+      @if ($showOrigins)
+        <div class="text-sm">{{ $name['origins'] }}</div>
+      @endif
+    </div>
   </div>
 
   <div class="flex items-center">
@@ -32,7 +37,6 @@
         xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#9a9a9a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bookmark"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/>
     </a>
   @endauth
-
   </div>
 
 </div>

@@ -16,6 +16,9 @@ use App\Jobs\ProcessSyllabes;
 use App\Models\Name;
 use Illuminate\Console\Command;
 
+/**
+ * @codeCoverageIgnore
+ */
 class FetchMetaData extends Command
 {
     /**
@@ -23,7 +26,7 @@ class FetchMetaData extends Command
      *
      * @var string
      */
-    protected $signature = 'openname:fetch-meta-data';
+    protected $signature = 'touslesprenoms:fetch-meta-data';
 
     /**
      * The console command description.

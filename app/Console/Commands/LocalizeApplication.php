@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Storage;
 use Stichoza\GoogleTranslate\GoogleTranslate;
 use Symfony\Component\Finder\Finder;
 
+/**
+ * @codeCoverageIgnore
+ */
 class LocalizeApplication extends Command
 {
     /**
@@ -14,7 +17,7 @@ class LocalizeApplication extends Command
      *
      * @var string
      */
-    protected $signature = 'openname:localize';
+    protected $signature = 'touslesprenoms:localize';
 
     /**
      * The console command description.
