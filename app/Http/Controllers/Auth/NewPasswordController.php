@@ -14,6 +14,8 @@ use Illuminate\View\View;
 
 class NewPasswordController extends Controller
 {
+    use PasswordValidationRules;
+
     /**
      * Display the password reset view.
      */
@@ -32,7 +34,7 @@ class NewPasswordController extends Controller
         $request->validate([
             'token' => ['required'],
             'email' => ['required', 'email'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => $this->passwordRules(),
         ]);
 
         // Here we will attempt to reset the user's password. If it is successful we
