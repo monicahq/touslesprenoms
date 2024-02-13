@@ -1,4 +1,4 @@
-<ul class="space-y-1">
+<ul class="space-y-1 px-2 sm:px-0">
   <li class="p-2 border {{ request()->routeIs('name.index') ? 'bg-yellow-100 border-yellow-200' : 'border-transparent' }} hover:bg-yellow-100 hover:border-yellow-200 rounded-md">
     <a hx-boost="true" href="{{ route('name.index') }}">Tous les prénoms</a>
   </li>

@@ -5,7 +5,7 @@
     </div>
 
     <div class="border-b border-violet-200">
-      <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 py-2">
+      <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 py-2">
         <ul class="text-xs">
           <li class="inline after:content-['>'] after:text-gray-500 after:text-xs">
             <a hx-boost="true" href="{{ route('home.index') }}" class="text-violet-900 underline">Accueil</a>
@@ -17,7 +17,7 @@
   </div>
 
   <div>
-    <div class="mx-auto max-w-2xl sm:px-6 lg:px-8 py-2 mb-10">
+    <div class="mx-auto max-w-2xl px-2 sm:px-6 lg:px-8 py-2 mb-10">
       <h2 class="text-center mb-4 text-xl">Recherche instantanée</h2>
       <form method="POST" action="{{ route('search.post') }}" class="mb-4" x-data="{ name: '{{ $term }}' }">
         @csrf
@@ -32,10 +32,10 @@
     </div>
 
     @if (count($names) > 0)
-    <div class="mx-auto max-w-2xl sm:px-6 lg:px-8 py-2 mb-10" x-data="{ last_name: '{{ auth()->check() ? auth()->user()->last_name : "" }}' }">
+    <div class="mx-auto max-w-2xl px-2 sm:px-6 lg:px-8 py-2 mb-10" x-data="{ last_name: '{{ auth()->check() ? auth()->user()->last_name : "" }}' }">
       <h2>Nous avons trouvé {{ $names['total'] }} résultats avec les caractères <kbd class="px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">{{ $term }}</kbd>. Les résultats sont classés par popularité.</h2>
 
-      <ul class="overflow-auto h-50 bg-white dark:bg-gray-900 rounded-b-lg mt-4" x-data="{ last_name: '{{ auth()->check() ? auth()->user()->last_name : "" }}' }">
+      <ul class="overflow-auto h-50 bg-white rounded-b-lg mt-4" x-data="{ last_name: '{{ auth()->check() ? auth()->user()->last_name : "" }}' }">
         @foreach ($names['names'] as $name)
         <x-name-items :name="$name" favorited="{{ $favorites->contains($name['id']) }}" class="py-2" />
         @endforeach
