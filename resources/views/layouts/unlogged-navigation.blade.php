@@ -3,7 +3,7 @@
 
   <!-- Primary Navigation Menu -->
   <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-    <div class="flex items-center py-4 justify-between">
+    <div class="flex items-center py-4 sm:px-0 px-4 justify-between">
       <div class="flex">
         <!-- Logo -->
         <div class="flex shrink-0 items-center">
@@ -89,7 +89,7 @@
   <!-- Responsive Navigation Menu -->
   <div class="hidden sm:hidden"
        :class="{ 'block': open, 'hidden': !open }">
-    <div class="space-y-1 pb-3 pt-2">
+    <div class="space-y-1 pt-2">
       <x-responsive-nav-link :href="route('home.index')"
                              :active="request()->routeIs('home*')">
         {{ __('Accueil') }}
@@ -97,13 +97,30 @@
     </div>
 
     <!-- Responsive Settings Options -->
-    <div class="border-t border-gray-200 pb-1 pt-4 dark:border-gray-600">
+    <div class="border-t border-gray-200 pb-1 dark:border-gray-600">
       <div class="mt-3 space-y-1">
         <x-responsive-nav-link :href="route('name.index')">
           {{ __('Tous les prénoms') }}
         </x-responsive-nav-link>
 
+        <x-responsive-nav-link :href="route('search.index')" :active="request()->routeIs('search*')">
+          {{ __('Recherche') }}
+        </x-responsive-nav-link>
+
+        @auth
+        <x-responsive-nav-link class="mr-4" hx-boost="true" :href="route('favorite.index')" :active="request()->routeIs('favorite*')">
+          {{ __('Vos favoris') }}
+        </x-responsive-nav-link>
+        <x-responsive-nav-link class="mr-4" hx-boost="true" :href="route('list.index')" :active="request()->routeIs('list*')">
+          {{ __('Vos listes') }}
+        </x-responsive-nav-link>
+        <x-responsive-nav-link class="mr-4" hx-boost="true" :href="route('profile.show')" :active="request()->routeIs('profile*')">
+          {{ __('Votre compte') }}
+        </x-responsive-nav-link>
+        @endauth
+
         <!-- Authentication -->
+        @auth
         <form method="POST"
               action="{{ route('logout') }}">
           @csrf
@@ -114,6 +131,7 @@
             {{ __('Log out') }}
           </x-responsive-nav-link>
         </form>
+        @endauth
       </div>
     </div>
   </div>
