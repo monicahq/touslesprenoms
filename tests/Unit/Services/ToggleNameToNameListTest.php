@@ -44,6 +44,8 @@ class ToggleNameToNameListTest extends TestCase
         $name = Name::factory()->create();
         $list = NameList::factory()->create();
 
+        $this->actingAs($user);
+
         $this->expectException(ModelNotFoundException::class);
 
         (new ToggleNameToNameList(
