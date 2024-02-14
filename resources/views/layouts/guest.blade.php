@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="description" content="Trouvez le prénom idéal pour votre enfant. Découvrez l'origine, la signification, les célébrités et la popularité de milliers de prénoms.">
 
   <title>{{ config('app.name', 'Laravel') }}</title>
 
