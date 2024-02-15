@@ -23,7 +23,7 @@
         <div>
           <div class="bg-white shadow-md rounded-lg">
             <div class="flex items-center border-b">
-              <img src="/img/prenom_du_jour.svg" class="w-48 mx-auto py-2" />
+              <img src="/img/prenom_du_jour.svg" alt="Prénom du jour" class="w-48 mx-auto py-2" />
             </div>
 
             <div class="p-6">
@@ -127,7 +127,6 @@
           <!-- avatars -->
           <div class="flex -space-x-4 rtl:space-x-reverse mr-5">
             @foreach ($list['names'] as $name)
-            {{-- <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="/docs/images/people/profile-picture-5.jpg" alt=""> --}}
             <div class="rounded-full w-6 h-6 mr-4 ring-4 ring-violet-100">{!! \App\Helpers\NameHelper::getAvatar($name['name']) !!}</div>
             @endforeach
           </div>
