@@ -54,7 +54,7 @@
       @csrf
 
       <div class="flex items-center px-2 py-2 bg-gray-100 rounded-lg border-gray-300 border">
-        <input x-model="name" type="text" value="old('term'), $term" name="term" class="rounded-l-lg w-full sm:w-96 py-2 px-4 border border-gray-300 bg-white dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:border-gray-400" placeholder="Rechercher un prénom" />
+        <input x-model="name" type="text" name="term" class="rounded-l-lg w-full sm:w-96 py-2 px-4 border border-gray-300 bg-white dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:border-gray-400" placeholder="Rechercher un prénom" />
         <button type="submit" x-bind:disabled="name.length < 3" class="border-t border-b border-r border-gray-300 bg-gray-100 dark:bg-gray-700 rounded-r-lg px-4 py-2 text-gray-900 dark:text-gray-100 font-bold">Rechercher</button>
       </div>
     </form>
