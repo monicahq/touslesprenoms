@@ -18,5 +18,8 @@ export default defineConfig(({ mode }) => {
     server: {
       host: host,
     },
+    build: {
+      sourcemap: env.VITE_PROD_SOURCE_MAPS,
+    },
   };
 });
