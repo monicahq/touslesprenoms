@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -41,5 +42,10 @@ class NameList extends Model
     public function names(): BelongsToMany
     {
         return $this->belongsToMany(Name::class, 'list_name', 'list_id', 'name_id');
+    }
+
+    public function scopeFavorite(Builder $query): void
+    {
+        $query->where('is_list_of_favorites', 1);
     }
 }

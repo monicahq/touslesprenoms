@@ -20,7 +20,7 @@ class MixteNamesViewModel
         $letters = collect();
         $letters->push([
             'letter' => 'Tous',
-            'count' => Number::format($total, locale: 'fr'),
+            'count' => Number::format($total),
             'url' => route('name.mixte.index'),
         ]);
 
@@ -29,7 +29,7 @@ class MixteNamesViewModel
                 ->where('name', 'like', $letter . '%')->count();
             $letters->push([
                 'letter' => $letter,
-                'count' => Number::format($total, locale: 'fr'),
+                'count' => Number::format($total),
                 'url' => route('name.mixte.letter', [
                     'letter' => Str::lcfirst($letter),
                 ]),

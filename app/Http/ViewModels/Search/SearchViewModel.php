@@ -27,9 +27,7 @@ class SearchViewModel
                     ]),
                 ],
             ])
-            ->filter(function ($name) {
-                return strpos($name['name'], '_prenoms_rares') === false;
-            });
+            ->filter(fn ($name) => strpos($name['name'], '_prenoms_rares') === false);
 
         return [
             'names' => $names,
