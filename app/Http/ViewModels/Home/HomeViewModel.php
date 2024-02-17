@@ -36,9 +36,12 @@ class HomeViewModel
             ->get()
             ->map(fn (Name $name) => NameViewModel::summary($name));
 
-        $randomNames = Name::where('name', '!=', '_PRENOMS_RARES')
+        $randomIds = Name::select('id')
+            ->where('name', '!=', '_PRENOMS_RARES')
             ->inRandomOrder()
             ->take(10)
+            ->get();
+        $randomNames = Name::whereIn('id', $randomIds)
             ->get()
             ->map(fn (Name $name) => NameViewModel::summary($name));
 
@@ -53,9 +56,12 @@ class HomeViewModel
     public static function nameSpotlight(): array
     {
         $name = Cache::remember('name-of-the-day', 86400, function () {
-            return Name::where('total', '>', 10000)
-                ->select('id', 'name', 'origins')
+            $id = Name::select('id')
+                ->where('total', '>', 10000)
                 ->inRandomOrder()
+                ->first();
+            return Name::whereIn('id', $id)
+                ->select('id', 'name', 'origins')
                 ->first();
         });
 
@@ -86,10 +92,14 @@ class HomeViewModel
      */
     public static function adminLists(): Collection
     {
-        return NameList::where('is_public', true)
+        $ids = NameList::select('id')
+            ->where('is_public', true)
+            ->inRandomOrder()
+            ->get();
+
+        return NameList::whereIn('id', $ids)
             ->withCount('names')
             ->with('names')
-            ->inRandomOrder()
             ->get()
             ->map(fn (NameList $list) => [
                 'id' => $list->id,
