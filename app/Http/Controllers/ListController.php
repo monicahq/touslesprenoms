@@ -14,9 +14,7 @@ class ListController extends Controller
 {
     public function index(): View
     {
-        $lists = Cache::remember('user-lists-' . auth()->id(), 604800, function () {
-            return ListViewModel::index();
-        });
+        $lists = Cache::remember('user-lists-' . auth()->id(), 604800, fn () => ListViewModel::index());
 
         return view('user.lists.index', [
             'lists' => $lists['lists'],
@@ -44,9 +42,7 @@ class ListController extends Controller
     {
         $requestedList = $request->attributes->get('list');
 
-        $details = Cache::remember('list-details-' . $requestedList->id, 604800, function () use ($requestedList) {
-            return ListViewModel::show($requestedList);
-        });
+        $details = Cache::remember('list-details-' . $requestedList->id, 604800, fn () => ListViewModel::show($requestedList));
 
         return view('user.lists.show', [
             'term' => null,
