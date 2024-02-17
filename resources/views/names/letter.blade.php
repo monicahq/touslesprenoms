@@ -50,7 +50,7 @@
             @endforeach
           </div>
 
-          <div id="nav" class="flex justify-center" hx-boost="true" hx-swap="show:none">
+          <div id="nav" class="flex justify-center">
             {{ $namesPagination->onEachSide(2)->links() }}
           </div>
         </div>
