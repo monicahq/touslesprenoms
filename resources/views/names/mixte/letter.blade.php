@@ -32,7 +32,7 @@
         <div>
 
           <!-- list of letters -->
-          <div class="grid grid-cols-12 gap-y-2 gap-2 mb-12">
+          <div class="grid grid-cols-12 gap-y-2 gap-2 mb-12" hx-boost="true" hx-swap="show:none">
             @foreach ($letters as $letter)
             <a href="{{ $letter['url'] }}" class="flex flex-col rounded-lg px-2 py-1 border hover:bg-violet-100 {{ $activeLetter === $letter['letter'] ? 'bg-violet-100' : '' }}">
               <div>{{ $letter['letter'] }}</div>
@@ -51,8 +51,8 @@
             @endforeach
           </div>
 
-          <div class="flex justify-center">
-              {{ $namesPagination->onEachSide(2)->links('vendor.pagination.tailwind') }}
+          <div class="flex justify-center" hx-boost="true" hx-swap="show:none">
+              {{ $namesPagination->onEachSide(2)->links() }}
             </div>
         </div>
       </div>

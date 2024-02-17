@@ -3,7 +3,6 @@
     <div class="border-b border-violet-200">
       @include('layouts.unlogged-navigation')
     </div>
-
     <div class="border-b border-violet-200">
       <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 py-2">
         <ul class="text-xs">
@@ -29,7 +28,7 @@
         <div class="sm:px-0 px-2">
 
           <!-- list of letters -->
-          <div class="grid grid-cols-6 sm:grid-cols-12 gap-y-2 gap-2 mb-12">
+          <div class="grid grid-cols-6 sm:grid-cols-12 gap-y-2 gap-2 mb-12" hx-boost="true" hx-swap="show:none">
             @foreach ($letters as $letter)
             <a href="{{ $letter['url'] }}" class="flex flex-col rounded-lg px-2 py-1 border hover:bg-violet-100">
               <div>{{ $letter['letter'] }}</div>
@@ -45,8 +44,8 @@
             @endforeach
           </div>
 
-          <div class="flex justify-center mb-10">
-            {{ $namesPagination->onEachSide(2)->links('vendor.pagination.tailwind') }}
+          <div class="flex justify-center mb-10" hx-boost="true" hx-swap="show:none">
+            {{ $namesPagination->onEachSide(2)->links() }}
           </div>
         </div>
       </div>
