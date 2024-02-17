@@ -13,9 +13,7 @@ class SearchController extends Controller
 {
     public function index(): View
     {
-        $stats = Cache::remember('stats', 604800, function () {
-            return HomeViewModel::serverStats();
-        });
+        $stats = Cache::remember('stats', 604800, fn () => HomeViewModel::serverStats());
 
         return view('search.index', [
             'stats' => $stats,
@@ -27,23 +25,15 @@ class SearchController extends Controller
 
     public function post(Request $request): View
     {
-        $stats = Cache::remember('stats', 604800, function () {
-            return HomeViewModel::serverStats();
-        });
+        $stats = Cache::remember('stats', 604800, fn () => HomeViewModel::serverStats());
 
         $term = trim($request->input('term'));
 
-        $names = Cache::remember('search-name-' . $term, 604800, function () use ($term) {
-            return SearchViewModel::names($term, 1000);
-        });
+        $names = Cache::remember('search-name-' . $term, 604800, fn () => SearchViewModel::names($term, 1000));
 
-        if (! auth()->check()) {
-            $favoritedNamesForLoggedUser = collect();
-        } else {
-            $favoritedNamesForLoggedUser = Cache::remember('user-favorites-' . auth()->id(), 604800, function () {
-                return UserViewModel::favorites();
-            });
-        }
+        $favoritedNamesForLoggedUser = auth()->check()
+            ? Cache::remember('user-favorites-' . auth()->id(), 604800, fn () => UserViewModel::favorites())
+            : collect();
 
         return view('search.index', [
             'stats' => $stats,

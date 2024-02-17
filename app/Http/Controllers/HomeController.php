@@ -11,25 +11,15 @@ class HomeController extends Controller
 {
     public function index(): View
     {
-        $popularNames = Cache::remember('popular-names', 86400, function () {
-            return HomeViewModel::twentyMostPopularNames();
-        });
+        $popularNames = Cache::remember('popular-names', 86400, fn () => HomeViewModel::twentyMostPopularNames());
 
-        $stats = Cache::remember('stats', 604800, function () {
-            return HomeViewModel::serverStats();
-        });
+        $stats = Cache::remember('stats', 604800, fn () => HomeViewModel::serverStats());
 
-        if (! auth()->check()) {
-            $favoritedNamesForLoggedUser = collect();
-        } else {
-            $favoritedNamesForLoggedUser = Cache::remember('user-favorites-' . auth()->id(), 604800, function () {
-                return UserViewModel::favorites();
-            });
-        }
+        $favoritedNamesForLoggedUser = auth()->check()
+            ? Cache::remember('user-favorites-' . auth()->id(), 604800, fn () => UserViewModel::favorites())
+            : collect();
 
-        $lists = Cache::remember('admin-lists', 604800, function () {
-            return HomeViewModel::adminLists();
-        });
+        $lists = Cache::remember('admin-lists', 604800, fn () => HomeViewModel::adminLists());
 
         return view('home.index', [
             'twentyMostPopularNames' => $popularNames,
