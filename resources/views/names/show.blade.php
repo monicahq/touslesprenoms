@@ -34,7 +34,7 @@
     </div>
 
     <div class="border-b border-violet-200">
-      <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 py-2">
+      <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 py-2">
         <ul class="text-xs">
           <li class="inline after:content-['>'] after:text-gray-500 after:text-xs">
             <a hx-boost="true" href="{{ route('home.index') }}" class="text-violet-900 underline">Accueil</a>
@@ -86,7 +86,7 @@
           </div>
 
           <!-- syllabes -->
-          <div class="grid grid-cols-4 gap-3 mb-10">
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10">
             <div class="bg-violet-100 rounded-lg p-2">
               <h3 class="text-xs text-gray-700">Nombre de syllabes</h3>
               <div class="text-xl">{!! $name['syllabes'] !!}</div>

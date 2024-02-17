@@ -5,7 +5,7 @@
     </div>
 
     <div class="border-b border-violet-200">
-      <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 py-2">
+      <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 py-2">
         <ul class="text-xs">
           <li class="inline after:content-['>'] after:text-gray-500 after:text-xs">
             <a hx-boost="true" href="{{ route('home.index') }}" class="text-violet-900 underline">Accueil</a>
@@ -26,10 +26,10 @@
         </div>
 
         <!-- right -->
-        <div>
+        <div class="sm:px-0 px-2">
 
           <!-- list of letters -->
-          <div class="grid grid-cols-12 gap-y-2 gap-2 mb-12">
+          <div class="grid grid-cols-6 sm:grid-cols-12 gap-y-2 gap-2 mb-12">
             @foreach ($letters as $letter)
             <a href="{{ $letter['url'] }}" class="flex flex-col rounded-lg px-2 py-1 border hover:bg-violet-100">
               <div>{{ $letter['letter'] }}</div>
@@ -39,7 +39,7 @@
           </div>
 
           <!-- names -->
-          <div class="grid grid-cols-3 gap-10 gap-y-1 mb-10" x-data="{ last_name: '{{ auth()->check() ? auth()->user()->last_name : "" }}' }">
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-10 gap-y-1 mb-10" x-data="{ last_name: '{{ auth()->check() ? auth()->user()->last_name : "" }}' }">
             @foreach ($names as $name)
             <x-name-items :name="$name" favorited="{{ $favorites->contains($name['id']) }}" />
             @endforeach

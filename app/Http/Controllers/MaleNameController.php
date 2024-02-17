@@ -19,31 +19,23 @@ class MaleNameController extends Controller
         // get the page parameter from the url
         $requestedPage = $request->query('page') ?? 1;
 
-        $letters = Cache::remember('all-letters-male', 604800, function () {
-            return MaleNamesViewModel::index();
-        });
+        $letters = Cache::remember('all-letters-male', 604800, fn () => MaleNamesViewModel::index());
 
-        Paginator::currentPageResolver(function () use ($requestedPage) {
-            return $requestedPage;
-        });
+        Paginator::currentPageResolver(fn () => $requestedPage);
 
-        $namesPagination = Cache::remember('all-names-male-page-' . $requestedPage, 604800, function () {
-            return Name::where('name', '!=', '_PRENOMS_RARES')
+        $namesPagination = Cache::remember('all-names-male-page-' . $requestedPage, 604800, fn () =>
+            Name::where('name', '!=', '_PRENOMS_RARES')
                 ->where('gender', 'male')
                 ->orderBy('total', 'desc')
-                ->paginate(40);
-        });
+                ->paginate(40)
+        );
 
         $names = $namesPagination
             ->map(fn (Name $name) => NameViewModel::summary($name));
 
-        if (! auth()->check()) {
-            $favoritedNamesForLoggedUser = collect();
-        } else {
-            $favoritedNamesForLoggedUser = Cache::remember('user-favorites-' . auth()->id(), 604800, function () {
-                return UserViewModel::favorites();
-            });
-        }
+        $favoritedNamesForLoggedUser = auth()->check()
+            ? Cache::remember('user-favorites-' . auth()->id(), 604800, fn () => UserViewModel::favorites())
+            : collect();
 
         return view('names.male.index', [
             'letters' => $letters,
@@ -58,32 +50,24 @@ class MaleNameController extends Controller
         $requestedLetter = $request->attributes->get('letter');
         $requestedPage = $request->query('page') ?? 1;
 
-        $letters = Cache::remember('all-letters-male', 604800, function () {
-            return MaleNamesViewModel::index();
-        });
+        $letters = Cache::remember('all-letters-male', 604800, fn () => MaleNamesViewModel::index());
 
-        Paginator::currentPageResolver(function () use ($requestedPage) {
-            return $requestedPage;
-        });
+        Paginator::currentPageResolver(fn () => $requestedPage);
 
-        $namesPagination = Cache::remember('male-letter-' . $requestedLetter . '-page-' . $requestedPage, 604800, function () use ($requestedLetter) {
-            return Name::where('name', '!=', '_PRENOMS_RARES')
+        $namesPagination = Cache::remember('male-letter-' . $requestedLetter . '-page-' . $requestedPage, 604800, fn () =>
+            Name::where('name', '!=', '_PRENOMS_RARES')
                 ->where('gender', 'male')
                 ->where('name', 'like', $requestedLetter . '%')
                 ->orderBy('total', 'desc')
-                ->paginate(40);
-        });
+                ->paginate(40)
+        );
 
         $names = $namesPagination
             ->map(fn (Name $name) => NameViewModel::summary($name));
 
-        if (! auth()->check()) {
-            $favoritedNamesForLoggedUser = collect();
-        } else {
-            $favoritedNamesForLoggedUser = Cache::remember('user-favorites-' . auth()->id(), 604800, function () {
-                return UserViewModel::favorites();
-            });
-        }
+        $favoritedNamesForLoggedUser = auth()->check()
+            ? Cache::remember('user-favorites-' . auth()->id(), 604800, fn () => UserViewModel::favorites())
+            : collect();
 
         return view('names.male.letter', [
             'letters' => $letters,
