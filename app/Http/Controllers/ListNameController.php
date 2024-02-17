@@ -16,9 +16,7 @@ class ListNameController extends Controller
     {
         $requestedList = $request->attributes->get('list');
 
-        $details = Cache::remember('list-details-' . $requestedList->id, 604800, function () use ($requestedList) {
-            return ListViewModel::show($requestedList);
-        });
+        $details = Cache::remember('list-details-' . $requestedList->id, 604800, fn () => ListViewModel::show($requestedList));
 
         return view('user.lists.show', [
             'list' => $details,
