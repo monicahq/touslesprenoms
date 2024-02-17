@@ -15,7 +15,7 @@
           <h2 class="text-xl mb-6">Parcourez le site de fiches de prénoms le plus complet. Créez des listes et faites voter vos proches. Un site qui vous respecte, sans pub et open source.</h2>
 
           <p class="sm:mb-0 mb-6">
-            <a hx-boost="true" href="{{ route('name.index') }}" class="bg-amber-300 px-4 py-2 rounded-lg font-bold shadow">Parcourir tous les prénoms</a>
+            <a href="{{ route('name.index') }}" class="bg-amber-300 px-4 py-2 rounded-lg font-bold shadow">Parcourir tous les prénoms</a>
           </p>
         </div>
 
@@ -38,7 +38,7 @@
               <div class="prose mb-5">{{ $nameSpotlight['origins'] }}</div>
 
               <p class="text-center">
-                <a hx-boost="true" href="{{ $nameSpotlight['url'] }}" class="bg-amber-300 px-4 py-2 rounded-lg font-bold shadow">Lire plus +</a>
+                <a href="{{ $nameSpotlight['url'] }}" class="bg-amber-300 px-4 py-2 rounded-lg font-bold shadow">Lire plus +</a>
               </p>
             </div>
           </div>

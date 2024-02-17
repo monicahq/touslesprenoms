@@ -15,24 +15,24 @@
         <!-- Navigation Links -->
         <div class="hidden space-x-4 sm:ms-10 sm:flex items-center">
           <div>
-            <x-unlogged-nav-link class="mr-4" hx-boost="true" :href="route('home.index')" :active="request()->routeIs('home.index')">
+            <x-unlogged-nav-link class="mr-4" :href="route('home.index')" :active="request()->routeIs('home.index')">
               {{ __('Accueil') }}
             </x-unlogged-nav-link>
-            <x-unlogged-nav-link class="mr-4" hx-boost="true" :href="route('name.index')" :active="request()->routeIs('name*')">
+            <x-unlogged-nav-link class="mr-4" :href="route('name.index')" :active="request()->routeIs('name*')">
               {{ __('Tous les prénoms') }}
             </x-unlogged-nav-link>
-            <x-unlogged-nav-link class="mr-4" hx-boost="true" :href="route('search.index')" :active="request()->routeIs('search*')">
+            <x-unlogged-nav-link class="mr-4" :href="route('search.index')" :active="request()->routeIs('search*')">
               {{ __('Recherche') }}
             </x-unlogged-nav-link>
 
             @auth
-            <x-unlogged-nav-link class="mr-4" hx-boost="true" :href="route('favorite.index')" :active="request()->routeIs('favorite*')">
+            <x-unlogged-nav-link class="mr-4" :href="route('favorite.index')" :active="request()->routeIs('favorite*')">
               {{ __('Vos favoris') }}
             </x-unlogged-nav-link>
-            <x-unlogged-nav-link class="mr-4" hx-boost="true" :href="route('list.index')" :active="request()->routeIs('list*')">
+            <x-unlogged-nav-link class="mr-4" :href="route('list.index')" :active="request()->routeIs('list*')">
               {{ __('Vos listes') }}
             </x-unlogged-nav-link>
-            <x-unlogged-nav-link class="mr-4" hx-boost="true" :href="route('profile.show')" :active="request()->routeIs('profile*')">
+            <x-unlogged-nav-link class="mr-4" :href="route('profile.show')" :active="request()->routeIs('profile*')">
               {{ __('Votre compte') }}
             </x-unlogged-nav-link>
             @endauth
@@ -55,8 +55,8 @@
 
           @guest
 
-            <a hx-boost="true" href="{{ route('register') }}" class="bg-amber-300 mr-4 px-4 py-2 rounded-lg font-bold shadow flex items-center"><x-heroicon-o-user-circle class="mr-2 w-5 h-5" /> <span>Créer votre compte</span></a>
-            <a hx-boost="true" href="{{ route('login') }}" class="inline-flex items-center text-md font-bold text-cyan-950 focus:outline-none focus:border-indigo-700 transition duration-250 ease-in-out"><span>Connexion</span></a>
+            <a href="{{ route('register') }}" class="bg-amber-300 mr-4 px-4 py-2 rounded-lg font-bold shadow flex items-center"><x-heroicon-o-user-circle class="mr-2 w-5 h-5" /> <span>Créer votre compte</span></a>
+            <a href="{{ route('login') }}" class="inline-flex items-center text-md font-bold text-cyan-950 focus:outline-none focus:border-indigo-700 transition duration-250 ease-in-out"><span>Connexion</span></a>
 
           @endguest
       </div>
@@ -108,13 +108,13 @@
         </x-responsive-nav-link>
 
         @auth
-        <x-responsive-nav-link class="mr-4" hx-boost="true" :href="route('favorite.index')" :active="request()->routeIs('favorite*')">
+        <x-responsive-nav-link class="mr-4" :href="route('favorite.index')" :active="request()->routeIs('favorite*')">
           {{ __('Vos favoris') }}
         </x-responsive-nav-link>
-        <x-responsive-nav-link class="mr-4" hx-boost="true" :href="route('list.index')" :active="request()->routeIs('list*')">
+        <x-responsive-nav-link class="mr-4" :href="route('list.index')" :active="request()->routeIs('list*')">
           {{ __('Vos listes') }}
         </x-responsive-nav-link>
-        <x-responsive-nav-link class="mr-4" hx-boost="true" :href="route('profile.show')" :active="request()->routeIs('profile*')">
+        <x-responsive-nav-link class="mr-4" :href="route('profile.show')" :active="request()->routeIs('profile*')">
           {{ __('Votre compte') }}
         </x-responsive-nav-link>
         @endauth

@@ -8,7 +8,7 @@
       <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 py-2">
         <ul class="text-xs">
           <li class="inline after:content-['>'] after:text-gray-500 after:text-xs">
-            <a hx-boost="true" href="{{ route('home.index') }}" class="text-violet-900 underline">Accueil</a>
+            <a  href="{{ route('home.index') }}" class="text-violet-900 underline">Accueil</a>
           </li>
           <li class="inline">Toutes vos listes de prénoms</li>
         </ul>
@@ -26,7 +26,7 @@
       </p>
 
       <div class="text-center mb-8">
-        <a hx-boost="true" href="{{ route('list.new') }}" class="bg-amber-300 px-4 py-2 rounded-lg font-bold shadow">Créer une nouvelle liste</a>
+        <a  href="{{ route('list.new') }}" class="bg-amber-300 px-4 py-2 rounded-lg font-bold shadow">Créer une nouvelle liste</a>
       </div>
       @endif
 
@@ -49,7 +49,7 @@
         <p class="mb-3">Vous n'avez pas encore mis de listes.</p>
         <p class="flex items-center justify-center mb-8">Une liste vous permet de classer vos prénoms autour d'une thématique donnée, et de faire voter vos choix par vos proches.</p>
 
-        <a hx-boost="true" href="{{ route('list.new') }}" class="bg-amber-300 px-4 py-2 rounded-lg font-bold shadow">Créez votre première liste</a>
+        <a  href="{{ route('list.new') }}" class="bg-amber-300 px-4 py-2 rounded-lg font-bold shadow">Créez votre première liste</a>
       </div>
       @endif
     </div>

@@ -8,10 +8,10 @@
       <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 py-2">
         <ul class="text-xs">
           <li class="inline after:content-['>'] after:text-gray-500 after:text-xs">
-            <a hx-boost="true" href="{{ route('home.index') }}" class="text-violet-900 underline">Accueil</a>
+            <a href="{{ route('home.index') }}" class="text-violet-900 underline">Accueil</a>
           </li>
           <li class="inline after:content-['>'] after:text-gray-500 after:text-xs">
-            <a hx-boost="true" href="{{ route('name.index') }}" class="text-violet-900 underline">Tous les prénoms</a>
+            <a href="{{ route('name.index') }}" class="text-violet-900 underline">Tous les prénoms</a>
           </li>
           <li class="inline">Tous les prénoms commençant par la lettre {{ $activeLetter }}</li>
         </ul>
@@ -34,7 +34,7 @@
           <!-- list of letters -->
           <div class="grid grid-cols-6 sm:grid-cols-12 gap-y-2 gap-2 mb-12">
             @foreach ($letters as $letter)
-            <a hx-boost="true" href="{{ $letter['url'] }}" class="flex flex-col rounded-lg px-2 py-1 border hover:bg-violet-100 {{ $activeLetter === $letter['letter'] ? 'bg-violet-100' : '' }}">
+            <a href="{{ $letter['url'] }}" class="flex flex-col rounded-lg px-2 py-1 border hover:bg-violet-100 {{ $activeLetter === $letter['letter'] ? 'bg-violet-100' : '' }}">
               <div>{{ $letter['letter'] }}</div>
               <div class="text-xs text-gray-600">{{ $letter['count'] }}</div>
             </a>
