@@ -13,9 +13,9 @@ jobs:
 
     steps:
       - name: Repository Dispatch
-        uses: peter-evans/repository-dispatch@v2
+        uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.GH_TOKEN }}
-          event-type: ${{ secrets.EVENT_TYPE }}
-          repository: ${{ secrets.REPO_URL }}
+          event-type: ${{ vars.EVENT_TYPE }}
+          repository: ${{ vars.REPO_URL }}
           client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "repository": "${{ github.repository }}"}'
