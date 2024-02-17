@@ -126,7 +126,7 @@
 
           <!-- personnality -->
           <div class="mb-8">
-            <h2 class="mb-2 flex items-center" id="personalite">
+            <h2 class="mb-2 flex items-center" id="personnalite">
               <span class="bg-amber-300 p-1 mr-2 rounded-full">
                 <x-heroicon-o-chevron-right class="w-4 h-4 text-white" />
               </span>

@@ -55,6 +55,8 @@ class ToggleNameToFavoritesTest extends TestCase
         $user = User::factory()->create();
         $name = Name::factory()->create();
 
+        $this->actingAs($user);
+
         $this->expectException(ModelNotFoundException::class);
         (new ToggleNameToFavorites(
             nameId: $name->id,

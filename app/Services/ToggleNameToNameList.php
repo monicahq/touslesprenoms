@@ -23,9 +23,8 @@ class ToggleNameToNameList extends BaseService
 
     private function addOrRemove(): void
     {
-        $list = NameList::where('user_id', auth()->id())
-            ->where('id', $this->listId)
-            ->firstOrFail();
+        $list = auth()->user()->lists() 
+            ->findOrFail($this->listId);
 
         $list->names()->toggle([$this->nameId]);
     }

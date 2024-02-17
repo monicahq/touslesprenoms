@@ -23,7 +23,7 @@ class ListViewModel
             ->map(fn (NameList $list) => [
                 'id' => $list->id,
                 'name' => $list->name,
-                'total' => Number::format($list->names_count, locale: 'fr'),
+                'total' => Number::format($list->names_count),
                 'url' => [
                     'show' => route('list.show', [
                         'liste' => $list->id,
@@ -44,7 +44,7 @@ class ListViewModel
                 'id' => $name->id,
                 'name' => StringHelper::formatNameFromDB($name->name),
                 'origins' => Str::words($name->origins, 50, '...'),
-                'total' => Number::format($name->total, locale: 'fr'),
+                'total' => Number::format($name->total),
                 'url' => [
                     'show' => route('name.show', [
                         'id' => $name->id,
