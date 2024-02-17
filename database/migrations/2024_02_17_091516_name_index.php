@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('names', function (Blueprint $table) {
-            $table->index(['gender', 'name']);
+            $table->index(['gender', 'name', 'unisex']);
+            $table->index(['total']);
         });
     }
 
