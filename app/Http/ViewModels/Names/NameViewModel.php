@@ -117,11 +117,15 @@ class NameViewModel
 
     public static function relatedNames(Name $name): Collection
     {
-        return Name::where('name', '!=', '_PRENOMS_RARES')
+        $ids = Name::select('id')
+            ->where('name', '!=', '_PRENOMS_RARES')
             ->where('id', '!=', $name->id)
             ->where('gender', $name->gender)
             ->inRandomOrder()
             ->take(10)
+            ->get();
+
+        return Name::whereIn('id', $ids)
             ->get()
             ->map(fn (Name $name) => NameViewModel::summary($name));
     }
