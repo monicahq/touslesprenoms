@@ -16,10 +16,11 @@
     </div>
   </div>
 
-  <div>
+  @fragment('content')
+  <div id="content">
     <div class="mx-auto max-w-2xl px-2 sm:px-6 lg:px-8 py-2 mb-10">
       <h2 class="text-center mb-4 text-xl">Recherche instantanée</h2>
-      <form method="POST" action="{{ route('search.post') }}" class="mb-4" x-data="{ name: '{{ $term }}' }">
+      <form method="POST" action="{{ route('search.post') }}" hx-post="{{ route('search.post') }}" hx-target="#content" class="mb-4" x-data="{ name: '{{ $term }}' }">
         @csrf
 
         <div class="flex items-center px-2 py-2 bg-gray-100 rounded-lg border-gray-300 border">
@@ -43,4 +44,5 @@
     </div>
     @endif
   </div>
+  @endfragment
 </x-guest-layout>
