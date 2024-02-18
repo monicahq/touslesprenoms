@@ -12,6 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Pirsch\Facades\Pirsch;
 
 class RegisteredUserController extends Controller
 {
@@ -32,6 +33,10 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        Pirsch::track('Action', [
+            'Label' => 'register',
+        ]);
+
         $request->validate([
             'email' => [
                 'required',
