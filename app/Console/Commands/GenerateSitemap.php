@@ -54,7 +54,7 @@ class GenerateSitemap extends Command
         Name::where('name', '!=', '_PRENOMS_RARES')
             ->chunkById(2000, function (Collection $names, int $key) use ($sitemapIndex) {
 
-                $file = static::PREFIX_PATH . '/sitemap_' . Str::padLeft($key, 2, '0') . '.xml';
+                $file = static::PREFIX_PATH . '/sitemap_' . Str::padLeft("$key", 2, '0') . '.xml';
 
                 Sitemap::create()
                     ->add($names)
