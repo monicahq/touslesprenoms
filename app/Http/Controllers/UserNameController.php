@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Helpers\StringHelper;
 use App\Services\AddNoteToName;
 use App\Services\DestroyNote;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\View\View;
 
 class UserNameController extends Controller
 {

@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\ViewModels\User\ListViewModel;
 use App\Services\ToggleNameToNameList;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\View\View;
 use Mauricius\LaravelHtmx\Http\HtmxResponseClientRedirect;
 
 class ListNameController extends Controller

@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\ViewModels\User\ListViewModel;
 use App\Http\ViewModels\User\UserViewModel;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\View\View;
 
 class PublicListController extends Controller
 {

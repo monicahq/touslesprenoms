@@ -7,7 +7,8 @@
     "lint": "eslint --ext .js *.js resources",
     "pretest": "php artisan migrate:fresh --database=testing",
     "posttest": "yarn lint --fix && ./vendor/bin/duster fix && yarn lint",
-    "test": "vendor/bin/phpunit"
+    "test": "vendor/bin/phpunit",
+    "postinstall": "husky"
   },
   "devDependencies": {
     "@vitejs/plugin-basic-ssl": "^1.1.0",
@@ -16,7 +17,9 @@
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-simple-import-sort": "^10.0.0",
+    "husky": "^9.0.11",
     "laravel-vite-plugin": "^1.0.1",
+    "lint-staged": "^15.2.2",
     "postcss": "^8.4.33",
     "vite": "^5.0.12"
   },
@@ -28,6 +31,9 @@
     "charts.css": "^1.1.0",
     "htmx.org": "^1.9.10",
     "tailwindcss": "^3.4.1"
+  },
+  "lint-staged": {
+    "**/*.php": "vendor/bin/pint"
   },
   "packageManager": "yarn@4.0.2"
 }
