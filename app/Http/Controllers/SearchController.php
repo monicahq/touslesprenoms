@@ -6,8 +6,8 @@ use App\Http\ViewModels\Home\HomeViewModel;
 use App\Http\ViewModels\Search\SearchViewModel;
 use App\Http\ViewModels\User\UserViewModel;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Mauricius\LaravelHtmx\Http\HtmxRequest;
 
 class SearchController extends Controller
 {
@@ -23,7 +23,7 @@ class SearchController extends Controller
         ]);
     }
 
-    public function post(Request $request): View
+    public function post(HtmxRequest $request): View|string
     {
         $stats = Cache::remember('stats', 604800, fn () => HomeViewModel::serverStats());
 
@@ -35,11 +35,15 @@ class SearchController extends Controller
             ? Cache::remember('user-favorites-' . auth()->id(), 604800, fn () => UserViewModel::favorites())
             : collect();
 
-        return view('search.index', [
+        $data = [
             'stats' => $stats,
             'names' => $names,
             'term' => $term,
             'favorites' => $favoritedNamesForLoggedUser,
-        ]);
+        ];
+
+        return $request->isHtmxRequest()
+            ? view()->renderFragment('search.index', 'content', $data)
+            : view('search.index', $data);
     }
 }
