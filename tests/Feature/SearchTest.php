@@ -16,7 +16,7 @@ class SearchTest extends TestCase
     {
         $response = $this->get('/recherche');
 
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     #[Test]
@@ -26,7 +26,7 @@ class SearchTest extends TestCase
 
         $response = $this->post('/recherche', ['term' => $name->name]);
 
-        $response->assertStatus(200);
+        $response->assertOk();
         $response->assertSee($name->name);
     }
 
@@ -37,7 +37,18 @@ class SearchTest extends TestCase
 
         $response = $this->post('/recherche', ['term' => Str::substr($names[0]->name, 0, 3)]);
 
-        $response->assertStatus(200);
+        $response->assertOk();
         $response->assertSee($names[0]->name);
+    }
+
+    #[Test]
+    public function search_not_valid_on_one_letter(): void
+    {
+        $name = \App\Models\Name::factory()->create();
+
+        $response = $this->post('/recherche', ['term' => $name->name[0]]);
+
+        $response->assertInvalid(['term']);
+        $response->assertRedirect();
     }
 }
