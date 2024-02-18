@@ -23,7 +23,7 @@ class SearchController extends Controller
         ]);
     }
 
-    public function post(SearchRequest $request): View
+    public function post(SearchRequest $request): View|string
     {
         $term = $request->input('term');
 
@@ -35,11 +35,15 @@ class SearchController extends Controller
             ? Cache::remember('user-favorites-' . auth()->id(), 604800, fn () => UserViewModel::favorites())
             : collect();
 
-        return view('search.index', [
+        $data = [
             'stats' => $stats,
             'names' => $names,
             'term' => $term,
             'favorites' => $favoritedNamesForLoggedUser,
-        ]);
+        ];
+
+        return $request->isHtmxRequest()
+            ? view()->renderFragment('search.index', 'content', $data)
+            : view('search.index', $data);
     }
 }

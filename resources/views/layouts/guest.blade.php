@@ -18,9 +18,11 @@
 </head>
 
 <body class="font-sans text-gray-900 antialiased">
-  <div class="flex min-h-screen flex-col">
+  @fragment('page')
+  <div class="flex min-h-screen flex-col" id="page">
     {{ $slot }}
   </div>
+  @endfragment
 
   <div class="bg-violet-100 border-t border-violet-200">
     @include('layouts.footer')
