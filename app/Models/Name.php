@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
 use Spatie\Sitemap\Contracts\Sitemapable;
 use Spatie\Sitemap\Tags\Url;
@@ -72,10 +72,13 @@ class Name extends Model implements Sitemapable
 
     public function toSitemapTag(): Url|string|array
     {
-        return Url::create(route('name.show', $this))
-            ->setLastModificationDate(Carbon::create($this->updated_at))
+        return Url::create(route('name.show', [
+            'id' => $this->id,
+            'name' => Str::lower($this->name),
+        ]))
+            ->setPriority(0.9)
             ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
-            ->setPriority(0.1);
+            ->setLastModificationDate($this->updated_at);
     }
 
     public function getNoteForUser(): ?string
