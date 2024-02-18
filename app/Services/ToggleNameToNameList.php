@@ -2,8 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\NameList;
-
 /**
  * This service toggles a name to the provided list of names: it adds it or
  * removes it.
@@ -23,7 +21,7 @@ class ToggleNameToNameList extends BaseService
 
     private function addOrRemove(): void
     {
-        $list = auth()->user()->lists() 
+        $list = auth()->user()->lists()
             ->findOrFail($this->listId);
 
         $list->names()->toggle([$this->nameId]);

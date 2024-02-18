@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\ViewModels\Search\SearchViewModel;
 use App\Http\ViewModels\User\ListViewModel;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\View\View;
 
 class ListSearchController extends Controller
 {

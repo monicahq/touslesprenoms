@@ -8,11 +8,11 @@ use App\Http\ViewModels\User\ListViewModel;
 use App\Http\ViewModels\User\UserViewModel;
 use App\Models\Name;
 use App\Services\ToggleNameToNameList;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
-use Illuminate\View\View;
 
 class NameController extends Controller
 {
@@ -25,10 +25,9 @@ class NameController extends Controller
 
         Paginator::currentPageResolver(fn () => $requestedPage);
 
-        $namesPagination = Cache::remember('all-names-page-' . $requestedPage, 604800, fn () =>
-             Name::where('name', '!=', '_PRENOMS_RARES')
-                ->orderBy('total', 'desc')
-                ->paginate(40)
+        $namesPagination = Cache::remember('all-names-page-' . $requestedPage, 604800, fn () => Name::where('name', '!=', '_PRENOMS_RARES')
+            ->orderBy('total', 'desc')
+            ->paginate(40)
         );
 
         $names = $namesPagination
@@ -97,11 +96,10 @@ class NameController extends Controller
 
         Paginator::currentPageResolver(fn () => $requestedPage);
 
-        $namesPagination = Cache::remember('letter-' . $requestedLetter . '-page-' . $requestedPage, 604800, fn () =>
-            Name::where('name', '!=', '_PRENOMS_RARES')
-                ->where('name', 'like', $requestedLetter . '%')
-                ->orderBy('total', 'desc')
-                ->paginate(40)
+        $namesPagination = Cache::remember('letter-' . $requestedLetter . '-page-' . $requestedPage, 604800, fn () => Name::where('name', '!=', '_PRENOMS_RARES')
+            ->where('name', 'like', $requestedLetter . '%')
+            ->orderBy('total', 'desc')
+            ->paginate(40)
         );
 
         $names = $namesPagination

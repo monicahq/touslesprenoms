@@ -60,6 +60,7 @@ class HomeViewModel
                 ->where('total', '>', 10000)
                 ->inRandomOrder()
                 ->first();
+
             return Name::whereIn('id', $id)
                 ->select('id', 'name', 'origins')
                 ->first();
@@ -87,8 +88,6 @@ class HomeViewModel
 
     /**
      * Get the list of all the public lists that administrators have set public.
-     *
-     * @return Collection
      */
     public static function adminLists(): Collection
     {

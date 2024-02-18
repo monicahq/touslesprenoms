@@ -83,7 +83,7 @@ class ListViewModelTest extends TestCase
                     'name' => 'Test',
                     'url' => [
                         'show' => env('APP_URL') . '/prenoms/' . $name->id . '/test',
-                        'favorite' => env('APP_URL') . '/prenoms/' . $name->id.'/favorite',
+                        'favorite' => env('APP_URL') . '/prenoms/' . $name->id . '/favorite',
                         'destroy' => env('APP_URL') . '/listes/' . $nameList->id . '/prenoms/' . $name->id,
                     ],
                 ],
