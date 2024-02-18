@@ -16,11 +16,9 @@ class NameFactory extends Factory
      */
     public function definition(): array
     {
-        $gender = fake()->randomElement(['male', 'female']);
-
         return [
-            'gender' => $gender,
-            'name' => fake()->firstName($gender),
+            'gender' => fake()->randomElement(['male', 'female']),
+            'name' => fn (array $attributes) => fake()->firstName($attributes['gender']),
             'origins' => fake()->sentence(),
             'personality' => fake()->sentence(),
             'country_of_origin' => fake()->word(),
@@ -41,12 +39,9 @@ class NameFactory extends Factory
      */
     public function male(): Factory
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'gender' => 'male',
-                'name' => fake()->firstName('male'),
-            ];
-        });
+        return $this->state(fn (array $attributes) => [
+            'gender' => 'male',
+        ]);
     }
 
     /**
@@ -54,12 +49,9 @@ class NameFactory extends Factory
      */
     public function female(): Factory
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'gender' => 'female',
-                'name' => fake()->firstName('female'),
-            ];
-        });
+        return $this->state(fn (array $attributes) => [
+            'gender' => 'female',
+        ]);
     }
 
     /**
@@ -67,11 +59,9 @@ class NameFactory extends Factory
      */
     public function unisex(): Factory
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'unisex' => true,
-            ];
-        });
+        return $this->state(fn (array $attributes) => [
+            'unisex' => true,
+        ]);
     }
 
     /**
@@ -79,10 +69,8 @@ class NameFactory extends Factory
      */
     public function specific(): Factory
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'unisex' => false,
-            ];
-        });
+        return $this->state(fn (array $attributes) => [
+            'unisex' => false,
+        ]);
     }
 }

@@ -109,7 +109,7 @@ class NameController extends Controller
             'letters' => $letters,
             'names' => $names,
             'namesPagination' => $namesPagination,
-            'activeLetter' => Str::ucfirst($requestedLetter),
+            'activeLetter' => Str::upper($requestedLetter),
             'favorites' => $favoritedNamesForLoggedUser,
         ]);
     }
