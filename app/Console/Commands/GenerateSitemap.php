@@ -7,12 +7,14 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Spatie\Sitemap\Sitemap;
+use Spatie\Sitemap\SitemapGenerator;
 use Spatie\Sitemap\SitemapIndex;
 use Spatie\Sitemap\Tags\Sitemap as SitemapTag;
-use Spatie\Sitemap\Tags\Url;
 
 class GenerateSitemap extends Command
 {
+    public const PREFIX_PATH = 'sitemap';
+
     /**
      * The name and signature of the console command.
      *
@@ -34,30 +36,31 @@ class GenerateSitemap extends Command
     {
         $sitemapIndex = SitemapIndex::create();
 
+        SitemapGenerator::create(config('app.url'))
+            ->writeToFile(public_path(static::PREFIX_PATH . '/sitemap_00.xml'));
+
+        $sitemapIndex->add(SitemapTag::create(url(static::PREFIX_PATH . '/sitemap_00.xml')));
+
+        $this->sitemap_names($sitemapIndex);
+
+        $sitemapIndex->writeToFile(public_path(static::PREFIX_PATH . '/sitemap.xml'));
+    }
+
+    /**
+     * Get names sitemap.
+     */
+    private function sitemap_names(SitemapIndex $sitemapIndex): void
+    {
         Name::where('name', '!=', '_PRENOMS_RARES')
             ->chunkById(2000, function (Collection $names, int $key) use ($sitemapIndex) {
 
-                $file = 'sitemap_' . Str::padLeft($key, 2, '0') . '.xml';
-                $sitemap = Sitemap::create();
+                $file = static::PREFIX_PATH . '/sitemap_' . Str::padLeft($key, 2, '0') . '.xml';
 
-                $names->each(function (Name $name) use ($sitemap) {
-                    $sitemap->add(
-                        Url::create(route('name.show', [
-                            'id' => $name->id,
-                            'name' => Str::lower($name->name),
-                        ]))
-                            ->setPriority(0.9)
-                            ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
-                            ->setLastModificationDate($name->updated_at)
-                    );
-                });
-
-                $sitemap->writeToFile(public_path($file));
-                $sitemap = null;
+                Sitemap::create()
+                    ->add($names)
+                    ->writeToFile(public_path($file));
 
                 $sitemapIndex->add(SitemapTag::create(url($file)));
             }, 'id');
-
-        $sitemapIndex->writeToFile(public_path('sitemap.xml'));
     }
 }

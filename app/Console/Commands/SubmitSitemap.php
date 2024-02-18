@@ -29,7 +29,7 @@ class SubmitSitemap extends Command
      */
     public function handle()
     {
-        $sitemapUrl = Str::finish(config('app.url'), '/') . 'sitemap.xml';
+        $sitemapUrl = Str::finish(config('app.url'), '/') . 'sitemap/sitemap.xml';
         $url = "https://www.google.com/webmasters/sitemaps/ping?sitemap=$sitemapUrl";
         Http::get($url);
     }
