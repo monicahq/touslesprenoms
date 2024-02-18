@@ -209,8 +209,8 @@ class NameViewModelTest extends TestCase
     /** @test */
     public function it_gets_a_collection_of_related_names(): void
     {
-        $name1 = Name::factory()->create();
-        $name = Name::factory()->create([
+        $name1 = Name::factory()->female()->create();
+        $name = Name::factory()->female()->create([
             'name' => 'HÉLOÏSE',
         ]);
 

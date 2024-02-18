@@ -1,9 +1,9 @@
-# ENV FILE FOR THE GITHUB ACTION RUNNING MYSQL
-APP_NAME=Laravel
+# ENV FILE FOR THE GITHUB ACTION RUNNING POSTGRESQL
+APP_NAME=TousLesPrenoms
 APP_ENV=testing
 APP_KEY=base64:NTrXToqFZJlv48dgPc+kNpc3SBt333TfDnF1mDShsBg=
 APP_DEBUG=true
-APP_URL=https://touslesprenoms.test
+APP_URL=http://localhost
 
 DB_CONNECTION=pgsql
 DB_HOST=127.0.0.1
@@ -12,15 +12,10 @@ DB_DATABASE=touslesprenoms
 DB_USERNAME=touslesprenoms
 DB_PASSWORD=secret
 
-BROADCAST_DRIVER=log
-
 DEBUGBAR_ENABLED=false
-CACHE_DRIVER=array
+CACHE_DRIVER=file
 QUEUE_CONNECTION=sync
 SESSION_DRIVER=file
 MAIL_MAILER=array
 
 SCOUT_DRIVER=collection
-
-LEMON_SQUEEZY_ACTIVATE=true
-LEMON_SQUEEZY_URL=https://bivouac.lemonsqueezy.com/

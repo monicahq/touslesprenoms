@@ -21,9 +21,7 @@ class CheckList
         $requestedId = $request->route()->parameter('liste');
 
         try {
-            $list = Cache::remember('route-list-' . $requestedId, 604800, function () use ($requestedId) {
-                return NameList::findOrFail($requestedId);
-            });
+            $list = Cache::remember('route-list-' . $requestedId, 604800, fn () => NameList::findOrFail($requestedId));
 
             if (! auth()->check() && ! $list->is_public) {
                 return redirect()->route('home.index');

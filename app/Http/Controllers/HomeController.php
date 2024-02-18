@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\ViewModels\Home\HomeViewModel;
 use App\Http\ViewModels\User\UserViewModel;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\View\View;
 
 class HomeController extends Controller
 {

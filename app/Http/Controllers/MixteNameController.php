@@ -6,28 +6,25 @@ use App\Http\ViewModels\Names\MixteNamesViewModel;
 use App\Http\ViewModels\Names\NameViewModel;
 use App\Http\ViewModels\User\UserViewModel;
 use App\Models\Name;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
-use Illuminate\View\View;
 
 class MixteNameController extends Controller
 {
     public function index(Request $request): View
     {
         // get the page parameter from the url
-        $requestedPage = $request->query('page') ?? 1;
+        $requestedPage = Paginator::resolveCurrentPage();
 
         $letters = Cache::remember('all-letters-mixte', 604800, fn () => MixteNamesViewModel::index());
 
-        Paginator::currentPageResolver(fn () => $requestedPage);
-
-        $namesPagination = Cache::remember('all-names-mixte-page-' . $requestedPage, 604800, fn () =>
-            Name::where('name', '!=', '_PRENOMS_RARES')
-                ->where('unisex', 1)
-                ->orderBy('total', 'desc')
-                ->paginate(40)
+        $namesPagination = Cache::remember('all-names-mixte-page-' . $requestedPage, 604800, fn () => Name::where('name', '!=', '_PRENOMS_RARES')
+            ->where('unisex', 1)
+            ->orderBy('total', 'desc')
+            ->paginate(40)
         );
 
         $names = $namesPagination
@@ -48,18 +45,15 @@ class MixteNameController extends Controller
     public function letter(Request $request): View
     {
         $requestedLetter = $request->attributes->get('letter');
-        $requestedPage = $request->query('page') ?? 1;
+        $requestedPage = Paginator::resolveCurrentPage();
 
         $letters = Cache::remember('all-letters-mixte', 604800, fn () => MixteNamesViewModel::index());
 
-        Paginator::currentPageResolver(fn () => $requestedPage);
-
-        $namesPagination = Cache::remember('mixte-letter-' . $requestedLetter . '-page-' . $requestedPage, 604800, fn () =>
-            Name::where('name', '!=', '_PRENOMS_RARES')
-                ->where('unisex', 1)
-                ->where('name', 'like', $requestedLetter . '%')
-                ->orderBy('total', 'desc')
-                ->paginate(40)
+        $namesPagination = Cache::remember('mixte-letter-' . $requestedLetter . '-page-' . $requestedPage, 604800, fn () => Name::where('name', '!=', '_PRENOMS_RARES')
+            ->where('unisex', 1)
+            ->where('name', 'like', Str::upper($requestedLetter) . '%')
+            ->orderBy('total', 'desc')
+            ->paginate(40)
         );
 
         $names = $namesPagination
@@ -73,7 +67,7 @@ class MixteNameController extends Controller
             'letters' => $letters,
             'names' => $names,
             'namesPagination' => $namesPagination,
-            'activeLetter' => Str::ucfirst($requestedLetter),
+            'activeLetter' => Str::upper($requestedLetter),
             'favorites' => $favoritedNamesForLoggedUser,
         ]);
     }

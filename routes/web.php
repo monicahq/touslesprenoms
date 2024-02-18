@@ -35,7 +35,7 @@ Route::get('prenoms/mixtes', [MixteNameController::class, 'index'])->name('name.
 Route::middleware(['letter'])->group(function (): void {
     Route::get('prenoms/garcons/{letter}', [MaleNameController::class, 'letter'])->name('name.garcon.letter');
     Route::get('prenoms/filles/{letter}', [FemaleNameController::class, 'letter'])->name('name.fille.letter');
-    Route::get('prenoms/mixte/{letter}', [MixteNameController::class, 'letter'])->name('name.mixte.letter');
+    Route::get('prenoms/mixtes/{letter}', [MixteNameController::class, 'letter'])->name('name.mixte.letter');
     Route::get('prenoms/{letter}', [NameController::class, 'letter'])->name('name.letter');
 });
 

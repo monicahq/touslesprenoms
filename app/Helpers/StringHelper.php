@@ -6,7 +6,7 @@ use Illuminate\Support\Str;
 
 class StringHelper
 {
-    public static function sanitizeNameForURL(string $name): string
+    public static function sanitizeNameForURL(?string $name): ?string
     {
         $string = str_replace(['[\', \']'], '', $name);
         $string = preg_replace('/\[.*\]/U', '', $string);
@@ -25,7 +25,7 @@ class StringHelper
      * - ucfirst it
      * so it becomes "Jean-Jacques"
      */
-    public static function formatNameFromDB(string $name): string
+    public static function formatNameFromDB(?string $name): ?string
     {
         $formattedName = Str::ucfirst(Str::lower($name));
 

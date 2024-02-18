@@ -6,28 +6,25 @@ use App\Http\ViewModels\Names\MaleNamesViewModel;
 use App\Http\ViewModels\Names\NameViewModel;
 use App\Http\ViewModels\User\UserViewModel;
 use App\Models\Name;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
-use Illuminate\View\View;
 
 class MaleNameController extends Controller
 {
     public function index(Request $request): View
     {
         // get the page parameter from the url
-        $requestedPage = $request->query('page') ?? 1;
+        $requestedPage = Paginator::resolveCurrentPage();
 
         $letters = Cache::remember('all-letters-male', 604800, fn () => MaleNamesViewModel::index());
 
-        Paginator::currentPageResolver(fn () => $requestedPage);
-
-        $namesPagination = Cache::remember('all-names-male-page-' . $requestedPage, 604800, fn () =>
-            Name::where('name', '!=', '_PRENOMS_RARES')
-                ->where('gender', 'male')
-                ->orderBy('total', 'desc')
-                ->paginate(40)
+        $namesPagination = Cache::remember('all-names-male-page-' . $requestedPage, 604800, fn () => Name::where('name', '!=', '_PRENOMS_RARES')
+            ->where('gender', 'male')
+            ->orderBy('total', 'desc')
+            ->paginate(40)
         );
 
         $names = $namesPagination
@@ -48,18 +45,15 @@ class MaleNameController extends Controller
     public function letter(Request $request): View
     {
         $requestedLetter = $request->attributes->get('letter');
-        $requestedPage = $request->query('page') ?? 1;
+        $requestedPage = Paginator::resolveCurrentPage();
 
         $letters = Cache::remember('all-letters-male', 604800, fn () => MaleNamesViewModel::index());
 
-        Paginator::currentPageResolver(fn () => $requestedPage);
-
-        $namesPagination = Cache::remember('male-letter-' . $requestedLetter . '-page-' . $requestedPage, 604800, fn () =>
-            Name::where('name', '!=', '_PRENOMS_RARES')
-                ->where('gender', 'male')
-                ->where('name', 'like', $requestedLetter . '%')
-                ->orderBy('total', 'desc')
-                ->paginate(40)
+        $namesPagination = Cache::remember('male-letter-' . $requestedLetter . '-page-' . $requestedPage, 604800, fn () => Name::where('name', '!=', '_PRENOMS_RARES')
+            ->where('gender', 'male')
+            ->where('name', 'like', Str::upper($requestedLetter) . '%')
+            ->orderBy('total', 'desc')
+            ->paginate(40)
         );
 
         $names = $namesPagination
@@ -73,7 +67,7 @@ class MaleNameController extends Controller
             'letters' => $letters,
             'names' => $names,
             'namesPagination' => $namesPagination,
-            'activeLetter' => Str::ucfirst($requestedLetter),
+            'activeLetter' => Str::upper($requestedLetter),
             'favorites' => $favoritedNamesForLoggedUser,
         ]);
     }
