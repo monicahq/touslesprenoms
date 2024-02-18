@@ -19,7 +19,7 @@ class NameTest extends TestCase
 
         $response = $this->get('/prenoms');
 
-        $response->assertStatus(200);
+        $response->assertOk();
         $response->assertSee($names[0]->name);
     }
 
@@ -30,7 +30,7 @@ class NameTest extends TestCase
 
         $response = $this->get('/prenoms/' . $name->name[0]);
 
-        $response->assertStatus(200);
+        $response->assertOk();
         $response->assertSee('Tous les prénoms commençant par la lettre ' . Str::upper($name->name[0]));
         $response->assertSee($name->name);
     }
@@ -42,7 +42,7 @@ class NameTest extends TestCase
 
         $response = $this->get('/prenoms/garcons');
 
-        $response->assertStatus(200);
+        $response->assertOk();
         $response->assertSee($names[0]->name);
     }
 
@@ -53,7 +53,7 @@ class NameTest extends TestCase
 
         $response = $this->get('/prenoms/garcons/' . $name->name[0]);
 
-        $response->assertStatus(200);
+        $response->assertOk();
         $response->assertSee('Tous les prénoms masculins commençant par la lettre ' . Str::upper($name->name[0]));
         $response->assertSee($name->name);
     }
@@ -65,7 +65,7 @@ class NameTest extends TestCase
 
         $response = $this->get('/prenoms/filles');
 
-        $response->assertStatus(200);
+        $response->assertOk();
         $response->assertSee($names[0]->name);
     }
 
@@ -76,7 +76,7 @@ class NameTest extends TestCase
 
         $response = $this->get('/prenoms/filles/' . $name->name[0]);
 
-        $response->assertStatus(200);
+        $response->assertOk();
         $response->assertSee('Tous les prénoms féminins commençant par la lettre ' . Str::upper($name->name[0]));
         $response->assertSee($name->name);
     }
@@ -88,7 +88,7 @@ class NameTest extends TestCase
 
         $response = $this->get('/prenoms/mixtes');
 
-        $response->assertStatus(200);
+        $response->assertOk();
         $response->assertSee($names[0]->name);
     }
 
@@ -99,7 +99,7 @@ class NameTest extends TestCase
 
         $response = $this->get("/prenoms/mixtes/{$name->name[0]}");
 
-        $response->assertStatus(200);
+        $response->assertOk();
         $response->assertSee('Tous les prénoms mixtes commençant par la lettre ' . Str::upper($name->name[0]));
         $response->assertSee($name->name);
     }
@@ -111,7 +111,7 @@ class NameTest extends TestCase
 
         $response = $this->get("/prenoms/$name->id/" . Str::slug($name->name));
 
-        $response->assertStatus(200);
+        $response->assertOk();
         $response->assertSee($name->name);
     }
 }

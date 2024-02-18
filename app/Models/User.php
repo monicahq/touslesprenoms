@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements HasLocalePreference, MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -50,5 +51,13 @@ class User extends Authenticatable implements MustVerifyEmail
     public function lists(): HasMany
     {
         return $this->hasMany(NameList::class, 'user_id', 'id');
+    }
+
+    /**
+     * Get the user's preferred locale.
+     */
+    public function preferredLocale(): string
+    {
+        return config('app.locale');
     }
 }

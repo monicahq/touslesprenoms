@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SearchRequest;
 use App\Http\ViewModels\Home\HomeViewModel;
 use App\Http\ViewModels\Search\SearchViewModel;
 use App\Http\ViewModels\User\UserViewModel;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
 class SearchController extends Controller
@@ -23,11 +23,11 @@ class SearchController extends Controller
         ]);
     }
 
-    public function post(Request $request): View
+    public function post(SearchRequest $request): View
     {
-        $stats = Cache::remember('stats', 604800, fn () => HomeViewModel::serverStats());
+        $term = $request->input('term');
 
-        $term = trim($request->input('term'));
+        $stats = Cache::remember('stats', 604800, fn () => HomeViewModel::serverStats());
 
         $names = Cache::remember('search-name-' . $term, 604800, fn () => SearchViewModel::names($term, 1000));
 
