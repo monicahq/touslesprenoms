@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Name;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\SitemapGenerator;
@@ -44,6 +45,11 @@ class GenerateSitemap extends Command
         $this->sitemap_names($sitemapIndex);
 
         $sitemapIndex->writeToFile(public_path(static::PREFIX_PATH . '/sitemap.xml'));
+
+        // Replace sitemap in robots.txt
+        $robots = File::get(public_path('robots.txt'));
+        $robots = Str::of($robots)->replaceMatches('/Sitemap: .*/', 'Sitemap: ' . url(static::PREFIX_PATH . '/sitemap.xml'));
+        File::put(public_path('robots.txt'), $robots);
     }
 
     /**
