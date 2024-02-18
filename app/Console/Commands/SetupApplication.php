@@ -126,7 +126,6 @@ class SetupApplication extends Command
      */
     protected function sitemap(): void
     {
-        // only if environment is production
         if ($this->getLaravel()->environment() === 'production') {
             $this->artisan('✓ Generate sitemap', 'sitemap:generate');
             $this->artisan('✓ Submit sitemap', 'sitemap:submit');
