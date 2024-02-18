@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\ViewModels\User\ListViewModel;
-use App\Services\CreateList;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
 
 class ListSystemController extends Controller
 {

@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\ViewModels\Home\HomeViewModel;
 use App\Http\ViewModels\Search\SearchViewModel;
 use App\Http\ViewModels\User\UserViewModel;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\View\View;
 
 class SearchController extends Controller
 {

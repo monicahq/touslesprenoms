@@ -7,12 +7,11 @@ use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use App\Services\CreateAccount;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules;
-use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
@@ -39,7 +38,7 @@ class RegisteredUserController extends Controller
                 'string',
                 'email',
                 'max:255',
-                Rule::unique(User::class)
+                Rule::unique(User::class),
             ],
             'password' => $this->passwordRules(),
         ]);

@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\ViewModels\Names\NameViewModel;
 use App\Services\ToggleNameToFavorites;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\View\View;
 
 class NameFavoriteController extends Controller
 {
