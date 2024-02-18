@@ -41,6 +41,7 @@ class SetupApplication extends Command
             $this->cacheConfig();
             $this->scout();
             $this->sitemap();
+            $this->cloudflare();
         }
     }
 
@@ -108,6 +109,16 @@ class SetupApplication extends Command
     protected function scout(): void
     {
         $this->artisan('✓ Setup scout', 'scout:setup', ['--force' => true]);
+    }
+
+    /**
+     * Reload cloudflare ips.
+     */
+    protected function cloudflare(): void
+    {
+        if ((bool) config('laravelcloudflare.enabled')) {
+            $this->artisan('✓ Reload cloudflare ips', 'cloudflare:reload');
+        }
     }
 
     /**
