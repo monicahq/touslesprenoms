@@ -34,14 +34,21 @@ class SetupApplication extends Command
     public function handle(): void
     {
         if ($this->confirmToProceed()) {
-            $this->resetCache();
-            $this->clearConfig();
-            $this->symlink();
-            $this->migrate();
-            $this->cacheConfig();
-            $this->scout();
-            $this->sitemap();
-            $this->cloudflare();
+            try {
+                $this->artisan('✓ Maintenance mode: on', 'down', [
+                    '--retry' => '10',
+                ]);
+                $this->resetCache();
+                $this->clearConfig();
+                $this->symlink();
+                $this->migrate();
+                $this->cacheConfig();
+                $this->scout();
+                $this->sitemap();
+                $this->cloudflare();
+            } finally {
+                $this->artisan('✓ Maintenance mode: off', 'up');
+            }
         }
     }
 
