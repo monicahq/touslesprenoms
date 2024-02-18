@@ -27,7 +27,7 @@ class CheckLetter
             return redirect()->route('home.index');
         }
 
-        $request->attributes->add(['letter' => Str::lcfirst($requestedLetter)]);
+        $request->attributes->add(['letter' => Str::lower($requestedLetter)]);
 
         return $next($request);
     }

@@ -26,7 +26,7 @@ class AllNamesViewModel
             $letters->push([
                 'letter' => $letter,
                 'count' => Number::format($count),
-                'url' => route('name.letter', ['letter' => Str::lcfirst($letter)]),
+                'url' => route('name.letter', ['letter' => Str::lower($letter)]),
             ]);
         }
 
