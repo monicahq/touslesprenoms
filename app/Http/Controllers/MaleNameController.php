@@ -17,11 +17,9 @@ class MaleNameController extends Controller
     public function index(Request $request): View
     {
         // get the page parameter from the url
-        $requestedPage = $request->query('page') ?? 1;
+        $requestedPage = Paginator::resolveCurrentPage();
 
         $letters = Cache::remember('all-letters-male', 604800, fn () => MaleNamesViewModel::index());
-
-        Paginator::currentPageResolver(fn () => $requestedPage);
 
         $namesPagination = Cache::remember('all-names-male-page-' . $requestedPage, 604800, fn () =>
             Name::where('name', '!=', '_PRENOMS_RARES')
@@ -48,11 +46,9 @@ class MaleNameController extends Controller
     public function letter(Request $request): View
     {
         $requestedLetter = $request->attributes->get('letter');
-        $requestedPage = $request->query('page') ?? 1;
+        $requestedPage = Paginator::resolveCurrentPage();
 
         $letters = Cache::remember('all-letters-male', 604800, fn () => MaleNamesViewModel::index());
-
-        Paginator::currentPageResolver(fn () => $requestedPage);
 
         $namesPagination = Cache::remember('male-letter-' . $requestedLetter . '-page-' . $requestedPage, 604800, fn () =>
             Name::where('name', '!=', '_PRENOMS_RARES')

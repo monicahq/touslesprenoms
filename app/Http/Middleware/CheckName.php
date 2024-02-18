@@ -21,9 +21,7 @@ class CheckName
         $requestedId = $request->route()->parameter('id');
 
         try {
-            $name = Cache::remember('route-name-' . $requestedId, 604800, function () use ($requestedId) {
-                return Name::findOrFail($requestedId);
-            });
+            $name = Cache::remember('route-name-' . $requestedId, 604800, fn () => Name::findOrFail($requestedId));
 
             $request->attributes->add(['name' => $name]);
 

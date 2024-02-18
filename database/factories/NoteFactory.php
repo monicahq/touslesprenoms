@@ -11,8 +11,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class NoteFactory extends Factory
 {
-    protected static ?string $password;
-
     /**
      * Define the model's default state.
      *

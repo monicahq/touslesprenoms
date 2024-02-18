@@ -60,19 +60,19 @@ class HomeViewModel
                 ->where('total', '>', 10000)
                 ->inRandomOrder()
                 ->first();
-            return Name::whereIn('id', $id)
+            return Name::whereIn('id', $id ?? [])
                 ->select('id', 'name', 'origins')
                 ->first();
         });
 
         return [
-            'id' => $name->id,
-            'name' => StringHelper::formatNameFromDB($name->name),
-            'origins' => Str::words($name->origins, 50, '...'),
-            'url' => route('name.show', [
+            'id' => optional($name)->id,
+            'name' => StringHelper::formatNameFromDB(optional($name)->name),
+            'origins' => Str::words(optional($name)->origins, 50, '...'),
+            'url' => $name ? route('name.show', [
                 'id' => $name->id,
                 'name' => StringHelper::sanitizeNameForURL($name->name),
-            ]),
+            ]) : '',
         ];
     }
 
