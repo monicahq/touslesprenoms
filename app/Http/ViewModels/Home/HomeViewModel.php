@@ -103,7 +103,7 @@ class HomeViewModel
             ->map(fn (NameList $list) => [
                 'id' => $list->id,
                 'name' => $list->name,
-                'total' => Number::format($list->names_count, locale: 'fr'),
+                'total' => Number::format($list->names_count),
                 'names' => $list->names()
                     ->inRandomOrder()
                     ->take(4)

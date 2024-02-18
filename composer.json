@@ -15,8 +15,10 @@
         "laravel/sanctum": "^3.3",
         "laravel/scout": "^10.6",
         "laravel/tinker": "^2.8",
-        "mauricius/laravel-htmx": "^0.5.0",
-        "openai-php/laravel": "^0.8.0",
+        "mauricius/laravel-htmx": "^0",
+        "monicahq/laravel-cloudflare": "^3.5",
+        "openai-php/laravel": "^0",
+        "pirsch-analytics/laravel-pirsch": "^0",
         "spatie/laravel-sitemap": "^7.0",
         "spatie/simple-excel": "^3.2"
     },
@@ -60,6 +62,7 @@
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
         ]
     },
