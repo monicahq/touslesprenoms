@@ -16,7 +16,7 @@ class NameFactory extends Factory
      */
     public function definition(): array
     {
-        $gender = fake()->randomElement(['male','female']);
+        $gender = fake()->randomElement(['male', 'female']);
 
         return [
             'gender' => $gender,
