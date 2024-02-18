@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Name>
@@ -18,7 +19,7 @@ class NameFactory extends Factory
     {
         return [
             'gender' => fake()->randomElement(['male', 'female']),
-            'name' => fn (array $attributes) => fake()->firstName($attributes['gender']),
+            'name' => fn (array $attributes) => Str::ucfirst(fake()->firstName($attributes['gender'])),
             'origins' => fake()->sentence(),
             'personality' => fake()->sentence(),
             'country_of_origin' => fake()->word(),

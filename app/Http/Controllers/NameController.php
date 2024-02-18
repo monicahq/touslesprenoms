@@ -93,7 +93,7 @@ class NameController extends Controller
         $letters = Cache::remember('all-letters', 604800, fn () => AllNamesViewModel::index());
 
         $namesPagination = Cache::remember('letter-' . $requestedLetter . '-page-' . $requestedPage, 604800, fn () => Name::where('name', '!=', '_PRENOMS_RARES')
-            ->where('name', 'like', $requestedLetter . '%')
+            ->where('name', 'like', Str::upper($requestedLetter) . '%')
             ->orderBy('total', 'desc')
             ->paginate(40)
         );
