@@ -14,14 +14,14 @@ class GenerateSitemap extends Command
      *
      * @var string
      */
-    protected $signature = 'touslesprenoms:sitemap';
+    protected $signature = 'sitemap:generate';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Generate the sitemap.';
 
     /**
      * Execute the console command.
@@ -29,13 +29,19 @@ class GenerateSitemap extends Command
     public function handle(): void
     {
         $sitemap = Sitemap::create();
-        Name::get()->each(function (Name $name) use ($sitemap) {
-            $sitemap->add(
-                Url::create(route('name.show', $name))
-                    ->setPriority(0.9)
-                    ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
-            );
-        });
+
+        Name::where('name', '!=', '_PRENOMS_RARES')
+            ->get()
+            ->each(function (Name $name) use ($sitemap) {
+                $sitemap->add(
+                    Url::create(route('name.show', [
+                        'id' => $name->id,
+                        'name' => $name->name,
+                    ]))
+                        ->setPriority(0.9)
+                        ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
+                );
+            });
 
         $sitemap->writeToFile(public_path('sitemap.xml'));
     }
