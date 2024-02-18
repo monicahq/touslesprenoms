@@ -135,7 +135,6 @@ class SetupApplication extends Command
     {
         if ($this->getLaravel()->environment() === 'production') {
             $this->artisan('✓ Generate sitemap', 'sitemap:generate');
-            $this->artisan('✓ Submit sitemap', 'sitemap:submit');
         }
     }
 }
