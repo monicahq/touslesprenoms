@@ -51,7 +51,7 @@ class FemaleNameController extends Controller
 
         $namesPagination = Cache::remember('female-letter-' . $requestedLetter . '-page-' . $requestedPage, 604800, fn () => Name::where('name', '!=', '_PRENOMS_RARES')
             ->where('gender', 'female')
-            ->where('name', 'like', $requestedLetter . '%')
+            ->where('name', 'like', Str::upper($requestedLetter) . '%')
             ->orderBy('total', 'desc')
             ->paginate(40)
         );
@@ -67,7 +67,7 @@ class FemaleNameController extends Controller
             'letters' => $letters,
             'names' => $names,
             'namesPagination' => $namesPagination,
-            'activeLetter' => Str::ucfirst($requestedLetter),
+            'activeLetter' => Str::upper($requestedLetter),
             'favorites' => $favoritedNamesForLoggedUser,
         ]);
     }
