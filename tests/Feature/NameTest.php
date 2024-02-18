@@ -28,10 +28,10 @@ class NameTest extends TestCase
     {
         $name = Name::factory()->create();
 
-        $response = $this->get('/prenoms/' . $name->name[0]);
+        $response = $this->get('/prenoms/' . Str::lower($name->name[0]));
 
         $response->assertOk();
-        $response->assertSee('Tous les prénoms commençant par la lettre ' . Str::upper($name->name[0]));
+        $response->assertSee('Tous les prénoms commençant par la lettre ' . $name->name[0]);
         $response->assertSee($name->name);
     }
 
@@ -51,10 +51,10 @@ class NameTest extends TestCase
     {
         $name = Name::factory()->male()->create();
 
-        $response = $this->get('/prenoms/garcons/' . $name->name[0]);
+        $response = $this->get('/prenoms/garcons/' . Str::lower($name->name[0]));
 
         $response->assertOk();
-        $response->assertSee('Tous les prénoms masculins commençant par la lettre ' . Str::upper($name->name[0]));
+        $response->assertSee('Tous les prénoms masculins commençant par la lettre ' . $name->name[0]);
         $response->assertSee($name->name);
     }
 
@@ -74,10 +74,10 @@ class NameTest extends TestCase
     {
         $name = Name::factory()->female()->create();
 
-        $response = $this->get('/prenoms/filles/' . $name->name[0]);
+        $response = $this->get('/prenoms/filles/' . Str::lower($name->name[0]));
 
         $response->assertOk();
-        $response->assertSee('Tous les prénoms féminins commençant par la lettre ' . Str::upper($name->name[0]));
+        $response->assertSee('Tous les prénoms féminins commençant par la lettre ' . $name->name[0]);
         $response->assertSee($name->name);
     }
 
@@ -100,7 +100,7 @@ class NameTest extends TestCase
         $response = $this->get("/prenoms/mixtes/{$name->name[0]}");
 
         $response->assertOk();
-        $response->assertSee('Tous les prénoms mixtes commençant par la lettre ' . Str::upper($name->name[0]));
+        $response->assertSee('Tous les prénoms mixtes commençant par la lettre ' . $name->name[0]);
         $response->assertSee($name->name);
     }
 
