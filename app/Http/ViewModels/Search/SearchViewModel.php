@@ -16,7 +16,7 @@ class SearchViewModel
             ->map(fn (Name $name) => [
                 'id' => $name->id,
                 'name' => StringHelper::formatNameFromDB($name->name),
-                'gender' => $name->gender == 'male' ? 'masculin' : 'feminin',
+                'gender' => $name->gender === 'male' ? 'Masculin' : 'Féminin',
                 'url' => [
                     'show' => route('name.show', [
                         'id' => $name->id,

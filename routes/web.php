@@ -23,7 +23,7 @@ Route::get('partage/{uuid}', [ShareController::class, 'show'])->name('share.show
 
 Route::get('', [HomeController::class, 'index'])->name('home.index');
 Route::get('recherche', [SearchController::class, 'index'])->name('search.index');
-Route::post('recherche', [SearchController::class, 'post'])->name('search.post');
+Route::post('recherche', [SearchController::class, 'post'])->middleware(['throttle:search'])->name('search.post');
 Route::get('prenoms', [NameController::class, 'index'])->name('name.index');
 
 Route::get('conditions', [TermsController::class, 'index'])->name('terms.index');
@@ -72,7 +72,7 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
         Route::get('listes/{liste}/system', [ListSystemController::class, 'update'])->name('list.system.update');
         Route::delete('listes/{liste}', [ListController::class, 'destroy'])->name('list.destroy');
 
-        Route::post('listes/{liste}/search', [ListSearchController::class, 'index'])->name('list.search.index');
+        Route::post('listes/{liste}/search', [ListSearchController::class, 'index'])->middleware(['throttle:search'])->name('list.search.index');
         Route::post('listes/{liste}/prenoms/{id}', [ListNameController::class, 'store'])->name('list.name.store');
         Route::get('listes/{liste}/prenoms', [ListNameController::class, 'index'])->name('list.name.index');
         Route::delete('listes/{liste}/prenoms/{id}', [ListNameController::class, 'destroy'])->name('list.name.destroy');
