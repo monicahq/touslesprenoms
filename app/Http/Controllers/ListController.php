@@ -69,8 +69,15 @@ class ListController extends Controller
 
     public function edit(Request $request): View
     {
+        $listCategories = ListCategory::all()
+            ->map(fn (ListCategory $listCategory) => [
+                'id' => $listCategory->id,
+                'name' => $listCategory->name,
+            ]);
+
         return view('user.lists.edit', [
             'list' => ListViewModel::edit($request->attributes->get('list')),
+            'listCategories' => $listCategories,
         ]);
     }
 
@@ -80,6 +87,7 @@ class ListController extends Controller
 
         $list->name = $request->input('list-name');
         $list->description = $request->input('description');
+        $list->list_category_id = $request->input('category');
         $list->save();
 
         Cache::forget('route-list-' . $list->id);

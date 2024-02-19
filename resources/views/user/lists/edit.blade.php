@@ -58,6 +58,19 @@
           <x-input-error class="mt-2" :messages="$errors->get('description')" />
         </div>
 
+        @if (auth()->user()->is_administrator)
+        <div class="relative px-6 pt-4 pb-4">
+        <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Catégories (pour administrateur seulement)</label>
+          <div class="mt-2">
+            <select id="category" name="category" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+              @foreach ($listCategories as $category)
+                <option value="{{ $category['id'] }}" @selected($category['id'] === $list['list_category_id'])>{{ $category['name'] }}</option>
+              @endforeach
+            </select>
+          </div>
+        </div>
+        @endif
+
         <!-- actions -->
         <div class="flex items-center justify-between border-t dark:border-gray-600 bg-white dark:bg-gray-800 px-6 py-4">
             <x-link href="{{ route('list.show', $list['id']) }}">Retour</x-link>
