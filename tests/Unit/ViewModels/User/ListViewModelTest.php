@@ -104,13 +104,14 @@ class ListViewModelTest extends TestCase
 
         $array = ListViewModel::edit($nameList);
 
-        $this->assertCount(4, $array);
+        $this->assertCount(5, $array);
 
         $this->assertEquals(
             [
                 'id' => $nameList->id,
                 'name' => 'Ma liste',
                 'description' => 'Ma description',
+                'list_category_id' => null,
                 'url' => [
                     'update' => env('APP_URL') . '/listes/' . $nameList->id,
                 ],

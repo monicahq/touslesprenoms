@@ -27,6 +27,7 @@ class NameList extends Model
         'can_be_modified',
         'is_list_of_favorites',
         'gender',
+        'list_category_id',
     ];
 
     protected $casts = [

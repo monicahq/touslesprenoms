@@ -57,7 +57,7 @@
         </div>
 
         <!-- is public -->
-        <div class="relative px-6 pt-4 pb-4">
+        <div class="relative px-6 pt-4 pb-2">
           <p class="block font-medium text-sm text-gray-700 dark:text-gray-300">{{ __('Genre de la liste') }}</p>
           <div class="grid grid-flow-row sm:grid-flow-col sm:grid-cols-3 gap-4 pt-2 pb-4">
             <div class="flex p-3 ps-4 border border-gray-200 rounded dark:border-gray-700">
@@ -89,6 +89,19 @@
             </div>
           </div>
         </div>
+
+        @if (auth()->user()->is_administrator)
+        <div class="relative px-6 pt-4 pb-4">
+        <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Catégories (pour administrateur seulement)</label>
+          <div class="mt-2">
+            <select id="category" name="category" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+              @foreach ($listCategories as $category)
+                <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
+              @endforeach
+            </select>
+          </div>
+        </div>
+        @endif
 
         <!-- actions -->
         <div class="flex items-center justify-between border-t dark:border-gray-600 bg-white dark:bg-gray-800 px-6 py-4">
