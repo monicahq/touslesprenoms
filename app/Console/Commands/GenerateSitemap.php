@@ -85,12 +85,12 @@ class GenerateSitemap extends Command
      */
     private function file(string $name): string
     {
-        $file = public_path(static::PREFIX_PATH . '/' . $file);
+        $file = public_path(static::PREFIX_PATH . '/' . $name);
         $this->line("$file ...");
 
         return [
             'file' => $file,
-            'url' => url(static::PREFIX_PATH . '/' . $file),
+            'url' => url(static::PREFIX_PATH . '/' . $name),
         ];
     }
 }
