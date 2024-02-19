@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\ViewModels\User\ListViewModel;
+use App\Models\ListCategory;
 use App\Services\CreateList;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -21,6 +22,19 @@ class ListController extends Controller
         ]);
     }
 
+    public function new(): View
+    {
+        $listCategories = ListCategory::all()
+            ->map(fn (ListCategory $listCategory) => [
+                'id' => $listCategory->id,
+                'name' => $listCategory->name,
+            ]);
+
+        return view('user.lists.new', [
+            'listCategories' => $listCategories,
+        ]);
+    }
+
     public function store(Request $request): RedirectResponse
     {
         $list = (new CreateList(
@@ -29,6 +43,7 @@ class ListController extends Controller
             isPublic: false,
             canBeModified: true,
             gender: $request->input('gender'),
+            categoryId: $request->input('category'),
         ))->execute();
 
         Cache::forget('route-list-' . $list->id);
@@ -87,11 +102,6 @@ class ListController extends Controller
         Cache::forget('list-details-' . $list->id);
 
         return Redirect::route('list.index');
-    }
-
-    public function new(): View
-    {
-        return view('user.lists.new');
     }
 
     public function delete(Request $request): View
