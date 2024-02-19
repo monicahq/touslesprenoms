@@ -119,9 +119,9 @@
 
   <div>
     <div class="py-20 mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <h2 class="text-center mb-4 text-xl">Quelques inspirations pour vous aider</h2>
+      <h2 class="text-center mb-12 text-xl">Quelques inspirations pour vous aider</h2>
 
-      <div class="grid grid-row-1 sm:grid-cols-2 gap-x-10 gap-y-4 w-full">
+      <div class="grid grid-row-1 sm:grid-cols-2 gap-x-10 gap-y-4 w-full px-2 sm:px-0">
         @foreach($lists as $list)
         <div class="flex items-center border border-gray-200 px-2 py-1 rounded-lg">
           <!-- avatars -->
