@@ -8,8 +8,8 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Spatie\Sitemap\Sitemap;
-use Spatie\Sitemap\SitemapGenerator;
 use Spatie\Sitemap\SitemapIndex;
+use Spatie\Sitemap\SitemapGenerator;
 use Spatie\Sitemap\Tags\Sitemap as SitemapTag;
 
 class GenerateSitemap extends Command
@@ -83,7 +83,7 @@ class GenerateSitemap extends Command
     /**
      * Get file path and url.
      */
-    private function file(string $name): string
+    private function file(string $name): array
     {
         $file = public_path(static::PREFIX_PATH . '/' . $name);
         $this->line("$file ...");
