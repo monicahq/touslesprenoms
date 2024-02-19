@@ -3,10 +3,7 @@
 namespace Tests\Unit\Jobs;
 
 use App\Jobs\IncrementPageViewForName;
-use App\Jobs\RecordTopicView;
-use App\Models\Channel;
 use App\Models\Name;
-use App\Models\Topic;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 

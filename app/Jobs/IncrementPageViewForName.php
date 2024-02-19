@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use App\Models\Name;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -16,7 +15,8 @@ class IncrementPageViewForName implements ShouldQueue
 
     public function __construct(
         public int $nameId
-    ) { }
+    ) {
+    }
 
     public function handle(): void
     {
