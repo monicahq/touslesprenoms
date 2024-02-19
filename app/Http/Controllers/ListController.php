@@ -28,6 +28,7 @@ class ListController extends Controller
             description: $request->input('description'),
             isPublic: false,
             canBeModified: true,
+            gender: $request->input('gender'),
         ))->execute();
 
         Cache::forget('route-list-' . $list->id);
