@@ -43,7 +43,7 @@ class GenerateSitemap extends Command
         $sitemapIndex->writeToFile($file['file']);
 
         // Replace sitemap in robots.txt
-        $robots = public_path('robots.txt')
+        $robots = public_path('robots.txt');
         $content = Str::of(File::get($robots))
             ->replaceMatches('/Sitemap: .*/', 'Sitemap: ' . $file['url']);
         File::put($robots, $content);
