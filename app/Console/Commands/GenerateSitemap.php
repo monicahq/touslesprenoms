@@ -8,8 +8,8 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Spatie\Sitemap\Sitemap;
-use Spatie\Sitemap\SitemapIndex;
 use Spatie\Sitemap\SitemapGenerator;
+use Spatie\Sitemap\SitemapIndex;
 use Spatie\Sitemap\Tags\Sitemap as SitemapTag;
 
 class GenerateSitemap extends Command
@@ -46,6 +46,7 @@ class GenerateSitemap extends Command
         $robots = public_path('robots.txt');
         $content = Str::of(File::get($robots))
             ->replaceMatches('/Sitemap: .*/', 'Sitemap: ' . $file['url']);
+        
         File::put($robots, $content);
     }
 
