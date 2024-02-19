@@ -14,6 +14,7 @@ class CreateList extends BaseService
         public ?string $description,
         public bool $isPublic,
         public bool $canBeModified,
+        public string $gender,
     ) {
     }
 
@@ -33,6 +34,7 @@ class CreateList extends BaseService
             'description' => $this->description,
             'is_public' => $this->isPublic,
             'can_be_modified' => $this->canBeModified,
+            'gender' => $this->gender,
         ]);
     }
 }
