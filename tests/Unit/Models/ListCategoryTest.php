@@ -3,9 +3,7 @@
 namespace Tests\Unit\Models;
 
 use App\Models\ListCategory;
-use App\Models\Name;
 use App\Models\NameList;
-use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
@@ -18,7 +16,7 @@ class ListCategoryTest extends TestCase
     {
         $listCategory = ListCategory::factory()->create();
         $nameList = NameList::factory()->create([
-           'list_category_id' => $listCategory->id,
+            'list_category_id' => $listCategory->id,
         ]);
 
         $this->assertTrue($listCategory->nameLists()->exists());
