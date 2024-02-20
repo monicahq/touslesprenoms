@@ -36,7 +36,7 @@ class GenerateSitemap extends Command
     public function handle(): void
     {
         $file = $this->file('sitemap.xml');
-        
+
         $sitemapIndex = SitemapIndex::create();
         $this->sitemap_root($sitemapIndex);
         $this->sitemap_names($sitemapIndex);
@@ -46,7 +46,7 @@ class GenerateSitemap extends Command
         $robots = public_path('robots.txt');
         $content = Str::of(File::get($robots))
             ->replaceMatches('/Sitemap: .*/', 'Sitemap: ' . $file['url']);
-        
+
         File::put($robots, $content);
     }
 
@@ -56,10 +56,10 @@ class GenerateSitemap extends Command
     private function sitemap_root(SitemapIndex $sitemapIndex): void
     {
         $file = $this->file('sitemap_00.xml');
-        
+
         SitemapGenerator::create(config('app.url'))
             ->writeToFile($file['file']);
-        
+
         $sitemapIndex->add(SitemapTag::create($file['url']));
     }
 
