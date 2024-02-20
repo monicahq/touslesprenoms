@@ -7,10 +7,13 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Psr\Http\Message\UriInterface;
+use Spatie\Crawler\Crawler;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\SitemapGenerator;
 use Spatie\Sitemap\SitemapIndex;
 use Spatie\Sitemap\Tags\Sitemap as SitemapTag;
+use Spatie\Sitemap\Tags\Url;
 
 class GenerateSitemap extends Command
 {
@@ -55,9 +58,26 @@ class GenerateSitemap extends Command
      */
     private function sitemap_root(SitemapIndex $sitemapIndex): void
     {
-        $file = $this->file('sitemap_00.xml');
+        $file = $this->file('sitemap_root.xml');
 
         SitemapGenerator::create(config('app.url'))
+            ->configureCrawler(function (Crawler $crawler) {
+                $crawler->ignoreRobots();
+            })
+            ->shouldCrawl(function (UriInterface $url): bool {
+                return $url->getQuery() === ''
+                    && ! Str::isMatch('/\/prenoms\/\d+\/\w+/', $url->getPath());
+            })
+            ->hasCrawled(function (Url $url) {
+                $frequency = Str::isMatch('/\/public\/\w+/', $url->url)
+                    || Str::isMatch('/\/prenoms\/\d+\/\w+/', $url->url)
+                    || Str::finish($url->url, '/') === Str::finish(config('app.url'), '/')
+                    ? Url::CHANGE_FREQUENCY_WEEKLY
+                    : Url::CHANGE_FREQUENCY_MONTHLY;
+                $url->setChangeFrequency($frequency);
+
+                return $url;
+            })
             ->writeToFile($file['file']);
 
         $sitemapIndex->add(SitemapTag::create($file['url']));
