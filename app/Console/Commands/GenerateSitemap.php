@@ -69,11 +69,11 @@ class GenerateSitemap extends Command
                     && ! Str::isMatch('/\/prenoms\/\d+\/\w+/', $url->getPath());
             })
             ->hasCrawled(function (Url $url) {
-                $frequency = Str::isMatch('/\/public\/\d+\/\w+/', $url->url)
+                $frequency = Str::isMatch('/\/public\/\w+/', $url->url)
                     || Str::isMatch('/\/prenoms\/\d+\/\w+/', $url->url)
                     || Str::finish($url->url, '/') === Str::finish(config('app.url'), '/')
-                    ? Url::CHANGE_FREQUENCY_MONTHLY
-                    : Url::CHANGE_FREQUENCY_YEARLY;
+                    ? Url::CHANGE_FREQUENCY_WEEKLY
+                    : Url::CHANGE_FREQUENCY_MONTHLY;
                 $url->setChangeFrequency($frequency);
 
                 return $url;
