@@ -17,7 +17,7 @@
   </div>
 
   <div>
-    <div class="mx-auto max-w-4xl sm:px-6 px-2 lg:px-8 py-2">
+    <div class="mx-auto max-w-6xl sm:px-6 px-2 lg:px-8 py-2">
 
       <h1 class="text-3xl mb-12 text-center">{{ $list['name'] }}</h1>
 
@@ -25,23 +25,52 @@
 
         <!-- left -->
         <div>
-          <p class="text-xs text-gray-700 mb-3">Liste créée le {{ $list['created_at'] }}.</p>
-
-          <div>
+          <div class="mb-3 text-gray-600">
             {{ $list['description'] }}
           </div>
+
+          <p class="text-xs text-gray-700">Liste créée le {{ $list['created_at'] }}.</p>
         </div>
 
         <!-- right -->
         <div>
           <div class="mb-10">
-            <ul class="space-y-1">
+            <div class="space-y-1">
               @foreach ($list['names'] as $name)
-              <li>
-                <x-name-items :name="$name" favorited="{{ $favorites->contains($name['id']) }}" showOrigins="true" />
-              </li>
+              <div class="border hover:bg-blue-50 hover:border-blue-400 px-3 py-2 mb-2 rounded-md">
+                <div class="flex items-center justify-between">
+                  <!-- avatar + name / public note -->
+                  <div class="relative">
+                    <!-- avatar -->
+                    <div class="absolute top-1 rounded-full w-5 mr-4 ring-4 ring-violet-100">{!! \App\Helpers\NameHelper::getAvatar($name['name']) !!}</div>
+
+                    <div class="ml-8">
+                      <!-- name -->
+                      <a href="{{ $name['url']['show'] }}" class="font-semibold mb-2 text-lg hover:underline">
+                        {{ $name['name']}}
+                      </a>
+
+                      <!-- public note -->
+                      <div class="mb-1">
+                        {{ $name['public_note'] }}
+                      </div>
+
+                      <!-- stats -->
+                      <p class="text-xs text-gray-700 flex">
+                        <x-heroicon-c-arrow-trending-up class="w-4 h-4 mr-1 text-gray-500" />
+                        {{ $name['total'] }} utilisations depuis 1900</p>
+                    </div>
+                  </div>
+
+                  <!-- favorite -->
+                  <div>
+                    {{-- <x-heroicon-o-heart
+                      class="w-4 h-4 ml-2 text-gray-400 hover:text-rose-400 hover:w-5 hover:h-5 transition-all cursor-pointer" /> --}}
+                  </div>
+                </div>
+              </div>
               @endforeach
-            </ul>
+            </div>
           </div>
         </div>
       </div>
