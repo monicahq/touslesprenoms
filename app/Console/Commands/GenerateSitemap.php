@@ -35,21 +35,32 @@ class GenerateSitemap extends Command
      */
     public function handle(): void
     {
+        $file = $this->file('sitemap.xml');
+
         $sitemapIndex = SitemapIndex::create();
-
-        SitemapGenerator::create(config('app.url'))
-            ->writeToFile(public_path(static::PREFIX_PATH . '/sitemap_00.xml'));
-
-        $sitemapIndex->add(SitemapTag::create(url(static::PREFIX_PATH . '/sitemap_00.xml')));
-
+        $this->sitemap_root($sitemapIndex);
         $this->sitemap_names($sitemapIndex);
-
-        $sitemapIndex->writeToFile(public_path(static::PREFIX_PATH . '/sitemap.xml'));
+        $sitemapIndex->writeToFile($file['file']);
 
         // Replace sitemap in robots.txt
-        $robots = File::get(public_path('robots.txt'));
-        $robots = Str::of($robots)->replaceMatches('/Sitemap: .*/', 'Sitemap: ' . url(static::PREFIX_PATH . '/sitemap.xml'));
-        File::put(public_path('robots.txt'), $robots);
+        $robots = public_path('robots.txt');
+        $content = Str::of(File::get($robots))
+            ->replaceMatches('/Sitemap: .*/', 'Sitemap: ' . $file['url']);
+
+        File::put($robots, $content);
+    }
+
+    /**
+     * Get root sitemap.
+     */
+    private function sitemap_root(SitemapIndex $sitemapIndex): void
+    {
+        $file = $this->file('sitemap_00.xml');
+
+        SitemapGenerator::create(config('app.url'))
+            ->writeToFile($file['file']);
+
+        $sitemapIndex->add(SitemapTag::create($file['url']));
     }
 
     /**
@@ -60,13 +71,27 @@ class GenerateSitemap extends Command
         Name::where('name', '!=', '_PRENOMS_RARES')
             ->chunkById(2000, function (Collection $names, int $key) use ($sitemapIndex) {
 
-                $file = static::PREFIX_PATH . '/sitemap_' . Str::padLeft("$key", 2, '0') . '.xml';
+                $file = $this->file('sitemap_' . Str::padLeft("$key", 2, '0') . '.xml');
 
                 Sitemap::create()
                     ->add($names)
-                    ->writeToFile(public_path($file));
+                    ->writeToFile($file['file']);
 
-                $sitemapIndex->add(SitemapTag::create(url($file)));
+                $sitemapIndex->add(SitemapTag::create($file['url']));
             }, 'id');
+    }
+
+    /**
+     * Get file path and url.
+     */
+    private function file(string $name): array
+    {
+        $file = public_path(static::PREFIX_PATH . '/' . $name);
+        $this->line("$file ...");
+
+        return [
+            'file' => $file,
+            'url' => url(static::PREFIX_PATH . '/' . $name),
+        ];
     }
 }
