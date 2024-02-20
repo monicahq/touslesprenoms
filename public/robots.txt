@@ -4,4 +4,4 @@ Disallow: /login
 Disallow: /forgot-password
 Disallow: /reset-password
 Allow: /
-Sitemap: /sitemap/sitemap.xml
+Sitemap: https://dev.touslesprenoms.org/sitemap/sitemap.xml
