@@ -25,6 +25,7 @@ parameters:
         - app/Http/ViewModels/Names/NameViewModel.php
         - app/Http/ViewModels/Search/SearchViewModel.php
         - app/Http/ViewModels/User/ListViewModel.php
+        - app/Http/ViewModels/User/PublicListViewModel.php
 #
 #    checkMissingIterableValueType: false
     checkGenericClassInNonGenericObjectType: false
