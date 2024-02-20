@@ -6,6 +6,7 @@ use App\Http\ViewModels\Names\AllNamesViewModel;
 use App\Http\ViewModels\Names\NameViewModel;
 use App\Http\ViewModels\User\ListViewModel;
 use App\Http\ViewModels\User\UserViewModel;
+use App\Jobs\IncrementPageViewForName;
 use App\Models\Name;
 use App\Services\ToggleNameToNameList;
 use Illuminate\Contracts\View\View;
@@ -64,6 +65,8 @@ class NameController extends Controller
             $lists = ListViewModel::lists($requestedName);
             $note = $requestedName->getNoteForUser();
         }
+
+        IncrementPageViewForName::dispatch($requestedName->id);
 
         return view('names.show', [
             'name' => $name,
