@@ -24,6 +24,7 @@ parameters:
         - app/Http/Controllers/Auth/VerifyEmailController.php
         - app/Http/ViewModels/Names/NameViewModel.php
         - app/Http/ViewModels/Search/SearchViewModel.php
+        - app/Http/ViewModels/User/ListViewModel.php
 #
 #    checkMissingIterableValueType: false
     checkGenericClassInNonGenericObjectType: false
