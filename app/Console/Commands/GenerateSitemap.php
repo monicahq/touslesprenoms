@@ -42,7 +42,7 @@ class GenerateSitemap extends Command
 
         $sitemapIndex = SitemapIndex::create();
         $this->sitemap_root($sitemapIndex);
-        // $this->sitemap_names($sitemapIndex);
+        $this->sitemap_names($sitemapIndex);
         $sitemapIndex->writeToFile($file['file']);
 
         // Replace sitemap in robots.txt
