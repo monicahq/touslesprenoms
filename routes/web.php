@@ -15,6 +15,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicListController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ShareController;
+use App\Http\Controllers\StoreNoteForNameInListController;
 use App\Http\Controllers\TermsController;
 use App\Http\Controllers\UserNameController;
 use Illuminate\Support\Facades\Route;
@@ -78,6 +79,9 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
         Route::delete('listes/{liste}/prenoms/{id}', [ListNameController::class, 'destroy'])->name('list.name.destroy');
 
         Route::put('listes/{liste}/prenoms/{id}/set', [NameController::class, 'storeNameInList'])->name('name.list.store');
+
+        Route::get('listes/{liste}/prenoms/{id}/note/update', [StoreNoteForNameInListController::class, 'edit'])->name('name.list.edit');
+        Route::put('listes/{liste}/prenoms/{id}/note', [StoreNoteForNameInListController::class, 'update'])->name('name.list.update');
     });
 
     Route::get('profil', [ProfileController::class, 'show'])->name('profile.show');

@@ -39,12 +39,14 @@ class ListViewModel
     public static function show(NameList $list): array
     {
         $names = $list->names()
+            ->withPivot('public_note')
             ->orderBy('name')->get()
             ->map(fn (Name $name) => [
                 'id' => $name->id,
                 'name' => StringHelper::formatNameFromDB($name->name),
                 'origins' => Str::words($name->origins, 50, '...'),
                 'total' => Number::format($name->total),
+                'public_note' => $name->pivot->public_note,
                 'url' => [
                     'show' => route('name.show', [
                         'id' => $name->id,
@@ -54,6 +56,10 @@ class ListViewModel
                         'id' => $name->id,
                     ]),
                     'destroy' => route('list.name.destroy', [
+                        'liste' => $list->id,
+                        'id' => $name->id,
+                    ]),
+                    'note' => route('name.list.edit', [
                         'liste' => $list->id,
                         'id' => $name->id,
                     ]),

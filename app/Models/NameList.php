@@ -43,7 +43,7 @@ class NameList extends Model
 
     public function names(): BelongsToMany
     {
-        return $this->belongsToMany(Name::class, 'list_name', 'list_id', 'name_id');
+        return $this->belongsToMany(Name::class, 'list_name', 'list_id', 'name_id')->withPivot('public_note');
     }
 
     public function scopeFavorite(Builder $query): void
