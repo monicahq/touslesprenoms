@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Redirect;
-use App\Http\ViewModels\User\ListViewModel;
 use App\Models\Name;
 use App\Services\ToggleNameToNameList;
 use App\Services\UpdateNoteToNameInList;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use Mauricius\LaravelHtmx\Http\HtmxResponseClientRedirect;
+use Illuminate\Support\Facades\Redirect;
 
 class StoreNoteForNameInListController extends Controller
 {
