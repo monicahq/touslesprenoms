@@ -81,6 +81,7 @@ class ListViewModelTest extends TestCase
                     'total' => '1 000',
                     'origins' => 'test',
                     'name' => 'Test',
+                    'public_note' => null,
                     'url' => [
                         'show' => env('APP_URL') . '/prenoms/' . $name->id . '/test',
                         'favorite' => env('APP_URL') . '/prenoms/' . $name->id . '/favorite',
