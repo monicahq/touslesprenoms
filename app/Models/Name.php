@@ -67,7 +67,7 @@ class Name extends Model implements Sitemapable
 
     public function lists(): BelongsToMany
     {
-        return $this->belongsToMany(NameList::class, 'list_name', 'name_id', 'list_id');
+        return $this->belongsToMany(NameList::class, 'list_name', 'name_id', 'list_id')->withPivot('public_note');
     }
 
     public function toSitemapTag(): Url|string|array
