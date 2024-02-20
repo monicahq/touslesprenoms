@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\ViewModels\User\ListViewModel;
+use App\Http\ViewModels\User\PublicListViewModel;
 use App\Http\ViewModels\User\UserViewModel;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -14,7 +14,7 @@ class PublicListController extends Controller
     {
         $requestedList = $request->attributes->get('list');
 
-        $details = Cache::remember('list-details-' . $requestedList->id, 604800, fn () => ListViewModel::show($requestedList));
+        $details = PublicListViewModel::show($requestedList);
 
         $favoritedNamesForLoggedUser = auth()->check()
             ? Cache::remember('user-favorites-' . auth()->id(), 604800, fn () => UserViewModel::favorites())
