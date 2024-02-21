@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FemaleNameController;
 use App\Http\Controllers\HomeController;
@@ -28,6 +29,7 @@ Route::post('recherche', [SearchController::class, 'post'])->middleware(['thrott
 Route::get('prenoms', [NameController::class, 'index'])->name('name.index');
 
 Route::get('conditions', [TermsController::class, 'index'])->name('terms.index');
+Route::get('a-propos', [AboutController::class, 'index'])->name('about.index');
 
 Route::get('prenoms/garcons', [MaleNameController::class, 'index'])->name('name.garcon.index');
 Route::get('prenoms/filles', [FemaleNameController::class, 'index'])->name('name.fille.index');
