@@ -30,7 +30,7 @@
         </div>
 
         <div class="relative px-6 pt-4 pb-2">
-          Voulez-vous vraiment supprimer la liste de prénoms nommées {{ $list['name'] }} ? Ceci est irrévocable.
+          Voulez-vous vraiment supprimer la liste de prénoms nommées {{ $list['name'] }} ? Ceci est irrévocable.
         </div>
 
         <!-- actions -->

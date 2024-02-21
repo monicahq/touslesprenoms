@@ -1,7 +1,7 @@
 <x-login-layout>
   <div class="border-b px-6 py-4">
     <div class="text-sm text-gray-600 dark:text-gray-400">
-      Merci de vous inscrire ! Avant de commencer, pourriez-vous vérifier votre adresse électronique en cliquant sur le lien que nous venons de vous envoyer par courriel ? Si vous n'avez pas reçu le courriel, nous vous en enverrons volontiers un autre.
+      Merci de vous inscrire ! Avant de commencer, pourriez-vous vérifier votre adresse électronique en cliquant sur le lien que nous venons de vous envoyer par courriel ? Si vous n'avez pas reçu le courriel, nous vous en enverrons volontiers un autre.
     </div>
   </div>
 
