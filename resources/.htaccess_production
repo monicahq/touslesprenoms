@@ -18,8 +18,13 @@
         Header always set X-XSS-Protection "1; mode=block"
 
         # Assets expire after 1 month
-        <filesMatch ".(css|js|json|woff2?|ttf|eot|svg)$">
+        <filesMatch ".(css|js|json|woff2?|ttf|eot)$">
             Header set Cache-Control "public, max-age=2628000"
+        </filesMatch>
+
+        # Images expire after 6 months
+        <filesMatch ".(svg|png|gif|ico|jpe?g)$">
+            Header set Cache-Control "public, max-age=15768000"
         </filesMatch>
     </IfModule>
 
