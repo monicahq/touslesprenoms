@@ -31,7 +31,7 @@
         <!-- name -->
         <div class="relative px-6 pt-4 pb-2">
           <x-input-label for="list-name"
-                        :value="__('Quel est nom de votre liste ?')" />
+                        :value="__('Quel est nom de votre liste ?')" />
 
           <x-text-input class="mt-1 block w-full"
                         id="list-name"

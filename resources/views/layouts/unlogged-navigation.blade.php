@@ -1,5 +1,4 @@
-<nav class=""
-     x-data="{ open: false }">
+<nav x-data="{ open: false }">
 
   <!-- Primary Navigation Menu -->
   <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
