@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Favorited;
 use App\Http\ViewModels\Names\NameViewModel;
 use App\Http\ViewModels\User\UserViewModel;
 use App\Services\ToggleNameToFavorites;
@@ -27,6 +28,8 @@ class FavoriteController extends Controller
         $favorited = (new ToggleNameToFavorites(
             nameId: $name->id,
         ))->execute();
+
+        Favorited::dispatch($request->user(), $name);
 
         Cache::forget('user-favorites-' . auth()->id());
         Cache::forget('user-favorites-details-' . auth()->id());
