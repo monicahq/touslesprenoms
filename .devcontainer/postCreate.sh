@@ -31,7 +31,7 @@ set_apache() {
 }
 
 set_database() {
-    cp $ROOT/.env.example $ROOT/.env && echo "APP_TRUSTED_PROXIES=*" >> $ROOT/.env
+    cp $ROOT/.env.example $ROOT/.env && echo -e "APP_TRUSTED_PROXIES=*\nAPP_FORCE_URL=true" >> $ROOT/.env
     setenv "DB_CONNECTION" "sqlite"
     setenv "DB_DATABASE" "$ROOT/$DATABASE"
     touch $ROOT/$DATABASE && chgrp www-data $ROOT/$DATABASE && chmod g+w $ROOT/$DATABASE
