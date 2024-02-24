@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Models\User;
 use Illuminate\Auth\Events\Registered as RegisteredEvent;
 use Pirsch\Facades\Pirsch;
 
@@ -14,8 +15,10 @@ class Registered
      */
     public function handle(RegisteredEvent $event)
     {
-        Pirsch::track('Registered', [
-            'UserId' => $event->user->id,
-        ]);
+        if ($event->user instanceof User) {
+            Pirsch::track('Registered', [
+                'UserId' => $event->user->id,
+            ]);
+        }
     }
 }

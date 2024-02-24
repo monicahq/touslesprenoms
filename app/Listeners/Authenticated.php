@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Models\User;
 use Illuminate\Auth\Events\Authenticated as AuthenticatedEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Pirsch\Facades\Pirsch;
@@ -13,9 +14,11 @@ class Authenticated implements ShouldQueue
      */
     public function handle(AuthenticatedEvent $event): void
     {
-        Pirsch::track('Authenticated', [
-            'UserId' => $event->user->id,
-        ]);
+        if ($event->user instanceof User) {
+            Pirsch::track('Authenticated', [
+                'UserId' => $event->user->id,
+            ]);
+        }
     }
 
     /**
@@ -23,6 +26,6 @@ class Authenticated implements ShouldQueue
      */
     public function shouldQueue(AuthenticatedEvent $event): bool
     {
-        return ! $event->user->is_administrator;
+        return $event->user instanceof User && ! $event->user->is_administrator;
     }
 }
