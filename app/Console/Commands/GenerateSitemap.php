@@ -61,9 +61,6 @@ class GenerateSitemap extends Command
         $file = $this->file('sitemap_root.xml');
 
         SitemapGenerator::create(config('app.url'))
-            ->configureCrawler(function (Crawler $crawler) {
-                $crawler->ignoreRobots();
-            })
             ->shouldCrawl(function (UriInterface $url): bool {
                 return $url->getQuery() === ''
                     && ! Str::isMatch('/\/prenoms\/\d+\/\w+/', $url->getPath());
