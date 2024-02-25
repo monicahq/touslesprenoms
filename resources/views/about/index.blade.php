@@ -16,7 +16,7 @@
         <div>
           <h2 class="text-2xl mb-10">Nous créeons la plus grande base de données de prénoms francophones.</h2>
 
-          <img src="/img/mockup.png" srcset="/img/mockup.png, /img/mockup@2x.png 2x" loading="lazy" alt="image du produit pour le prénom jean">
+          <img src="/img/mockup.png" srcset="/img/mockup.png, /img/mockup-2x.png 2x" loading="lazy" alt="image du produit pour le prénom jean">
         </div>
         <div>
           <p class="mb-3 prose">Touslesprenoms.org est une plateforme qui aide les futurs parents à choisir un prénom pour leur progéniture. Nous avons recueilli plus de 39 000 prénoms de l'Institut National de la Statistique et des Études Économiques (INSEE) et avons rassemblé de nombreuses informations pour permettre aux parents de prendre une décision éclairée.</p>
@@ -41,7 +41,7 @@
 
       <div class="mt-10">
         <div class="text-center mb-10">
-          <img src="/img/founders.png" srcset="/img/founders.png, /img/founders@2x.png 2x" loading="lazy" alt="image des deux fondateurs" data-nosnippet>
+          <img src="/img/founders.png" srcset="/img/founders.png, /img/founders-2x.png 2x" loading="lazy" alt="image des deux fondateurs" data-nosnippet>
         </div>
 
         <div class="text-center text-sm text-gray-600">
