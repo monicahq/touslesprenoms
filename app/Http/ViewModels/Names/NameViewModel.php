@@ -99,14 +99,30 @@ class NameViewModel
     public static function jsonLdSchema(Name $name): array
     {
         return [
+            '@context' => 'http://schema.org/',
+            '@type' => 'Article',
+            'mainEntityOfPage' => [
+                '@type' => 'WebPage',
+                '@id' => route('name.show', [
+                    'id' => $name->id,
+                    'name' => StringHelper::sanitizeNameForURL($name->name),
+                ]),
+            ],
+            'author' => [
+                '@type' => 'Organization',
+                'name' => config('app.org'),
+            ],
+            'publisher' => [
+                '@type' => 'Organization',
+                'name' => config('app.org'),
+                'logo' => [
+                    '@type' => 'ImageObject',
+                    'url' => asset('/img/facebook.png'),
+                ],
+            ],
             'headline' => 'Tout savoir sur le prénom ' . StringHelper::formatNameFromDB($name->name),
-            'image' => asset('/img/facebook.png'),
-            'updated_at' => $name->updated_at->format('Y-m-d'),
-            'created_at' => $name->updated_at->format('Y-m-d'),
-            'url' => route('name.show', [
-                'id' => $name->id,
-                'name' => StringHelper::sanitizeNameForURL($name->name),
-            ]),
+            'datePublished' => $name->created_at->format('Y-m-d'),
+            'dateModified' => $name->updated_at->format('Y-m-d'),
         ];
     }
 

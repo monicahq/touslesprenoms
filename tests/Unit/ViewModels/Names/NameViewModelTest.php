@@ -197,11 +197,27 @@ class NameViewModelTest extends TestCase
 
         $this->assertEquals(
             [
+                '@context' => 'http://schema.org/',
+                '@type' => 'Article',
+                'mainEntityOfPage' => [
+                    '@type' => 'WebPage',
+                    '@id' => env('APP_URL') . '/prenoms/' . $name->id . '/heloise',
+                ],
+                'author' => [
+                    '@type' => 'Organization',
+                    'name' => 'touslesprenoms.org',
+                ],
+                'publisher' => [
+                    '@type' => 'Organization',
+                    'name' => 'touslesprenoms.org',
+                    'logo' => [
+                        '@type' => 'ImageObject',
+                        'url' => env('APP_URL') . '/img/facebook.png',
+                    ],
+                ],
                 'headline' => 'Tout savoir sur le prénom Héloïse',
-                'image' => env('APP_URL') . '/img/facebook.png',
-                'created_at' => '2018-01-01',
-                'updated_at' => '2018-01-01',
-                'url' => env('APP_URL') . '/prenoms/' . $name->id . '/heloise',
+                'datePublished' => '2018-01-01',
+                'dateModified' => '2018-01-01',
             ],
             $array
         );
