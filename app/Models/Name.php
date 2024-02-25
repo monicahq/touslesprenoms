@@ -110,7 +110,7 @@ class Name extends Model implements Sitemapable
     /**
      * Scope a query to only include male names.
      */
-    public function male(Builder $query): void
+    public function scopeMale(Builder $query): void
     {
         $query->where('gender', 'male');
     }
@@ -118,7 +118,7 @@ class Name extends Model implements Sitemapable
     /**
      * Scope a query to only include female names.
      */
-    public function female(Builder $query): void
+    public function scopeFemale(Builder $query): void
     {
         $query->where('gender', 'female');
     }
@@ -126,7 +126,7 @@ class Name extends Model implements Sitemapable
     /**
      * Scope a query to only include unisex names.
      */
-    public function unisex(Builder $query): void
+    public function scopeUnisex(Builder $query): void
     {
         $query->where('unisex', 1);
     }
