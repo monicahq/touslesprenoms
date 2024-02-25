@@ -84,7 +84,7 @@ class GenerateSitemap extends Command
      */
     private function sitemap_names(SitemapIndex $sitemapIndex): void
     {
-        Name::where('name', '!=', '_PRENOMS_RARES')
+        Name::nonRares()
             ->chunkById(2000, function (Collection $names, int $key) use ($sitemapIndex) {
 
                 $file = $this->file('sitemap_' . Str::padLeft("$key", 2, '0') . '.xml');

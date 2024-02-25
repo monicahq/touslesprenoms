@@ -14,8 +14,8 @@ class MaleNamesViewModel
         // iterate over the alphabet
         $alphabet = range('A', 'Z');
 
-        $total = Name::where('gender', 'male')
-            ->where('name', '!=', '_PRENOMS_RARES')->count();
+        $total = Name::male()
+            ->nonRares()->count();
 
         $letters = collect();
         $letters->push([
@@ -25,7 +25,7 @@ class MaleNamesViewModel
         ]);
 
         foreach ($alphabet as $letter) {
-            $total = Name::where('gender', 'male')
+            $total = Name::male()
                 ->where('name', 'like', $letter . '%')->count();
             $letters->push([
                 'letter' => $letter,

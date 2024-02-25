@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -96,5 +97,37 @@ class Name extends Model implements Sitemapable
         }
 
         return $note->content;
+    }
+
+    /**
+     * Scope a query to only include non rares names.
+     */
+    public function scopeNonRares(Builder $query): void
+    {
+        $query->where('name', '!=', '_PRENOMS_RARES');
+    }
+
+    /**
+     * Scope a query to only include male names.
+     */
+    public function scopeMale(Builder $query): void
+    {
+        $query->where('gender', 'male');
+    }
+
+    /**
+     * Scope a query to only include female names.
+     */
+    public function scopeFemale(Builder $query): void
+    {
+        $query->where('gender', 'female');
+    }
+
+    /**
+     * Scope a query to only include unisex names.
+     */
+    public function scopeUnisex(Builder $query): void
+    {
+        $query->where('unisex', 1);
     }
 }

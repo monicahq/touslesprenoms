@@ -14,8 +14,8 @@ class MixteNamesViewModel
         // iterate over the alphabet
         $alphabet = range('A', 'Z');
 
-        $total = Name::where('unisex', 1)
-            ->where('name', '!=', '_PRENOMS_RARES')->count();
+        $total = Name::unisex()
+            ->nonRares()->count();
 
         $letters = collect();
         $letters->push([
@@ -25,7 +25,7 @@ class MixteNamesViewModel
         ]);
 
         foreach ($alphabet as $letter) {
-            $total = Name::where('unisex', 1)
+            $total = Name::unisex()
                 ->where('name', 'like', $letter . '%')->count();
             $letters->push([
                 'letter' => $letter,
