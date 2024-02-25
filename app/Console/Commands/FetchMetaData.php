@@ -40,11 +40,7 @@ class FetchMetaData extends Command
      */
     public function handle(): void
     {
-        foreach (Name::orderBy('total', 'desc')->lazy() as $name) {
-            if ($name->name === '_PRENOMS_RARES') {
-                continue;
-            }
-
+        foreach (Name::nonRares()->orderBy('total', 'desc')->lazy() as $name) {
             if (is_null($name->origins)) {
                 ProcessOrigins::dispatch($name);
             }

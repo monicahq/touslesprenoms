@@ -21,8 +21,8 @@ class MixteNameController extends Controller
 
         $letters = Cache::remember('all-letters-mixte', 604800, fn () => MixteNamesViewModel::index());
 
-        $namesPagination = Cache::remember('all-names-mixte-page-' . $requestedPage, 604800, fn () => Name::where('name', '!=', '_PRENOMS_RARES')
-            ->where('unisex', 1)
+        $namesPagination = Cache::remember('all-names-mixte-page-' . $requestedPage, 604800, fn () => Name::nonRares()
+            ->unisex()
             ->orderBy('total', 'desc')
             ->paginate(40)
         );
@@ -49,8 +49,8 @@ class MixteNameController extends Controller
 
         $letters = Cache::remember('all-letters-mixte', 604800, fn () => MixteNamesViewModel::index());
 
-        $namesPagination = Cache::remember('mixte-letter-' . $requestedLetter . '-page-' . $requestedPage, 604800, fn () => Name::where('name', '!=', '_PRENOMS_RARES')
-            ->where('unisex', 1)
+        $namesPagination = Cache::remember('mixte-letter-' . $requestedLetter . '-page-' . $requestedPage, 604800, fn () => Name::nonRares()
+            ->unisex()
             ->where('name', 'like', Str::upper($requestedLetter) . '%')
             ->orderBy('total', 'desc')
             ->paginate(40)

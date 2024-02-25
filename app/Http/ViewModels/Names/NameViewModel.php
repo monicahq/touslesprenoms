@@ -129,7 +129,7 @@ class NameViewModel
     public static function relatedNames(Name $name): Collection
     {
         $ids = Name::select('id')
-            ->where('name', '!=', '_PRENOMS_RARES')
+            ->nonRares()
             ->where('id', '!=', $name->id)
             ->where('gender', $name->gender)
             ->inRandomOrder()

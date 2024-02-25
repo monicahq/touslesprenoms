@@ -15,29 +15,29 @@ class HomeViewModel
 {
     public static function twentyMostPopularNames(): array
     {
-        $maleNames = Name::where('gender', 'male')
-            ->where('name', '!=', '_PRENOMS_RARES')
+        $maleNames = Name::male()
+            ->nonRares()
             ->orderBy('total', 'desc')
             ->take(10)
             ->get()
             ->map(fn (Name $name) => NameViewModel::summary($name));
 
-        $femaleNames = Name::where('gender', 'female')
-            ->where('name', '!=', '_PRENOMS_RARES')
+        $femaleNames = Name::female()
+            ->nonRares()
             ->orderBy('total', 'desc')
             ->take(10)
             ->get()
             ->map(fn (Name $name) => NameViewModel::summary($name));
 
-        $mixtedNames = Name::where('unisex', 1)
-            ->where('name', '!=', '_PRENOMS_RARES')
+        $mixtedNames = Name::unisex()
+            ->nonRares()
             ->orderBy('total', 'desc')
             ->take(10)
             ->get()
             ->map(fn (Name $name) => NameViewModel::summary($name));
 
         $randomIds = Name::select('id')
-            ->where('name', '!=', '_PRENOMS_RARES')
+            ->nonRares()
             ->inRandomOrder()
             ->take(10)
             ->get();
@@ -79,7 +79,7 @@ class HomeViewModel
 
     public static function serverStats(): array
     {
-        $totalNames = Name::where('name', '!=', '_PRENOMS_RARES')->count();
+        $totalNames = Name::nonRares()->count();
 
         return [
             'total_names' => Number::format($totalNames),

@@ -21,8 +21,8 @@ class MaleNameController extends Controller
 
         $letters = Cache::remember('all-letters-male', 604800, fn () => MaleNamesViewModel::index());
 
-        $namesPagination = Cache::remember('all-names-male-page-' . $requestedPage, 604800, fn () => Name::where('name', '!=', '_PRENOMS_RARES')
-            ->where('gender', 'male')
+        $namesPagination = Cache::remember('all-names-male-page-' . $requestedPage, 604800, fn () => Name::nonRares()
+            ->male()
             ->orderBy('total', 'desc')
             ->paginate(40)
         );
@@ -49,8 +49,8 @@ class MaleNameController extends Controller
 
         $letters = Cache::remember('all-letters-male', 604800, fn () => MaleNamesViewModel::index());
 
-        $namesPagination = Cache::remember('male-letter-' . $requestedLetter . '-page-' . $requestedPage, 604800, fn () => Name::where('name', '!=', '_PRENOMS_RARES')
-            ->where('gender', 'male')
+        $namesPagination = Cache::remember('male-letter-' . $requestedLetter . '-page-' . $requestedPage, 604800, fn () => Name::nonRares()
+            ->male()
             ->where('name', 'like', Str::upper($requestedLetter) . '%')
             ->orderBy('total', 'desc')
             ->paginate(40)

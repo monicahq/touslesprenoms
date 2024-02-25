@@ -12,7 +12,7 @@ class AllNamesViewModel
     public static function index(): Collection
     {
         $letters = collect();
-        $allNames = Name::where('name', '!=', '_PRENOMS_RARES')->count();
+        $allNames = Name::nonRares()->count();
         $letters->push([
             'letter' => 'Tous',
             'count' => Number::format($allNames),
