@@ -198,7 +198,7 @@ class NameViewModelTest extends TestCase
         $this->assertEquals(
             [
                 'headline' => 'Tout savoir sur le prénom Héloïse',
-                'image' => env('APP_URL') . '/images/facebook.png',
+                'image' => env('APP_URL') . '/img/facebook.png',
                 'date' => '2018-01-01',
                 'url' => env('APP_URL') . '/prenoms/' . $name->id . '/heloise',
             ],
