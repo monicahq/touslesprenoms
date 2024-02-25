@@ -100,8 +100,9 @@ class NameViewModel
     {
         return [
             'headline' => 'Tout savoir sur le prénom ' . StringHelper::formatNameFromDB($name->name),
-            'image' => env('APP_URL') . '/img/facebook.png',
-            'date' => Carbon::now()->format('Y-m-d'),
+            'image' => asset('/img/facebook.png'),
+            'updated_at' => $name->updated_at->format('Y-m-d'),
+            'created_at' => $name->updated_at->format('Y-m-d'),
             'url' => route('name.show', [
                 'id' => $name->id,
                 'name' => StringHelper::sanitizeNameForURL($name->name),
