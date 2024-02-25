@@ -18,6 +18,8 @@ return [
 
     'name' => env('APP_REALNAME', env('APP_NAME', 'Tous les prénoms')),
 
+    'org' => 'touslesprenoms.org',
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

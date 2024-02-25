@@ -1,30 +1,7 @@
 <x-guest-layout>
   <x-slot:jsonLdSchema>
     <script type="application/ld+json">
-      {
-        "@context": "http://schema.org/",
-        "@type": "Article",
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "{{ $jsonLdSchema['url'] }}"
-        },
-        "author": {
-          "@type": "Organization",
-          "name": "touslesprenoms.org"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "touslesprenoms.org",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "{{ $jsonLdSchema['image'] }}"
-          }
-        },
-        "headline": "{{ $jsonLdSchema['headline'] }}",
-        "image": {{ $jsonLdSchema['image'] }},
-        "datePublished": "{{ $jsonLdSchema['created_at'] }}",
-        "dateModified": "{{ $jsonLdSchema['updated_at'] }}",
-      }
+      {!! json_encode($jsonLdSchema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) !!}
   </script>
   </x-slot>
 
