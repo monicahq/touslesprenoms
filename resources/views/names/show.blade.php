@@ -1,7 +1,7 @@
 <x-guest-layout>
   <x-slot:jsonLdSchema>
     <script type="application/ld+json">
-      {!! json_encode($jsonLdSchema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) !!}
+      {!! json_encode($jsonLdSchema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
   </script>
   </x-slot>
 
