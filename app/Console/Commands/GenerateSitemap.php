@@ -8,7 +8,6 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Psr\Http\Message\UriInterface;
-use Spatie\Crawler\Crawler;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\SitemapGenerator;
 use Spatie\Sitemap\SitemapIndex;
@@ -61,9 +60,6 @@ class GenerateSitemap extends Command
         $file = $this->file('sitemap_root.xml');
 
         SitemapGenerator::create(config('app.url'))
-            ->configureCrawler(function (Crawler $crawler) {
-                $crawler->ignoreRobots();
-            })
             ->shouldCrawl(function (UriInterface $url): bool {
                 return $url->getQuery() === ''
                     && ! Str::isMatch('/\/prenoms\/\d+\/\w+/', $url->getPath());
