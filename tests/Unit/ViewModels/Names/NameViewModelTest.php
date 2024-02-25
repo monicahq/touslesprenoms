@@ -199,7 +199,8 @@ class NameViewModelTest extends TestCase
             [
                 'headline' => 'Tout savoir sur le prénom Héloïse',
                 'image' => env('APP_URL') . '/img/facebook.png',
-                'date' => '2018-01-01',
+                'created_at' => '2018-01-01',
+                'updated_at' => '2018-01-01',
                 'url' => env('APP_URL') . '/prenoms/' . $name->id . '/heloise',
             ],
             $array

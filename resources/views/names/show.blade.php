@@ -10,20 +10,20 @@
         },
         "author": {
           "@type": "Organization",
-          "name": "choisisunprenom.com"
+          "name": "touslesprenoms.org"
         },
         "publisher": {
           "@type": "Organization",
-          "name": "choisisunprenom.com",
+          "name": "touslesprenoms.org",
           "logo": {
             "@type": "ImageObject",
-            "url": "{{ $jsonLdSchema['image'] }}}"
+            "url": "{{ $jsonLdSchema['image'] }}"
           }
         },
         "headline": "{{ $jsonLdSchema['headline'] }}",
         "image": {{ $jsonLdSchema['image'] }},
-        "datePublished": "{{ $jsonLdSchema['date'] }}",
-        "dateModified": "{{ $jsonLdSchema['date'] }}",
+        "datePublished": "{{ $jsonLdSchema['created_at'] }}",
+        "dateModified": "{{ $jsonLdSchema['updated_at'] }}",
       }
   </script>
   </x-slot>
