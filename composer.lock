@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "871c670d37a3e72f6356eb2d5d3d2c3d",
+    "content-hash": "af2191d605ff0aca7610f599d2e367a7",
     "packages": [
         {
             "name": "blade-ui-kit/blade-heroicons",
@@ -2745,33 +2745,32 @@
         },
         {
             "name": "monicahq/laravel-cloudflare",
-            "version": "3.5.0",
+            "version": "3.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/monicahq/laravel-cloudflare.git",
-                "reference": "156f49fa823fbdec4c26691cb83844c9283f14dc"
+                "reference": "4e760aa222f5eed94833112d669d310c1ec7b137"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/monicahq/laravel-cloudflare/zipball/156f49fa823fbdec4c26691cb83844c9283f14dc",
-                "reference": "156f49fa823fbdec4c26691cb83844c9283f14dc",
+                "url": "https://api.github.com/repos/monicahq/laravel-cloudflare/zipball/4e760aa222f5eed94833112d669d310c1ec7b137",
+                "reference": "4e760aa222f5eed94833112d669d310c1ec7b137",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "^8.0 || ^9.0 || ^10.0",
+                "illuminate/support": "^8.0 || ^9.0 || ^10.0 || ^11.0",
                 "php": "^7.4 || ^8.0"
             },
             "require-dev": {
                 "guzzlehttp/guzzle": "^6.3 || ^7.0",
+                "larastan/larastan": "^1.0 || ^2.4",
                 "mockery/mockery": "^1.4",
-                "nunomaduro/larastan": "^1.0 || ^2.4",
                 "ocramius/package-versions": "^1.5 || ^2.1",
-                "orchestra/testbench": "^6.0 || ^7.0 || ^8.0",
+                "orchestra/testbench": "^6.0 || ^7.0 || ^8.0 || ^9.0",
                 "phpstan/phpstan-deprecation-rules": "^1.0",
                 "phpstan/phpstan-phpunit": "^1.0",
                 "phpstan/phpstan-strict-rules": "^1.0",
-                "phpunit/phpunit": "^8.0 || ^9.0",
-                "thecodingmachine/phpstan-safe-rule": "^1.0",
+                "phpunit/phpunit": "^9.5 || ^10.0 || ^11.0",
                 "vimeo/psalm": "^4.0 || ^5.6"
             },
             "suggest": {
@@ -2817,7 +2816,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-07T18:14:12+00:00"
+            "time": "2024-03-10T17:30:42+00:00"
         },
         {
             "name": "monolog/monolog",
