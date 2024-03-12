@@ -100,6 +100,7 @@ class ListViewModel
             'id' => $list->id,
             'name' => $list->name,
             'description' => $list->description,
+            'gender' => $list->gender,
             'list_category_id' => $list->list_category_id,
             'url' => [
                 'update' => route('list.update', [

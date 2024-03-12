@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NameListRequest;
 use App\Http\ViewModels\User\ListViewModel;
 use App\Models\ListCategory;
 use App\Services\CreateList;
@@ -35,10 +36,12 @@ class ListController extends Controller
         ]);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(NameListRequest $request): RedirectResponse
     {
+        $request->validated();
+
         $list = (new CreateList(
-            name: $request->input('list-name'),
+            name: $request->input('listname'),
             description: $request->input('description'),
             isPublic: false,
             canBeModified: true,
@@ -81,12 +84,15 @@ class ListController extends Controller
         ]);
     }
 
-    public function update(Request $request): RedirectResponse
+    public function update(NameListRequest $request): RedirectResponse
     {
+        $request->validated();
+
         $list = $request->attributes->get('list');
 
-        $list->name = $request->input('list-name');
+        $list->name = $request->input('listname');
         $list->description = $request->input('description');
+        $list->gender = $request->input('gender');
         $list->list_category_id = $request->input('category');
         $list->save();
 

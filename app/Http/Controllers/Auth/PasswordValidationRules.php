@@ -13,6 +13,15 @@ trait PasswordValidationRules
      */
     protected function passwordRules(): array
     {
-        return ['required', 'string', Password::default(), 'confirmed'];
+        return [
+            'required',
+            'string',
+            app()->environment('local')
+                ? Password::min(4)
+                : ($this->isPrecognitive()
+                    ? Password::default()
+                    : Password::default()->uncompromised()),
+            'confirmed',
+        ];
     }
 }

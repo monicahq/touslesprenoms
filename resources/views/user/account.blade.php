@@ -67,7 +67,13 @@
           </div>
         </form>
 
-      <form method="POST" action="{{ route('profile.update') }}" class="mb-6 shadow sm:rounded-lg">
+      <form method="POST" x-data="{
+        form: $form('post', '{{ route('profile.update') }}', {
+          email: '{{ old('email') }}',
+          password: '',
+          password_confirmation: '',
+        }).setErrors({{ Js::from($errors->messages()) }}),
+      }" action="{{ route('profile.update') }}" class="mb-6 shadow sm:rounded-lg">
         @csrf
 
         <div class="relative border-b dark:border-gray-600 px-6 py-4 bg-yellow-50">
