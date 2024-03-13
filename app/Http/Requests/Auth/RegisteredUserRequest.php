@@ -30,6 +30,7 @@ class RegisteredUserRequest extends FormRequest
             'email' => [
                 'required',
                 'string',
+                'lowercase',
                 'email',
                 'max:255',
                 Rule::unique(User::class),

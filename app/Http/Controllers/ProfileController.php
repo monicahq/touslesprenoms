@@ -2,29 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfileNameRequest;
+use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProfileController extends Controller
 {
-    public function show(Request $request): View
+    public function edit(Request $request): View
     {
-        return view('user.account', [
+        return view('profile.edit', [
             'user' => $request->user(),
         ]);
     }
 
     /**
-     * Update the user's password.
+     * Update the user's profile.
      */
-    public function update(Request $request): RedirectResponse
+    public function update(ProfileUpdateRequest $request): Response
     {
+        $request->user()->fill($request->validated());
+
+        if ($request->user()->isDirty('email')) {
+            $request->user()->email_verified_at = null;
+        }
+
         $request->user()->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return $request->expectsJson()
+            ? response()->json(['status' => 'profile-updated'])
+            : Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
     /**
@@ -48,11 +59,13 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 
-    public function name(Request $request): RedirectResponse
+    public function name(ProfileNameRequest $request): Response
     {
-        auth()->user()->last_name = $request->get('last_name');
-        auth()->user()->save();
+        $request->user()->fill($request->validated());
+        $request->user()->save();
 
-        return redirect()->route('profile.show');
+        return $request->expectsJson()
+            ? response()->json(['status' => 'name-updated'])
+            : Redirect::route('profile.edit')->with('status', 'name-updated');
     }
 }

@@ -48,7 +48,7 @@
     <div class="relative px-6 pt-4 pb-2">
       <x-input-label for="description"
                     :optional="true"
-                    :value="'Description (optionnel)'" />
+                    :value="'Description'" />
 
       <x-textarea class="mt-1 block w-full"
                 id="description"
@@ -66,31 +66,31 @@
       <div class="grid grid-flow-row sm:grid-flow-col sm:grid-cols-3 gap-4 pt-2 pb-4">
         <div class="flex p-3 ps-4 border border-gray-200 rounded dark:border-gray-700" @click="form.gender = 'male'">
           <div class="flex items-center h-5">
-            <input id="gender-boy" name="gender" x-model="form.gender" type="radio" value="male" @change="form.forgetError('gender'); form.validate('gender')"
+            <input id="gender-male" name="gender" x-model="form.gender" type="radio" value="male" @change="form.forgetError('gender'); form.validate('gender')"
               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
           </div>
           <div class="ms-2 text-sm">
-            <label for="gender-boy" class="font-medium text-gray-900 dark:text-gray-300">{{ __('Garçons') }}</label>
+            <label for="gender-male" class="font-medium text-gray-900 dark:text-gray-300">{{ __('Garçons') }}</label>
             <p class="text-xs font-normal text-gray-500 dark:text-gray-300">{{ __('La liste contient des prénoms de garçons.') }}</p>
           </div>
         </div>
         <div class="flex p-3 ps-4 border border-gray-200 rounded dark:border-gray-700" @click="form.gender = 'female'">
           <div class="flex items-center h-5">
-            <input id="gender-girl" name="gender" x-model="form.gender" type="radio" value="female" @change="form.forgetError('gender'); form.validate('gender')"
+            <input id="gender-female" name="gender" x-model="form.gender" type="radio" value="female" @change="form.forgetError('gender'); form.validate('gender')"
               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
           </div>
           <div class="ms-2 text-sm">
-            <label for="gender-girl" class="font-medium text-gray-900 dark:text-gray-300">{{ __('Filles') }}</label>
+            <label for="gender-female" class="font-medium text-gray-900 dark:text-gray-300">{{ __('Filles') }}</label>
             <p class="text-xs font-normal text-gray-500 dark:text-gray-300">{{ __('La liste contient des prénoms de filles.') }}</p>
           </div>
         </div>
         <div class="flex p-3 ps-4 border border-gray-200 rounded dark:border-gray-700" @click="form.gender = 'unisex'">
           <div class="flex items-center h-5">
-            <input id="gender-mixte" name="gender" x-model="form.gender" type="radio" value="unisex" @change="form.forgetError('gender'); form.validate('gender')"
+            <input id="gender-unisex" name="gender" x-model="form.gender" type="radio" value="unisex" @change="form.forgetError('gender'); form.validate('gender')"
               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
           </div>
           <div class="ms-2 text-sm">
-            <label for="gender-mixte" class="font-medium text-gray-900 dark:text-gray-300">{{ __('Mixtes') }}</label>
+            <label for="gender-unisex" class="font-medium text-gray-900 dark:text-gray-300">{{ __('Mixtes') }}</label>
             <p class="text-xs font-normal text-gray-500 dark:text-gray-300">{{ __('La liste contient des prénoms mixtes.') }}</p>
           </div>
         </div>
@@ -100,10 +100,14 @@
 
     @if (auth()->user()->is_administrator)
     <div class="relative px-6 pt-4 pb-4">
-    <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Catégories (pour administrateur seulement)</label>
+    <label for="category" class="block text-sm font-medium leading-6 text-gray-900">Catégories (pour administrateur seulement)</label>
       <div class="mt-2">
-        <select id="category" name="category" @change="form.forgetError('category'); form.validate('category')"
-          class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+        <select id="category"
+                name="category"
+                x-model="form.category"
+                @change="form.forgetError('category'); form.validate('category')"
+                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+          <option value="">(vide)</option>
           @foreach ($listCategories as $category)
             <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
           @endforeach

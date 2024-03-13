@@ -31,7 +31,7 @@
             <x-unlogged-nav-link class="mr-4" hx-boost="true" :href="route('list.index')" :active="request()->routeIs('list*')">
               {{ __('Vos listes') }}
             </x-unlogged-nav-link>
-            <x-unlogged-nav-link class="mr-4" hx-boost="true" :href="route('profile.show')" :active="request()->routeIs('profile*')">
+            <x-unlogged-nav-link class="mr-4" hx-boost="true" :href="route('profile.edit')" :active="request()->routeIs('profile*')">
               {{ __('Votre compte') }}
             </x-unlogged-nav-link>
             @endauth
@@ -113,7 +113,7 @@
         <x-responsive-nav-link class="mr-4" hx-boost="true" :href="route('list.index')" :active="request()->routeIs('list*')">
           {{ __('Vos listes') }}
         </x-responsive-nav-link>
-        <x-responsive-nav-link class="mr-4" hx-boost="true" :href="route('profile.show')" :active="request()->routeIs('profile*')">
+        <x-responsive-nav-link class="mr-4" hx-boost="true" :href="route('profile.edit')" :active="request()->routeIs('profile*')">
           {{ __('Votre compte') }}
         </x-responsive-nav-link>
         @endauth

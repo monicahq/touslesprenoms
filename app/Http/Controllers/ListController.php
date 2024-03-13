@@ -38,15 +38,15 @@ class ListController extends Controller
 
     public function store(NameListRequest $request): RedirectResponse
     {
-        $request->validated();
+        $validated = $request->validated();
 
         $list = (new CreateList(
-            name: $request->input('listname'),
-            description: $request->input('description'),
+            name: $validated['listname'],
+            description: $validated['description'],
             isPublic: false,
             canBeModified: true,
-            gender: $request->input('gender'),
-            categoryId: $request->input('category'),
+            gender: $validated['gender'],
+            categoryId: $validated['category'],
         ))->execute();
 
         Cache::forget('route-list-' . $list->id);
@@ -86,14 +86,16 @@ class ListController extends Controller
 
     public function update(NameListRequest $request): RedirectResponse
     {
-        $request->validated();
+        $validated = $request->validated();
 
         $list = $request->attributes->get('list');
 
-        $list->name = $request->input('listname');
-        $list->description = $request->input('description');
-        $list->gender = $request->input('gender');
-        $list->list_category_id = $request->input('category');
+        $list->name = $validated['listname'];
+        $list->description = $validated['description'];
+        $list->gender = $validated['gender'];
+        if (auth()->user()->is_administrator) {
+            $list->list_category_id = $validated['category'];
+        }
         $list->save();
 
         Cache::forget('route-list-' . $list->id);
@@ -102,7 +104,7 @@ class ListController extends Controller
 
         return Redirect::route('list.show', [
             'liste' => $list->id,
-        ]);
+        ])->withStatus('La liste a été mise à jour.');
     }
 
     public function destroy(Request $request): RedirectResponse

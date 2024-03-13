@@ -88,11 +88,18 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
         Route::get('listes/{liste}/prenoms/{id}/note/update', [StoreNoteForNameInListController::class, 'edit'])->name('name.list.edit');
         Route::put('listes/{liste}/prenoms/{id}/note', [StoreNoteForNameInListController::class, 'update'])->middleware([HandlePrecognitiveRequests::class])->name('name.list.update');
     });
+});
 
-    Route::get('profil', [ProfileController::class, 'show'])->name('profile.show');
-    Route::put('profil', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::put('profil/nom', [ProfileController::class, 'name'])->name('profile.name');
-    Route::delete('profil', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::middleware(['auth'])->group(function (): void {
+
+    Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('profile', [ProfileController::class, 'update'])
+        ->middleware([HandlePrecognitiveRequests::class])
+        ->name('profile.update');
+    Route::put('profile/nom', [ProfileController::class, 'name'])
+        ->middleware([HandlePrecognitiveRequests::class])
+        ->name('profile.name');
+    Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 Route::middleware(['list'])->group(function (): void {
