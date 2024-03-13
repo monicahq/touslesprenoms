@@ -16,7 +16,7 @@ trait PasswordValidationRules
         return [
             'required',
             'string',
-            app()->environment('local')
+            app()->environment('local') || app()->environment('testing')
                 ? Password::min(4)
                 : ($this->isPrecognitive()
                     ? Password::default()

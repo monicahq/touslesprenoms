@@ -101,18 +101,20 @@ class ListViewModelTest extends TestCase
         $nameList = NameList::factory()->create([
             'name' => 'Ma liste',
             'description' => 'Ma description',
+            'gender' => 'female',
         ]);
         $nameList->names()->attach($name->id);
 
         $array = ListViewModel::edit($nameList);
 
-        $this->assertCount(5, $array);
+        $this->assertCount(6, $array);
 
         $this->assertEquals(
             [
                 'id' => $nameList->id,
                 'name' => 'Ma liste',
                 'description' => 'Ma description',
+                'gender' => 'female',
                 'list_category_id' => null,
                 'url' => [
                     'update' => env('APP_URL') . '/listes/' . $nameList->id,
