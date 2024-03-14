@@ -92,14 +92,14 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
 
 Route::middleware(['auth'])->group(function (): void {
 
-    Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::put('profile', [ProfileController::class, 'update'])
+    Route::get('profil', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('profil', [ProfileController::class, 'update'])
         ->middleware([HandlePrecognitiveRequests::class])
         ->name('profile.update');
-    Route::put('profile/nom', [ProfileController::class, 'name'])
+    Route::put('profil/nom', [ProfileController::class, 'name'])
         ->middleware([HandlePrecognitiveRequests::class])
         ->name('profile.name');
-    Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::delete('profil', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 Route::middleware(['list'])->group(function (): void {

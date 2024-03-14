@@ -48,6 +48,6 @@
           Les fondateurs, Régis et Alexis.
         </div>
       </div>
-    <div>
+    </div>
   </div>
 </x-guest-layout>
