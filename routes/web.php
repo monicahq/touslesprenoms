@@ -19,13 +19,16 @@ use App\Http\Controllers\ShareController;
 use App\Http\Controllers\StoreNoteForNameInListController;
 use App\Http\Controllers\TermsController;
 use App\Http\Controllers\UserNameController;
+use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
 use Illuminate\Support\Facades\Route;
 
 Route::get('partage/{uuid}', [ShareController::class, 'show'])->name('share.show');
 
 Route::get('', [HomeController::class, 'index'])->name('home.index');
 Route::get('recherche', [SearchController::class, 'index'])->name('search.index');
-Route::post('recherche', [SearchController::class, 'post'])->middleware(['throttle:search'])->name('search.post');
+Route::post('recherche', [SearchController::class, 'post'])
+    ->middleware(['throttle:search', HandlePrecognitiveRequests::class])
+    ->name('search.post');
 Route::get('prenoms', [NameController::class, 'index'])->name('name.index');
 
 Route::get('conditions', [TermsController::class, 'index'])->name('terms.index');
@@ -59,36 +62,43 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
         // set the note for the given name
         Route::get('notes/{id}', [UserNameController::class, 'show'])->name('user.name.show');
         Route::get('notes/{id}/edit', [UserNameController::class, 'edit'])->name('user.name.edit');
-        Route::put('notes/{id}', [UserNameController::class, 'update'])->name('user.name.update');
+        Route::put('notes/{id}', [UserNameController::class, 'update'])->name('user.name.update')->middleware([HandlePrecognitiveRequests::class]);
         Route::delete('notes/{id}', [UserNameController::class, 'destroy'])->name('user.name.destroy');
     });
 
     Route::get('favoris', [FavoriteController::class, 'index'])->name('favorite.index');
     Route::get('listes', [ListController::class, 'index'])->name('list.index');
     Route::get('listes/nouveau', [ListController::class, 'new'])->name('list.new');
-    Route::post('listes', [ListController::class, 'store'])->name('list.store');
+    Route::post('listes', [ListController::class, 'store'])->name('list.store')->middleware([HandlePrecognitiveRequests::class]);
 
     Route::middleware(['list'])->group(function (): void {
         Route::get('listes/{liste}/edition', [ListController::class, 'edit'])->name('list.edit');
-        Route::put('listes/{liste}', [ListController::class, 'update'])->name('list.update');
+        Route::put('listes/{liste}', [ListController::class, 'update'])->name('list.update')->middleware([HandlePrecognitiveRequests::class]);
         Route::get('listes/{liste}/suppression', [ListController::class, 'delete'])->name('list.delete');
         Route::get('listes/{liste}/system', [ListSystemController::class, 'update'])->name('list.system.update');
         Route::delete('listes/{liste}', [ListController::class, 'destroy'])->name('list.destroy');
 
-        Route::post('listes/{liste}/search', [ListSearchController::class, 'index'])->middleware(['throttle:search'])->name('list.search.index');
-        Route::post('listes/{liste}/prenoms/{id}', [ListNameController::class, 'store'])->name('list.name.store');
+        Route::post('listes/{liste}/search', [ListSearchController::class, 'index'])->middleware(['throttle:search', HandlePrecognitiveRequests::class])->name('list.search.index');
+        Route::post('listes/{liste}/prenoms/{id}', [ListNameController::class, 'store'])->middleware([HandlePrecognitiveRequests::class])->name('list.name.store');
         Route::get('listes/{liste}/prenoms', [ListNameController::class, 'index'])->name('list.name.index');
         Route::delete('listes/{liste}/prenoms/{id}', [ListNameController::class, 'destroy'])->name('list.name.destroy');
 
         Route::put('listes/{liste}/prenoms/{id}/set', [NameController::class, 'storeNameInList'])->name('name.list.store');
 
         Route::get('listes/{liste}/prenoms/{id}/note/update', [StoreNoteForNameInListController::class, 'edit'])->name('name.list.edit');
-        Route::put('listes/{liste}/prenoms/{id}/note', [StoreNoteForNameInListController::class, 'update'])->name('name.list.update');
+        Route::put('listes/{liste}/prenoms/{id}/note', [StoreNoteForNameInListController::class, 'update'])->middleware([HandlePrecognitiveRequests::class])->name('name.list.update');
     });
+});
 
-    Route::get('profil', [ProfileController::class, 'show'])->name('profile.show');
-    Route::put('profil', [ProfileController::class, 'update'])->name('profile.update');
-    Route::put('profil/nom', [ProfileController::class, 'name'])->name('profile.name');
+Route::middleware(['auth'])->group(function (): void {
+
+    Route::get('profil', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('profil', [ProfileController::class, 'update'])
+        ->middleware([HandlePrecognitiveRequests::class])
+        ->name('profile.update');
+    Route::put('profil/nom', [ProfileController::class, 'name'])
+        ->middleware([HandlePrecognitiveRequests::class])
+        ->name('profile.name');
     Route::delete('profil', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 

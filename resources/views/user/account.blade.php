@@ -20,7 +20,11 @@
     <div class="mx-auto max-w-3xl sm:px-6 lg:px-8 py-2">
       <h3 class="text-center text-3xl mb-4 mt-10">Votre compte</h3>
 
-      <form method="POST" action="{{ route('profile.name') }}" class="mb-8 shadow sm:rounded-lg" x-data="{ example: '{{ $user->last_name }}' }">
+      <form method="POST" x-data="{
+        form: $form('put', '{{ route('profile.name') }}', {
+          last_name: '{{ old('last_name', $user->last_name) }}',
+        }).setErrors({{ Js::from($errors->messages()) }}),
+      }" class="mb-8 shadow sm:rounded-lg">
           @csrf
           @method('PUT')
 
@@ -31,15 +35,17 @@
 
           <div class="relative px-6 pt-4 pb-2">
             <x-input-label for="last_name"
+                          :optional="true"
                           :value="'Indiquez un nom de famille'" />
 
             <x-text-input class="mt-1 block w-full"
                           id="last_name"
                           name="last_name"
-                          type="text"
-                          x-model="example" />
+                          x-model="form.last_name"
+                          @change="form.forgetError('last_name'); form.validate('last_name')"
+                          type="text" />
 
-            <x-input-error class="mt-2" :messages="$errors->get('last_name')" />
+            <x-input-validation class="mt-2" :form="'last_name'" />
           </div>
 
 
@@ -49,7 +55,7 @@
             <div class="flex items-center justify-between border border-transparent hover:bg-gray-50 hover:border-gray-200 px-2 py-1 rounded-sm">
               <div class="flex items-center">
                 <div class="rounded-full w-6 mr-4 ring-4 ring-violet-100">{!! \App\Helpers\NameHelper::getAvatar('Jean') !!}</div>
-                <div class="text-lg hover:underline">Jean <span x-text="example"></span></div>
+                <div class="text-lg hover:underline">Jean <span x-text="form.last_name"></span></div>
               </div>
 
             <svg class="w-5 h-5 ml-2 text-gray-400 hover:text-rose-400 hover:w-5 hover:h-5 transition-all cursor-pointer"
@@ -67,8 +73,15 @@
           </div>
         </form>
 
-      <form method="POST" action="{{ route('profile.update') }}" class="mb-6 shadow sm:rounded-lg">
+      <form method="POST" x-data="{
+        form: $form('put', '{{ route('profile.update') }}', {
+          email: '{{ old('email') }}',
+          password: '',
+          password_confirmation: '',
+        }).setErrors({{ Js::from($errors->messages()) }}),
+      }" class="mb-6 shadow sm:rounded-lg">
         @csrf
+        @method('PUT')
 
         <div class="relative border-b dark:border-gray-600 px-6 py-4 bg-yellow-50">
           <h1 class="text-center font-bold">Changer votre mot de passe</h1>
@@ -81,42 +94,47 @@
           <x-text-input class="mt-1 block w-full"
                         id="current_password"
                         name="current_password"
+                        x-model="form.current_password"
                         type="password"
                         required />
 
-          <x-input-error class="mt-2" :messages="$errors->get('current_password')" />
+          <x-input-validation class="mt-2" :form="'current_password'" />
         </div>
 
         <div class="relative px-6 py-2">
-          <x-input-label for="current_password"
+          <x-input-label for="password"
                         :value="'Nouveau mot de passe'" />
 
           <x-text-input class="mt-1 block w-full"
-                        id="current_password"
-                        name="current_password"
+                        id="password"
+                        name="password"
+                        x-model="form.password"
                         type="password"
+                        @change="if (form.password && form.password_confirmation) { form.validate('password') }"
                         required />
 
-          <x-input-error class="mt-2" :messages="$errors->get('current_password')" />
+        <x-input-validation class="mt-2" :form="'password'" />
         </div>
 
         <div class="relative px-6 pt-2 pb-4">
-          <x-input-label for="current_password"
+          <x-input-label for="password_confirmation"
                         :value="'Confirmer le nouveau mot de passe'" />
 
           <x-text-input class="mt-1 block w-full"
-                        id="current_password"
-                        name="current_password"
+                        id="password_confirmation"
+                        name="password_confirmation"
+                        x-model="form.password_confirmation"
                         type="password"
+                        @change="if (form.password && form.password_confirmation) { form.validate('password') }"
                         required />
 
-          <x-input-error class="mt-2" :messages="$errors->get('current_password')" />
+          <x-input-validation class="mt-2" :form="'password_confirmation'" />
         </div>
 
         <!-- actions -->
         <div class="flex items-center justify-between border-t dark:border-gray-600 bg-white dark:bg-gray-800 px-6 py-4">
           <div>
-            <x-primary-button class="w-full text-center">
+            <x-primary-button class="w-full text-center" disabled="form.processing || form.hasErrors">
               Sauvegarder
             </x-primary-button>
           </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NameListRequest;
 use App\Http\ViewModels\User\ListViewModel;
 use App\Models\ListCategory;
 use App\Services\CreateList;
@@ -35,15 +36,17 @@ class ListController extends Controller
         ]);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(NameListRequest $request): RedirectResponse
     {
+        $validated = $request->validated();
+
         $list = (new CreateList(
-            name: $request->input('list-name'),
-            description: $request->input('description'),
+            name: $validated['listname'],
+            description: $validated['description'],
             isPublic: false,
             canBeModified: true,
-            gender: $request->input('gender'),
-            categoryId: $request->input('category'),
+            gender: $validated['gender'],
+            categoryId: $validated['category'],
         ))->execute();
 
         Cache::forget('route-list-' . $list->id);
@@ -81,13 +84,18 @@ class ListController extends Controller
         ]);
     }
 
-    public function update(Request $request): RedirectResponse
+    public function update(NameListRequest $request): RedirectResponse
     {
+        $validated = $request->validated();
+
         $list = $request->attributes->get('list');
 
-        $list->name = $request->input('list-name');
-        $list->description = $request->input('description');
-        $list->list_category_id = $request->input('category');
+        $list->name = $validated['listname'];
+        $list->description = $validated['description'];
+        $list->gender = $validated['gender'];
+        if (auth()->user()->is_administrator) {
+            $list->list_category_id = $validated['category'];
+        }
         $list->save();
 
         Cache::forget('route-list-' . $list->id);
@@ -96,7 +104,7 @@ class ListController extends Controller
 
         return Redirect::route('list.show', [
             'liste' => $list->id,
-        ]);
+        ])->withStatus('La liste a été mise à jour.');
     }
 
     public function destroy(Request $request): RedirectResponse

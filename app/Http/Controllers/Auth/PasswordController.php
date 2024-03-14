@@ -3,29 +3,25 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+use App\Http\Requests\Auth\PasswordRequest;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules\Password;
+use Symfony\Component\HttpFoundation\Response;
 
 class PasswordController extends Controller
 {
-    use PasswordValidationRules;
-
     /**
      * Update the user's password.
      */
-    public function update(Request $request): RedirectResponse
+    public function update(PasswordRequest $request): Response
     {
-        $validated = $request->validateWithBag('updatePassword', [
-            'current_password' => ['required', 'current_password'],
-            'password' => $this->passwordRules(),
-        ]);
+        $validated = $request->validated();
 
         $request->user()->update([
             'password' => Hash::make($validated['password']),
         ]);
 
-        return back()->with('status', 'password-updated');
+        return $request->expectsJson()
+            ? response()->json(['status' => 'password-updated'])
+            : back()->with('status', 'password-updated');
     }
 }
