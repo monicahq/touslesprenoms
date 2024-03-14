@@ -10,6 +10,13 @@ class PasswordRequest extends FormRequest
     use PasswordValidationRules;
 
     /**
+     * The key to be used for the view error bag.
+     *
+     * @var string
+     */
+    protected $errorBag = 'updatePassword';
+
+    /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
@@ -25,7 +32,7 @@ class PasswordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'current_password' => 'required|string',
+            'current_password' => 'required|string|current_password',
             'password' => $this->passwordRules(),
         ];
     }
