@@ -4,12 +4,6 @@
     "description": "Intranet for asynchronous teams.",
     "keywords": ["laravel", "intranet", "asynchronous"],
     "license": "AGPL-3.0-or-later",
-    "repositories": [
-      {
-          "type": "vcs",
-          "url": "https://github.com/asbiin/laravel-htmx"
-      }
-  ],
     "require": {
         "php": "^8.2",
         "ext-fileinfo": "*",
@@ -21,7 +15,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/scout": "^10.6",
         "laravel/tinker": "^2.8",
-        "mauricius/laravel-htmx": "dev-patch-1",
+        "mauricius/laravel-htmx": "^0",
         "monicahq/laravel-cloudflare": "^3.7",
         "openai-php/laravel": "^0",
         "pirsch-analytics/laravel-pirsch": "^0",
