@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
 use App\Services\CreateAccount;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\View\View;
@@ -52,6 +51,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect(route('home.index', absolute: false));
     }
 }

@@ -9,17 +9,17 @@ return Application::configure(basePath: dirname(__DIR__))
         web: __DIR__ . '/../routes/web.php',
         commands: __DIR__ . '/../routes/console.php',
         api: __DIR__ . '/../routes/api.php',
-        apiPrefix: 'api',
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->append(\Monicahq\Cloudflare\Http\Middleware\TrustProxies::class);
+        $middleware->replace(
+            \Illuminate\Http\Middleware\TrustProxies::class,
+            \Monicahq\Cloudflare\Http\Middleware\TrustProxies::class
+        );
         $middleware->web(append: [
             \Pirsch\Http\Middleware\TrackPageview::class,
         ]);
-        $middleware->api(prepend: [
-            \Illuminate\Routing\Middleware\ThrottleRequests::class . ':api',
-        ]);
+        $middleware->throttleApi();
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

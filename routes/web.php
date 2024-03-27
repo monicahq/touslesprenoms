@@ -19,6 +19,9 @@ use App\Http\Controllers\ShareController;
 use App\Http\Controllers\StoreNoteForNameInListController;
 use App\Http\Controllers\TermsController;
 use App\Http\Controllers\UserNameController;
+use App\Http\Middleware\CheckLetter;
+use App\Http\Middleware\CheckList;
+use App\Http\Middleware\CheckName;
 use Illuminate\Support\Facades\Route;
 
 Route::get('partage/{uuid}', [ShareController::class, 'show'])->name('share.show');
@@ -35,19 +38,19 @@ Route::get('prenoms/garcons', [MaleNameController::class, 'index'])->name('name.
 Route::get('prenoms/filles', [FemaleNameController::class, 'index'])->name('name.fille.index');
 Route::get('prenoms/mixtes', [MixteNameController::class, 'index'])->name('name.mixte.index');
 
-Route::middleware(['letter'])->group(function (): void {
-    Route::get('prenoms/garcons/{letter}', [MaleNameController::class, 'letter'])->name('name.garcon.letter');
-    Route::get('prenoms/filles/{letter}', [FemaleNameController::class, 'letter'])->name('name.fille.letter');
-    Route::get('prenoms/mixtes/{letter}', [MixteNameController::class, 'letter'])->name('name.mixte.letter');
-    Route::get('prenoms/{letter}', [NameController::class, 'letter'])->name('name.letter');
+Route::middleware([CheckLetter::class])->group(function (): void {
+    Route::get('prenoms/garcons/{letter}', [MaleNameController::class, 'letter'])->where('letter', '[A-Za-z]{1}')->name('name.garcon.letter');
+    Route::get('prenoms/filles/{letter}', [FemaleNameController::class, 'letter'])->where('letter', '[A-Za-z]{1}')->name('name.fille.letter');
+    Route::get('prenoms/mixtes/{letter}', [MixteNameController::class, 'letter'])->where('letter', '[A-Za-z]{1}')->name('name.mixte.letter');
+    Route::get('prenoms/{letter}', [NameController::class, 'letter'])->where('letter', '[A-Za-z]{1}')->name('name.letter');
 });
 
-Route::middleware(['name'])->group(function (): void {
+Route::middleware([CheckName::class])->group(function (): void {
     Route::get('prenoms/{id}/{name}', [NameController::class, 'show'])->name('name.show');
 });
 
 Route::middleware(['auth', 'verified'])->group(function (): void {
-    Route::middleware(['name'])->group(function (): void {
+    Route::middleware([CheckName::class])->group(function (): void {
 
         // set favorites
         // used in the list of names
@@ -68,7 +71,7 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
     Route::get('listes/nouveau', [ListController::class, 'new'])->name('list.new');
     Route::post('listes', [ListController::class, 'store'])->name('list.store');
 
-    Route::middleware(['list'])->group(function (): void {
+    Route::middleware([CheckList::class])->group(function (): void {
         Route::get('listes/{liste}/edition', [ListController::class, 'edit'])->name('list.edit');
         Route::put('listes/{liste}', [ListController::class, 'update'])->name('list.update');
         Route::get('listes/{liste}/suppression', [ListController::class, 'delete'])->name('list.delete');
@@ -92,7 +95,7 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
     Route::delete('profil', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['list'])->group(function (): void {
+Route::middleware([CheckList::class])->group(function (): void {
     Route::get('listes/{liste}', [ListController::class, 'show'])->name('list.show');
 
     Route::get('public/listes/{liste}', [PublicListController::class, 'show'])->name('list.public.show');
