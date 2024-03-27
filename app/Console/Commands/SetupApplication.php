@@ -71,10 +71,12 @@ class SetupApplication extends Command
             $this->artisan('✓ Clear config cache', 'config:clear');
             $this->artisan('✓ Resetting route cache', 'route:cache');
             $this->artisan('✓ Resetting view cache', 'view:clear');
+            $this->artisan('✓ Resetting event cache', 'event:cache');
         } else {
             $this->artisan('✓ Clear config cache', 'config:clear');
             $this->artisan('✓ Clear route cache', 'route:clear');
             $this->artisan('✓ Clear view cache', 'view:clear');
+            $this->artisan('✓ Clear event cache', 'event:clear');
         }
     }
 
