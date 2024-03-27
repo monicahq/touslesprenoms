@@ -10,3 +10,8 @@
 | simple approach to interacting with each command's IO methods.
 |
 */
+
+use Illuminate\Support\Facades\Schedule;
+
+Schedule::command('cloudflare:reload')->daily();
+Schedule::command('sitemap:generate')->daily();
